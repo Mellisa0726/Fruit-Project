@@ -26,7 +26,7 @@ export default function App() {
         <View style={styles.main}>
           <TouchableOpacity style={styles.myButton}>
             <View>
-              <Text style={styles.text}> Banana </Text>
+              <Text style={styles.text}>Tomato </Text>
             </View>
           </TouchableOpacity>
         </View>
