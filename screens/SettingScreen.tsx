@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     },
     first: {
         height: 210,
-        width: 400,
+        width: 420,
         backgroundColor: '#FF9900',
         borderBottomLeftRadius: 60,
         borderBottomRightRadius: 60,
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
         color: "white",
         fontWeight: 'bold',
         paddingTop: 3,
-        paddingLeft: 151.5,
+        paddingLeft: 153,
     },
     main: {
         flex: 4,

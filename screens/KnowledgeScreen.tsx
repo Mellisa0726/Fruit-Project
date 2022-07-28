@@ -26,7 +26,12 @@ export default function App() {
         <View style={styles.main}>
           <TouchableOpacity style={styles.myButton}>
             <View>
-              <Text style={styles.text}> Banana </Text>
+              <Text style={styles.text}> 香蕉小知識 </Text>
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.myButton}>
+            <View>
+              <Text style={styles.text}> 香蕉食譜 </Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -47,7 +52,7 @@ const styles = StyleSheet.create({
   },
   first:{
     height: 210,
-    width: 400,
+    width: 420,
     backgroundColor: '#FF9900',
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
