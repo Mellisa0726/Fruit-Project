@@ -75,9 +75,10 @@ const styles = StyleSheet.create({
         flex: 4,
         backgroundColor: 'white',
         alignItems: 'center',
+        zIndex: -1,
     },
     myButton: {
-        marginTop: 20,
+        marginTop: 30,
         height: 60,
         width: 250,
         borderRadius: 20,
