@@ -9,6 +9,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
+import LogInScreen from '../screens/LogInScreen';
 import CameraScreen from '../screens/CameraScreen';
 import SettingScreen from '../screens/SettingScreen';
 import CalendarScreen from '../screens/CalendarScreen';
@@ -31,6 +32,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 function RootNavigator() {
   return (
     <Stack.Navigator>
+      <Stack.Screen name="LogIn" component={LogInScreen} options={{ title: 'Log In' }} />
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>
