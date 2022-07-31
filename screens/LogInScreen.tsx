@@ -8,7 +8,7 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
     <View style={styles.container}>
       <Text style={styles.title}>LogIn</Text>
       <TouchableOpacity onPress={() => navigation.replace('Root')} style={styles.link}>
-        <Text style={styles.linkText}>Go to home screen!</Text>
+        <Text style={styles.linkText}>Log in!</Text>
       </TouchableOpacity>
     </View>
   );

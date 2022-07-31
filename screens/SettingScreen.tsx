@@ -9,8 +9,10 @@ import {
     View,
     Image,
 } from 'react-native';
+import { Link } from '@react-navigation/native';
 
 export default function App() {
+
     return (
         <>
             <StatusBar />
@@ -29,11 +31,13 @@ export default function App() {
                             <Text style={styles.text}> Account </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.myButton}>
-                        <View>
-                            <Text style={styles.text}> Sign Out </Text>
-                        </View>
-                    </TouchableOpacity>
+                    <Link to='/'>
+                        <TouchableOpacity style={styles.myButton}>
+                            <View>
+                                <Text style={styles.text}> Log Out </Text>
+                            </View>
+                        </TouchableOpacity>
+                    </Link>
                 </View>
             </SafeAreaView>
         </>
