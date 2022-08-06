@@ -58,7 +58,7 @@ function BottomTabNavigator() {
         name="Knowledge"
         component={KnowledgeScreen}
         options={{
-          title: 'Knowledge',
+          title: '香蕉小知識',
           tabBarIcon: ({ color }) => <TabBarIcon name="bulb-outline" color={color} />,
         }}
       />
@@ -66,7 +66,7 @@ function BottomTabNavigator() {
         name="Camera"
         component={CameraScreen}
         options={{
-          title: 'Camera',
+          title: '相機',
           tabBarIcon: ({ color }) => <TabBarIcon name="camera" color={color} />,
         }}
       />
@@ -74,7 +74,7 @@ function BottomTabNavigator() {
         name="Calendar"
         component={CalendarScreen}
         options={{
-          title: 'Calendar',
+          title: '日曆',
           tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
         }}
       />
@@ -82,7 +82,7 @@ function BottomTabNavigator() {
         name="Setting"
         component={SettingScreen}
         options={{
-          title: 'Setting',
+          title: '設定',
           tabBarIcon: ({ color }) => <TabBarIcon name="settings-outline" color={color} />,
         }}
       />

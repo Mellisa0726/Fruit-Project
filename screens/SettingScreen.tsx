@@ -19,7 +19,7 @@ export default function App() {
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
                     <View style={styles.first}>
-                        <Text style={styles.title}> Settings </Text>
+                        <Text style={styles.title}> 設定 </Text>
                         <TouchableOpacity>
                             <Ionicons name="notifications-outline" size={25} style={styles.notification} />
                         </TouchableOpacity>
@@ -28,13 +28,13 @@ export default function App() {
                 <View style={styles.main}>
                     <TouchableOpacity style={styles.myButton}>
                         <View>
-                            <Text style={styles.text}> Account </Text>
+                            <Text style={styles.text}> 個人帳號 </Text>
                         </View>
                     </TouchableOpacity>
                     <Link to='/'>
                         <TouchableOpacity style={styles.myButton}>
                             <View>
-                                <Text style={styles.text}> Log Out </Text>
+                                <Text style={styles.text}> 登出 </Text>
                             </View>
                         </TouchableOpacity>
                     </Link>
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     first: {
         height: 210,
         width: 420,
-        backgroundColor: '#FF9900',
+        backgroundColor: '#FAE5A4',
         borderBottomLeftRadius: 60,
         borderBottomRightRadius: 60,
         paddingTop: 160,
@@ -65,15 +65,15 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        color: "white",
+        color: "#7E6107",
         fontWeight: 'bold',
         paddingLeft: 60,
     },
     notification: {
-        color: "white",
+        color: "#7E6107",
         fontWeight: 'bold',
         paddingTop: 3,
-        paddingLeft: 153,
+        paddingLeft: 200,
     },
     main: {
         flex: 4,
@@ -87,10 +87,11 @@ const styles = StyleSheet.create({
         width: 250,
         borderRadius: 20,
         backgroundColor: 'transparent',
-        borderColor: '#FF9900',
+        borderColor: '#FAE5A4',
         borderWidth: 4,
         justifyContent: 'center',
         paddingLeft: 20,
+        marginBottom: 30,
     },
     text: {
         fontSize: 20,

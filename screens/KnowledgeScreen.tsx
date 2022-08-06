@@ -17,7 +17,7 @@ export default function App() {
       <SafeAreaView style={styles.container}>
         <View style={styles.header}>
           <View style={styles.first}>
-            <Text style={styles.title}> Knowledge </Text>
+            <Text style={styles.title}> 香蕉小知識 </Text>
             <TouchableOpacity>
               <Ionicons name="notifications-outline" size={25} style={styles.notification} />
             </TouchableOpacity>
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   first:{
     height: 210,
     width: 420,
-    backgroundColor: '#FF9900',
+    backgroundColor: '#FAE5A4',
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
     paddingTop: 160,
@@ -61,15 +61,15 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 25,
-    color: "white",
+    color: "#7E6107",
     fontWeight: 'bold',
     paddingLeft: 60,
   },
   notification: {
-    color: "white",
+    color: "#7E6107",
     fontWeight: 'bold',
     paddingTop: 3,
-    paddingLeft: 120,
+    paddingLeft: 125,
   },
   main: {
     flex: 4,
@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
     width: 250,
     borderRadius: 20,
     backgroundColor:'transparent',
-    borderColor:'#FF9900',
+    borderColor:'#FAE5A4',
     borderWidth: 4,
     justifyContent: 'center',
     paddingLeft: 20,

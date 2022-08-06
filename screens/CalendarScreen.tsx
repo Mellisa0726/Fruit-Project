@@ -20,7 +20,7 @@ export default class AgendaScreen extends Component<State> {
                 <ScrollView >
                     <View style={styles.header}>
                         <View style={styles.first}>
-                            <Text style={styles.title}> Calendar </Text>
+                            <Text style={styles.title}> 日曆 </Text>
                             <TouchableOpacity>
                                 <Ionicons name="notifications-outline" size={25} style={styles.notification} />
                             </TouchableOpacity>
@@ -74,7 +74,7 @@ export default class AgendaScreen extends Component<State> {
                 if (!items[strTime]) {
                     items[strTime] = [];
                     items[strTime].push({
-                        name: '',
+                        name: 'abhf',
                         height: Math.max(50, Math.floor(90)),
                         day: strTime
                     });  
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     first: {
         height: 210,
         width: 420,
-        backgroundColor: '#FF9900',
+        backgroundColor: '#FAE5A4',
         borderBottomLeftRadius: 60,
         borderBottomRightRadius: 60,
         paddingTop: 160,
@@ -140,15 +140,15 @@ const styles = StyleSheet.create({
     },
     title: {
         fontSize: 25,
-        color: "white",
+        color: "#7E6107",
         fontWeight: 'bold',
         paddingLeft: 60,
     },
     notification: {
-        color: "white",
+        color: "#7E6107",
         fontWeight: 'bold',
         paddingTop: 3,
-        paddingLeft: 135.8,
+        paddingLeft: 200,
     },
     main: {
         flex: 100,
