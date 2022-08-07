@@ -16,6 +16,7 @@ import CalendarScreen from '../screens/CalendarScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import KnowledgeScreen from '../screens/KnowledgeScreen';
+import EatScreen from '../screens/EatScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -58,7 +59,7 @@ function BottomTabNavigator() {
         name="Knowledge"
         component={KnowledgeScreen}
         options={{
-          title: '香蕉小知識',
+          title: '關於香蕉',
           tabBarIcon: ({ color }) => <TabBarIcon name="bulb-outline" color={color} />,
         }}
       />

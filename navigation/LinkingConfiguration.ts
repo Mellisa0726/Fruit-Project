@@ -19,6 +19,11 @@ const linking: LinkingOptions<RootStackParamList> = {
               KnowledgeScreen: 'one',
             },
           },
+          Eat: {
+            screens: {
+              EatScreen: 'one',
+            },
+          },
           Camera: {
             screens: {
               CameraScreen: 'camera',
