@@ -13,7 +13,7 @@ function KnowledgeScreen(props: { navigation: { navigate: (arg0: string) => void
     props.navigation.navigate('什麼時候適合吃');
   };
   const gotoRecipeStackScreen = () => {
-    props.navigation.navigate('Recipe');
+    props.navigation.navigate('香蕉食譜');
   };
   return (
     <>
@@ -52,7 +52,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Knowledge" component={KnowledgeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="什麼時候適合吃" component={EatScreen}/>
-        <Stack.Screen name="Recipe" component={RecipeScreen} />
+        <Stack.Screen name="香蕉食譜" component={RecipeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
