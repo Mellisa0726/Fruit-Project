@@ -113,7 +113,8 @@ const styles = StyleSheet.create({
   },
   text:{
     fontSize: 20,
-    color: "black",
+    color: "#7E6107",
+    fontWeight: 'bold',
   },
 });
 
