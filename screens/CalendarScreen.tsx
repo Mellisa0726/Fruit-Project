@@ -1,6 +1,6 @@
 import React, { useState, Fragment, Component } from 'react';
 import { SafeAreaView, Alert, StyleSheet, Text, View, TouchableOpacity, ScrollView } from 'react-native';
-import { Agenda, DateData, AgendaEntry, AgendaSchedule } from 'react-native-calendars';
+import { Agenda, DateData, AgendaEntry, AgendaSchedule } from '../components/react-native-calendars';
 import testIDs from '../testIDs';
 import { Ionicons } from '@expo/vector-icons';
 
