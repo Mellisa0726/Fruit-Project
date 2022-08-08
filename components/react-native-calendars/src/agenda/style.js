@@ -12,7 +12,7 @@ export default function styleConstructor(theme = {}) {
         animatedContainer: {
             flex: 1
         },
-        knob,
+        // knob,
         weekdays,
         header: {
             overflow: 'hidden',
