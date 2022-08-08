@@ -17,46 +17,47 @@ export default class AgendaScreen extends Component<State> {
         return (
             <>
                 <SafeAreaView style={styles.container}>
-                <ScrollView >
-                    <View style={styles.header}>
-                        <View style={styles.first}>
-                            <Text style={styles.title}> 日曆 </Text>
-                            <TouchableOpacity>
-                                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
-                            </TouchableOpacity>
+                    <View>
+                        <View style={styles.header}>
+                            <View style={styles.first}>
+                                <Text style={styles.title}> 日曆 </Text>
+                                <TouchableOpacity>
+                                    <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                                </TouchableOpacity>
+                            </View>
                         </View>
                     </View>
-                </ScrollView>
-                <View style={styles.main}>
-                    <Agenda
-                        testID={testIDs.agenda.CONTAINER}
-                        items={this.state.items}
-                        loadItemsForMonth={this.loadItems}
-                        //selected={'2022-07-27'}
-                        renderItem={this.renderItem}
-                        rowHasChanged={this.rowHasChanged}
-                        showClosingKnob={true}
-                        markingType={'multi-period'}
-                        markedDates={{
-                            '2022-07-20': {
-                                periods: [
-                                    { startingDay: true, endingDay: false, color: 'green' },
-                                    { startingDay: true, endingDay: false, color: 'orange' }
-                                ]
-                            },
-                            '2022-07-21': {
-                                periods: [
-                                    { startingDay: false, endingDay: true, color: 'green' },
-                                    { startingDay: false, endingDay: false, color: 'orange' }
-                                ]
-                            },
-                            '2022-07-22': {
-                                periods: [
-                                    { startingDay: true, endingDay: true, color: 'pink' },
-                                    { startingDay: false, endingDay: true, color: 'orange' }
-                                ]
-                            }
-                        }} />
+                    <View style={styles.main}>
+                        <Agenda
+                            testID={testIDs.agenda.CONTAINER}
+                            items={this.state.items}
+                            loadItemsForMonth={this.loadItems}
+                            //selected={'2022-07-27'}
+                            renderItem={this.renderItem}
+                            rowHasChanged={this.rowHasChanged}
+                            showClosingKnob={true}
+                            markingType={'multi-period'}
+                            markedDates={{
+                                '2022-07-20': {
+                                    periods: [
+                                        { startingDay: true, endingDay: false, color: 'green' },
+                                        { startingDay: true, endingDay: false, color: 'orange' }
+                                    ]
+                                },
+                                '2022-07-21': {
+                                    periods: [
+                                        { startingDay: false, endingDay: true, color: 'green' },
+                                        { startingDay: false, endingDay: false, color: 'orange' }
+                                    ]
+                                },
+                                '2022-07-22': {
+                                    periods: [
+                                        { startingDay: true, endingDay: true, color: 'pink' },
+                                        { startingDay: false, endingDay: true, color: 'orange' }
+                                    ]
+                                }
+                            }}
+                        />
                     </View>
                 </SafeAreaView>
             </>
