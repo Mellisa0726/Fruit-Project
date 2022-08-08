@@ -21,16 +21,16 @@ export default function styleConstructor(theme = {}) {
             height: '100%',
             width: '100%'
         },
-        knobContainer: {
-            flex: 1,
-            position: 'absolute',
-            left: 0,
-            right: 0,
-            height: 24,
-            bottom: 0,
-            alignItems: 'center',
-            backgroundColor: appStyle.calendarBackground
-        },
+        // knobContainer: {
+        //     flex: 1,
+        //     position: 'absolute',
+        //     left: 0,
+        //     right: 0,
+        //     height: 24,
+        //     bottom: 0,
+        //     alignItems: 'center',
+        //     backgroundColor: appStyle.calendarBackground
+        // },
         dayHeader: {
             width: 32,
             textAlign: 'center',
@@ -41,13 +41,14 @@ export default function styleConstructor(theme = {}) {
         },
         reservations: {
             flex: 1,
-            marginTop: 104,
+            marginTop: 330,
             backgroundColor: appStyle.backgroundColor
         },
         scrollPadStyle: {
             position: 'absolute',
             width: '100%',
-            alignSelf: 'center'
+            alignSelf: 'center',
+            // backgroundColor: 'black'
         },
         // @ts-expect-error
         ...(theme['stylesheet.agenda.main'] || {})
