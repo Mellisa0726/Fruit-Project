@@ -241,7 +241,7 @@ export default class Agenda extends Component {
         const { markedDates, items } = this.props;
         const shouldHideExtraDays = this.state.calendarScrollable ? this.props.hideExtraDays : false;
         const calendarListProps = extractComponentProps(CalendarList, this.props);
-        return (<CalendarList {...calendarListProps} ref={this.calendar} current={getCalendarDateString(this.currentMonth.toString())} markedDates={this.generateMarkings(this.state.selectedDay, markedDates, items)} calendarWidth={this.viewWidth} scrollEnabled={this.state.calendarScrollable} hideExtraDays={shouldHideExtraDays} onLayout={this.onCalendarListLayout} onDayPress={this.onDayPress} onVisibleMonthsChange={this.onVisibleMonthsChange}/>);
+        return (<CalendarList {...calendarListProps} ref={this.calendar} current={getCalendarDateString(this.currentMonth.toString())} markedDates={this.generateMarkings(this.state.selectedDay, markedDates, items)} calendarWidth={this.viewWidth} scrollEnabled={true} hideExtraDays={shouldHideExtraDays} onLayout={this.onCalendarListLayout} onDayPress={this.onDayPress} onVisibleMonthsChange={this.onVisibleMonthsChange}/>);
     }
     renderKnob() {
         const { showClosingKnob, hideKnob, renderKnob } = this.props;
@@ -314,7 +314,7 @@ export default class Agenda extends Component {
         };
         return (
         <View testID={testID} onLayout={this.onLayout} style={[style, this.style.container]}>
-            <View style={this.style.container}>{this.renderCalendarList()}</View>
+            <View style={this.style.container}>{this.renderCalendarList()}</View>       
             <View style={this.style.reservations}>{this.renderReservations()}</View>
         </View>
       );
