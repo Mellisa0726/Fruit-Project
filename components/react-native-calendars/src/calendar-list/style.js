@@ -4,7 +4,8 @@ export default function getStyle(theme = {}) {
     const appStyle = { ...defaultStyle, ...theme };
     return StyleSheet.create({
         flatListContainer: {
-            flex: Platform.OS === 'web' ? 1 : undefined
+            flex: Platform.OS === 'web' ? 1 : undefined,
+            // height: 300
         },
         container: {
             backgroundColor: appStyle.calendarBackground
@@ -12,7 +13,7 @@ export default function getStyle(theme = {}) {
         placeholder: {
             backgroundColor: appStyle.calendarBackground,
             alignItems: 'center',
-            justifyContent: 'center'
+            justifyContent: 'center',
         },
         placeholderText: {
             fontSize: 30,

@@ -6,12 +6,13 @@ export default function styleConstructor(theme = {}) {
     const { knob, weekdays } = platformStyles(appStyle);
     return StyleSheet.create({
         container: {
-            flex: 1,
-            overflow: 'hidden'
+            height: 330
+            // flex: 0.5,
+            // overflow: 'hidden',
         },
-        animatedContainer: {
-            flex: 1
-        },
+        // animatedContainer: {
+        //     flex: 1
+        // },
         // knob,
         weekdays,
         header: {
@@ -40,8 +41,8 @@ export default function styleConstructor(theme = {}) {
             color: appStyle.textSectionTitleColor
         },
         reservations: {
-            flex: 1,
-            marginTop: 330,
+            // flex: 0.5,
+            // marginTop: 0,
             backgroundColor: appStyle.backgroundColor
         },
         scrollPadStyle: {

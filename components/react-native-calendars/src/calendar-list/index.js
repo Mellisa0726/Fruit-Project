@@ -235,13 +235,36 @@ class CalendarList extends Component {
     }
     render() {
         const { style, pastScrollRange, futureScrollRange, horizontal, showScrollIndicator } = this.props;
-        return (<View style={this.style.flatListContainer}>
-        <FlatList ref={this.list} style={[this.style.container, style]} 
-        // @ts-expect-error
-        initialListSize={pastScrollRange + futureScrollRange + 1} // ListView deprecated
-         data={this.state.rows} renderItem={this.renderItem} getItemLayout={this.getItemLayout} onViewableItemsChanged={this.onViewableItemsChanged} viewabilityConfig={this.viewabilityConfig} initialScrollIndex={this.state.openDate ? this.getMonthIndex(this.state.openDate) : undefined} showsVerticalScrollIndicator={showScrollIndicator} showsHorizontalScrollIndicator={horizontal && showScrollIndicator} testID={this.props.testID} onLayout={this.props.onLayout} removeClippedSubviews={this.props.removeClippedSubviews} pagingEnabled={this.props.pagingEnabled} scrollEnabled={this.props.scrollEnabled} scrollsToTop={this.props.scrollsToTop} horizontal={this.props.horizontal} keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps} keyExtractor={this.props.keyExtractor} onEndReachedThreshold={this.props.onEndReachedThreshold} onEndReached={this.props.onEndReached} nestedScrollEnabled={this.props.nestedScrollEnabled}/>
-        {this.renderStaticHeader()}
-      </View>);
+        return (
+            <View style={this.style.flatListContainer}>
+                <FlatList
+                    ref={this.list}
+                    style={[this.style.container, style]} 
+                    // @ts-expect-error
+                    initialListSize={pastScrollRange + futureScrollRange + 1} // ListView deprecated
+                    data={this.state.rows}
+                    renderItem={this.renderItem}
+                    getItemLayout={this.getItemLayout}
+                    onViewableItemsChanged={this.onViewableItemsChanged}
+                    viewabilityConfig={this.viewabilityConfig}
+                    initialScrollIndex={this.state.openDate ? this.getMonthIndex(this.state.openDate) : undefined}
+                    showsVerticalScrollIndicator={showScrollIndicator}
+                    showsHorizontalScrollIndicator={horizontal && showScrollIndicator}
+                    testID={this.props.testID}
+                    onLayout={this.props.onLayout}
+                    removeClippedSubviews={this.props.removeClippedSubviews}
+                    pagingEnabled={this.props.pagingEnabled}
+                    scrollEnabled={this.props.scrollEnabled}
+                    scrollsToTop={this.props.scrollsToTop}
+                    horizontal={this.props.horizontal}
+                    keyboardShouldPersistTaps={this.props.keyboardShouldPersistTaps}
+                    keyExtractor={this.props.keyExtractor}
+                    onEndReachedThreshold={this.props.onEndReachedThreshold}
+                    onEndReached={this.props.onEndReached}
+                    nestedScrollEnabled={this.props.nestedScrollEnabled}
+                />
+                {this.renderStaticHeader()}
+            </View>);
     }
 }
 export default CalendarList;
