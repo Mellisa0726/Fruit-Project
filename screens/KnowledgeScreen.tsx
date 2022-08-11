@@ -10,7 +10,7 @@ import RecipeScreen from '../screens/RecipeScreen';
 
 function KnowledgeScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
   const gotoEatStackScreen = () => {
-    props.navigation.navigate('什麼時候適合吃');
+    props.navigation.navigate('香蕉熟成階段');
   };
   const gotoRecipeStackScreen = () => {
     props.navigation.navigate('香蕉食譜');
@@ -30,7 +30,7 @@ function KnowledgeScreen(props: { navigation: { navigate: (arg0: string) => void
         <View style={styles.main}>
           <TouchableOpacity onPress={gotoEatStackScreen} style={styles.myButton}>
             <View>
-              <Text style={styles.text}> 什麼時候適合吃 </Text>
+              <Text style={styles.text}> 香蕉熟成階段 </Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity onPress={gotoRecipeStackScreen} style={styles.myButton}>
@@ -51,7 +51,7 @@ export default function App() {
     <NavigationContainer independent={true}>
       <Stack.Navigator>
         <Stack.Screen name="Knowledge" component={KnowledgeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="什麼時候適合吃" component={EatScreen}/>
+        <Stack.Screen name="香蕉熟成階段" component={EatScreen}/>
         <Stack.Screen name="香蕉食譜" component={RecipeScreen} />
       </Stack.Navigator>
     </NavigationContainer>

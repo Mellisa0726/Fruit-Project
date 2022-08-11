@@ -75,7 +75,7 @@ export default class AgendaScreen extends Component<State> {
                 if (!items[strTime]) {
                     items[strTime] = [];
                     items[strTime].push({
-                        name: 'abhf',
+                        name: '輸入',
                         height: Math.max(50, Math.floor(90)),
                         day: strTime
                     });  
