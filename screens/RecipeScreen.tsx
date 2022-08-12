@@ -5,7 +5,7 @@ export default class RecipeScreen extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text> About Screen </Text>
+                <View style={styles.pages}/>
             </View>
         )
     }
@@ -14,8 +14,13 @@ export default class RecipeScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: 'center',
         justifyContent: 'center',
+        alignItems: 'center',
         color: "#fff",
+    },
+    pages: {
+        height: 500,
+        width: 320,
+        backgroundColor: 'green'
     },
 })

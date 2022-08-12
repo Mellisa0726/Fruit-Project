@@ -45,12 +45,16 @@ export default class EatScreen extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor:'white'
+        backgroundColor:'white',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     border: {
         flex: 1,
         fontSize: 5,
-        backgroundColor: 'black'
+        backgroundColor: 'black',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     center: {
         flex: 1,
@@ -63,6 +67,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 50,
         width: 300,
         height: 200,
         //marginVertical:'center',
