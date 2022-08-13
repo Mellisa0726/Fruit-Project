@@ -8,18 +8,19 @@ import {
   TouchableWithoutFeedback,
   KeyboardAvoidingView,
   Platform,
+  ScrollView,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
+import * as Animatable from 'react-native-animatable';
 import React, { useState } from "react";
 import { Text } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
 let val: string
 export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'>) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [data, setData] = React.useState({
-    username: '',
+    email: '',
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
@@ -31,6 +32,23 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
       ...data,
       secureTextEntry: !data.secureTextEntry
     });
+  }
+  const textInputChange = (val:any) => {
+    if (val.trim().length >= 8) {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: true,
+        isValidUser: true
+      });
+    } else {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: false,
+        isValidUser: false
+      });
+    }
   }
   const handlePasswordChange = (val:any) => {
     if (val.trim().length >= 8) {
@@ -47,55 +65,88 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
       });
     }
   }
+  const handleValidUser = (val:any) => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        isValidUser: true
+      });
+    } else {
+      setData({
+        ...data,
+        isValidUser: false
+      });
+    }
+  }
   return (
-    <View style={styles.container}>
-      <View style={styles.first}>
-        <View style={styles.logo}/>
-        <StatusBar />
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Email"
-            placeholderTextColor="#9B9B9B"
-            onChangeText={(email) => setEmail(email)}
-          />
-        </View>
+    <ScrollView 
+      contentContainerStyle={{ flex: 1 }}
+      keyboardDismissMode="on-drag"
+      keyboardShouldPersistTaps="never"
+      scrollEnabled={false}
+      >
+      <View style={styles.container}>
+        <View style={styles.first}>
+          <View style={styles.logo}/>
+          <StatusBar />
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Email"
+              placeholderTextColor="#9B9B9B"
+              onChangeText={(val) => textInputChange(val)}
+              onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
+            />
+            {data.check_textInputChange ?
+              <Animatable.View
+                animation="bounceIn"
+              >
+                <Feather
+                  name="check-circle"
+                  color="green"
+                  size={20}
+                />
+              </Animatable.View>
+              : null}
+              <Text>   </Text>
+          </View>
 
-        <View style={styles.inputView}>
-          <TextInput
-            style={styles.TextInput}
-            placeholder="Password"
-            placeholderTextColor="#9B9B9B"
-            secureTextEntry={data.secureTextEntry ? true : false}
-            onChangeText={(password) => setPassword(password)}
-          />
-          <TouchableOpacity
-            onPress={updateSecureTextEntry}
-          >
-            {data.secureTextEntry ?
-              <Feather
-                name="eye-off"
-                color="grey"
-                size={20}
-              />
-              :
-              <Feather
-                name="eye"
-                color="grey"
-                size={20}
-              />
-            }
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Password"
+              placeholderTextColor="#9B9B9B"
+              secureTextEntry={data.secureTextEntry ? true : false}
+              onChangeText={(val) => handlePasswordChange(val)}
+            />
+            <TouchableOpacity
+              onPress={updateSecureTextEntry}
+            >
+              {data.secureTextEntry ?
+                <Feather
+                  name="eye-off"
+                  color="grey"
+                  size={20}
+                />
+                :
+                <Feather
+                  name="eye"
+                  color="grey"
+                  size={20}
+                />
+              }
+            </TouchableOpacity>
+            <Text>   </Text>
+          </View>
+          <TouchableOpacity>
+            <Text style={styles.forgot_button}>忘記密碼？</Text>
           </TouchableOpacity>
-          <Text>   </Text>
-        </View>
-        <TouchableOpacity>
-          <Text style={styles.forgot_button}>Forgot Password ?</Text>
+          <TouchableOpacity onPress={() => navigation.replace('Root')} style={styles.link}>
+            <Text style={styles.text}> 登入 </Text>
         </TouchableOpacity>
+        </View>
       </View>
-      <TouchableOpacity onPress={() => navigation.replace('Root')} style={styles.link}>
-        <Text style={styles.linkText}>Log in!</Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 }
 
@@ -106,7 +157,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   first: {
-    height: 480,
+    height: 540,
     width: 420,
     backgroundColor: '#FAE5A4',
     borderBottomLeftRadius: 130,
@@ -120,12 +171,18 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   link: {
-    marginTop: 15,
-    paddingVertical: 15,
+    marginTop: 10,
+    height: 40,
+    width: 250,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: "center",
+    backgroundColor: "#D3A51D",
   },
-  linkText: {
-    fontSize: 14,
-    color: '#2e78b7',
+  text: {
+    fontSize: 15,
+    color: "#000",
+    fontWeight: 'bold',
   },
   logo: {
     height: 160,
