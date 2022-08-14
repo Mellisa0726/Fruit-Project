@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "center",
-        width
+        width,
     },
     pic1: {
         flex: 1,

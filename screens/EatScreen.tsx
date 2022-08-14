@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
         flex: 1,
         borderRadius: 50,
         width: "70%",
-        height: 200,
+        height: 180,
         marginLeft: -17,
     },
     header: {
