@@ -17,10 +17,13 @@ import * as Animatable from 'react-native-animatable';
 import React, { useState } from "react";
 import { Text } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
+import { api } from '../api';
+
 let val: string
+
 export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'>) {
   const [data, setData] = React.useState({
-    email: '',
+    username: '',
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
@@ -37,14 +40,14 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
     if (val.trim().length >= 8) {
       setData({
         ...data,
-        email: val,
+        username: val,
         check_textInputChange: true,
         isValidUser: true
       });
     } else {
       setData({
         ...data,
-        email: val,
+        username: val,
         check_textInputChange: false,
         isValidUser: false
       });
@@ -78,6 +81,13 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
       });
     }
   }
+
+  function logIn() {
+    // console.log(data);
+    api.logIn(data.username, data.password);
+    navigation.replace('Root');
+  }
+
   return (
     <ScrollView 
       contentContainerStyle={{ flex: 1 }}
@@ -92,7 +102,7 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
           <View style={styles.inputView}>
             <TextInput
               style={styles.TextInput}
-              placeholder="Email"
+              placeholder="Username"
               placeholderTextColor="#9B9B9B"
               onChangeText={(val) => textInputChange(val)}
               onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
@@ -141,7 +151,7 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
           <TouchableOpacity>
             <Text style={styles.forgot_button}>忘記密碼？</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.replace('Root')} style={styles.link}>
+          <TouchableOpacity onPress={() => logIn()} style={styles.link}>
             <Text style={styles.text}> 登入 </Text>
         </TouchableOpacity>
         </View>
