@@ -9,9 +9,14 @@ import {
     View,
     Image,
 } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Link } from '@react-navigation/native';
 
-export default function App() {
+export default function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
+    const LogOut = () => {
+        props.navigation.navigate('LogIn');
+      };
 
     return (
         <>
@@ -31,13 +36,11 @@ export default function App() {
                             <Text style={styles.text}> 個人帳號 </Text>
                         </View>
                     </TouchableOpacity>
-                    <Link to='/'>
-                        <TouchableOpacity style={styles.myButton}>
-                            <View>
-                                <Text style={styles.text}> 登出 </Text>
-                            </View>
-                        </TouchableOpacity>
-                    </Link>
+                    <TouchableOpacity style={styles.myButton} onPress={LogOut}>
+                        <View>
+                            <Text style={styles.text}> 登出 </Text>
+                        </View>
+                    </TouchableOpacity>
                 </View>
             </SafeAreaView>
         </>
