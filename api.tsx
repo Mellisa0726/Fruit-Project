@@ -25,5 +25,11 @@ export const api = {
             axios.get(url)
             .then(res => res.data)
         )
+    },
+    getRecipe(fruit: string) {
+        return (
+            axios.get(hostname + '/recipe?fruit=' + fruit)
+            .then(res => res.data)
+        )
     }
 };
