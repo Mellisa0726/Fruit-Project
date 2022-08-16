@@ -15,6 +15,7 @@ import { Link } from '@react-navigation/native';
 
 export default function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
     const LogOut = () => {
+        window.localStorage.clear();
         props.navigation.navigate('LogIn');
       };
 

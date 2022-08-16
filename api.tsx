@@ -15,4 +15,22 @@ export const api = {
             })
         )
     },
+    // getKnowledge(fruit: string, kid: number) {
+    //     return (
+    //         let url: string;
+            
+    //         url :hostname + '/knowledge/' + fruit;
+    //         if (kid !== undefined)
+    //             url += String(kid)
+
+    //         axios.get(hostname + '/knowledge', {
+    //             'name': name,
+    //             'password': password
+    //         })
+    //         .then(res => {
+    //             // console.log(res);
+    //             window.localStorage.setItem('JWT', res.data.jwt);
+    //         })
+    //     )
+    // }
 };
