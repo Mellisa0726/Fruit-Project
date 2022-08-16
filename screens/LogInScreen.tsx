@@ -153,7 +153,10 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
           </TouchableOpacity>
           <TouchableOpacity onPress={() => logIn()} style={styles.link}>
             <Text style={styles.text}> 登入 </Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.link}>
+            <Text style={styles.text}> 註冊 </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ScrollView>
@@ -167,7 +170,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   first: {
-    height: 540,
+    height: 600,
     width: 420,
     backgroundColor: '#FAE5A4',
     borderBottomLeftRadius: 130,
@@ -175,15 +178,10 @@ const styles = StyleSheet.create({
     paddingTop: 100,
     alignItems: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-    justifyContent: 'center',
-  },
   link: {
     marginTop: 10,
     height: 40,
-    width: 250,
+    width: 200,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: "center",
@@ -218,5 +216,8 @@ const styles = StyleSheet.create({
     fontSize: 11,
     height: 30,
     marginHorizontal: 0,
+  },
+  signIn:{
+    marginTop: 10,
   },
 });
