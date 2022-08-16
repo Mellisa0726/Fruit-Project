@@ -11,7 +11,7 @@ export const api = {
             })
             .then(res => {
                 // console.log(res);
-                window.localStorage.setItem('JWT', res.data.jwt);
+                // window.localStorage.setItem('JWT', res.data.jwt);
             })
         )
     },
