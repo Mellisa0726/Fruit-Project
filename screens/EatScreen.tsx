@@ -76,6 +76,8 @@ const styles = StyleSheet.create({
     banana:{
         flex: 1,
         borderRadius: 50,
+        borderColor:'#272727',
+        borderWidth:2,
         width: "70%",
         height: 180,
         marginLeft: -17,
