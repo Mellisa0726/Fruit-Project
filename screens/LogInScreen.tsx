@@ -84,8 +84,12 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
 
   function logIn() {
     // console.log(data);
-    api.logIn(data.username, data.password);
-    navigation.replace('Root');
+    api.logIn(data.username, data.password)
+    .then(res => navigation.replace('Root'))
+    .catch(err => {
+      // console.log(err);
+      window.alert('Log in failed');
+    });
   }
 
   return (

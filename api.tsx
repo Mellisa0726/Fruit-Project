@@ -15,4 +15,15 @@ export const api = {
             })
         )
     },
+    getKnowledge(fruit: string, kid: any) {
+        let url: string;
+        url = hostname + '/knowledge?fruit=' + fruit;
+        if (kid !== undefined)
+            url += '/Kid=' + String(kid);
+
+        return (
+            axios.get(url)
+            .then(res => res.data)
+        )
+    }
 };
