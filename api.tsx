@@ -11,7 +11,7 @@ export const api = {
             })
             .then(res => {
                 // console.log(res);
-                window.localStorage.setItem('JWT', res.data.jwt);
+                // window.localStorage.setItem('JWT', res.data.jwt);
             })
         )
     },
@@ -23,6 +23,12 @@ export const api = {
 
         return (
             axios.get(url)
+            .then(res => res.data)
+        )
+    },
+    getRecipe(fruit: string) {
+        return (
+            axios.get(hostname + '/recipe?fruit=' + fruit)
             .then(res => res.data)
         )
     }
