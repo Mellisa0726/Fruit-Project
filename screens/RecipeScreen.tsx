@@ -93,7 +93,7 @@ export default function RecipeScreen() {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFF8D7",
+        backgroundColor: "#FFF6DB",
         alignItems: "center",
         width,
     },

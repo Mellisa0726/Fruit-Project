@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import * as React from 'react';
+import React from 'react';
 import {
     SafeAreaView,
     StyleSheet,
@@ -9,21 +9,8 @@ import {
     View,
     Image,
 } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Link } from '@react-navigation/native';
-import AccountScreen from '../screens/AccountScreen';
 
-function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
-    const gotoAccountScreen = () => {
-        props.navigation.navigate('個人帳號');
-    };
-    
-    const LogOut = () => {
-        window.localStorage.clear();
-        props.navigation.navigate('LogIn');
-      };
-
+export default function AccountScreen() {
     return (
         <>
             <StatusBar />
@@ -36,35 +23,11 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
                         </TouchableOpacity>
                     </View>
                 </View>
-                <View style={styles.main}>
-                    <TouchableOpacity onPress={gotoAccountScreen} style={styles.myButton}>
-                        <View>
-                            <Text style={styles.text}> 個人帳號 </Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={LogOut} style={styles.myButton} >
-                        <View>
-                            <Text style={styles.text}> 登出 </Text>
-                        </View>
-                    </TouchableOpacity>
-                </View>
             </SafeAreaView>
         </>
     );
 }
 
-const Stack = createNativeStackNavigator();
-
-export default function App() {
-    return (
-        <NavigationContainer independent={true}>
-            <Stack.Navigator>
-                <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="個人帳號" component={AccountScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-}
 const styles = StyleSheet.create({
     container: {
         flex: 1, //佔據所有空間
@@ -119,4 +82,3 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
 });
-
