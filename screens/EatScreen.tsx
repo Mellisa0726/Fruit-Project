@@ -26,28 +26,28 @@ export default function EatScreen() {
                     <Text style={styles.border} />
                     <View style={styles.middle}>
                         <Text style={styles.header} />
-                        <Text style={styles.header}> • 墨綠色                   {"\n"}</Text>
+                        <Text style={styles.header}>  墨綠色                   {"\n"}</Text>
                         <Image style={styles.banana} source={require('../assets/images/banana_1.png')} />
                         <Text style={styles.header} />
                         <Text style={styles.text}>
                             未熟，不宜食用{"\n"}
                         </Text>
 
-                        <Text style={styles.header}> • 淡青色至半青半黃{"\n"}</Text>
+                        <Text style={styles.header}>  淡青色至半青半黃{"\n"}</Text>
                         <Image style={styles.banana} source={require('../assets/images/banana_2.png')} />
                         <Text style={styles.header} />
                         <Text style={styles.text}>
                             口感苦澀、皮厚肉硬，含有「難消化性麥芽糊精」，不易被小腸吸收，升糖指數較低，可被腸道細菌發酵，具有穩定血糖之作用，有助於改善腸道健康。具有抗性澱粉、提供高飽足感，但不易消化，吃多容易引起腹脹、消化不良等反應。{"\n"}
                         </Text>
 
-                        <Text style={styles.header}> • 四分之三至全黃香蕉{"\n"}</Text>
+                        <Text style={styles.header}>  四分之三至全黃香蕉{"\n"}</Text>
                         <Image style={styles.banana} source={require('../assets/images/banana_3.png')} />
                         <Text style={styles.header} />
                         <Text style={styles.text}>
                             味道香濃、口感軟滑，含有豐富維他命B2、B6及C，能促進新陳代謝，具養顏美白效果。此階段香蕉中含有豐富的鉀和鎂，能消除疲勞，減少運動時抽筋的機會。助消化、安眠、抗憂鬱。{"\n"}
                         </Text>
 
-                        <Text style={styles.header}> • 帶有啡點之全熟香蕉{"\n"}</Text>
+                        <Text style={styles.header}>  帶有啡點之全熟香蕉{"\n"}</Text>
                         <Image style={styles.banana} source={require('../assets/images/banana_4.png')} />
                         <Text style={styles.header} />
                         <Text style={styles.text}>

@@ -13,17 +13,7 @@ import {
 export default function AccountScreen() {
     return (
         <>
-            <StatusBar />
-            <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <View style={styles.first}>
-                        <Text style={styles.title}> 設定 </Text>
-                        <TouchableOpacity>
-                            <Ionicons name="notifications-outline" size={25} style={styles.notification} />
-                        </TouchableOpacity>
-                    </View>
-                </View>
-            </SafeAreaView>
+
         </>
     );
 }
