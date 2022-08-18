@@ -2,24 +2,15 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
-  Image,
   TextInput,
-  Button,
-  TouchableWithoutFeedback,
-  KeyboardAvoidingView,
-  Platform,
   ScrollView,
 } from 'react-native';
 import { Feather } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
-import * as Animatable from 'react-native-animatable';
 import React, { useState } from "react";
 import { Text } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
 import { api } from '../api';
-
-let val: string
 
 export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'>) {
   const [data, setData] = React.useState({
@@ -111,18 +102,6 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
               onChangeText={(val) => textInputChange(val)}
               onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
             />
-            {data.check_textInputChange ?
-              <Animatable.View
-                animation="bounceIn"
-              >
-                <Feather
-                  name="check-circle"
-                  color="green"
-                  size={20}
-                />
-              </Animatable.View>
-              : null}
-              <Text>   </Text>
           </View>
 
           <View style={styles.inputView}>
@@ -158,8 +137,8 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
           <TouchableOpacity onPress={() => logIn()} style={styles.link}>
             <Text style={styles.text}> 登入 </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.link}>
-            <Text style={styles.text}> 註冊 </Text>
+          <TouchableOpacity>
+            <Text style={styles.signup_button}>註冊</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -219,9 +198,12 @@ const styles = StyleSheet.create({
   forgot_button: {
     fontSize: 11,
     height: 30,
-    marginHorizontal: 0,
+    textDecorationLine: 'underline',
   },
-  signIn:{
-    marginTop: 10,
+  signup_button:{
+    fontSize: 11,
+    height: 30,
+    paddingTop: 8,
+    textDecorationLine: 'underline',
   },
 });
