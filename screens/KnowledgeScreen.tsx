@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import * as React from 'react';
-import { SafeAreaView, StyleSheet, TouchableOpacity, Text, View, Button } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Text, View, Image, ImageBackground } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import EatScreen from '../screens/EatScreen';
@@ -17,29 +17,35 @@ function KnowledgeScreen(props: { navigation: { navigate: (arg0: string) => void
   };
   return (
     <>
-      <StatusBar />
-      <SafeAreaView style={styles.container}>
-        <View style={styles.header}>
-          <View style={styles.first}>
-            <Text style={styles.title}> 關於香蕉 </Text>
-            <TouchableOpacity>
-              <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+      <StatusBar/>
+      <ScrollView>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.header}>
+            <View style={styles.first}>
+              <Text style={styles.title}> 關於香蕉 </Text>
+              <TouchableOpacity>
+                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+              </TouchableOpacity>
+            </View>
+          </View>
+          <View style={styles.main}>
+            <TouchableOpacity onPress={gotoEatStackScreen} style={styles.myButton}>
+              <View>
+                <ImageBackground style={styles.banana} source={require('../assets/images/香蕉熟成階段2.png')}>
+                  <Text style={styles.text}> 香蕉熟成階段 </Text>
+                </ImageBackground>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={gotoRecipeStackScreen} style={styles.myButton}>
+              <View>
+                <ImageBackground style={styles.banana} source={require('../assets/images/廚房用具7.png')}>
+                  <Text style={styles.text}> 香蕉食譜 </Text>
+                </ImageBackground>
+              </View>
             </TouchableOpacity>
           </View>
-        </View>
-        <View style={styles.main}>
-          <TouchableOpacity onPress={gotoEatStackScreen} style={styles.myButton}>
-            <View>
-              <Text style={styles.text}> 香蕉熟成階段 </Text>
-            </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={gotoRecipeStackScreen} style={styles.myButton}>
-            <View>
-              <Text style={styles.text}> 香蕉食譜 </Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+        </SafeAreaView>
+      </ScrollView>
     </>
   );
 }
@@ -101,20 +107,31 @@ const styles = StyleSheet.create({
     zIndex: -1,
   },
   myButton:{
-    marginTop: 30,
-    height: 60,
-    width: 250,
+    marginTop: 25,
+    height: 220,
+    width: 230,
     borderRadius: 20,
     backgroundColor:'transparent',
-    borderColor:'#FAE5A4',
-    borderWidth: 4,
+    borderColor:'#fff',
+    borderWidth: 1,
     justifyContent: 'center',
     paddingLeft: 20,
   },
   text:{
-    fontSize: 20,
-    color: "#7E6107",
+    fontSize: 27,
+    color: "#fff",
     fontWeight: 'bold',
+    paddingTop: 75,
+  },
+  banana: {
+    flex: 1,
+    borderRadius: 20,
+    width: 215,
+    height: 202,
+    marginLeft: -13,
+    marginTop: -106,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
 
