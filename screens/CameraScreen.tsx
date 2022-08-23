@@ -33,7 +33,6 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {startCamera ? (
         <View
           style={{
             flex: 1,
@@ -108,40 +107,6 @@ export default function App() {
             </Camera>
           )}
         </View>
-      ) : (
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: '#fff',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <TouchableOpacity
-            onPress={__startCamera}
-            style={{
-              width: 130,
-              borderRadius: 4,
-              backgroundColor: '#14274e',
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: 40
-            }}
-          >
-            <Text
-              style={{
-                color: '#fff',
-                fontWeight: 'bold',
-                textAlign: 'center'
-              }}
-            >
-              Take picture
-            </Text>
-          </TouchableOpacity>
-        </View>
-      )}
-
       <StatusBar style="auto" />
     </View>
   )
