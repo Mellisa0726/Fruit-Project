@@ -57,7 +57,7 @@ export default function App() {
     <NavigationContainer independent={true}>
       <Stack.Navigator>
         <Stack.Screen name="Knowledge" component={KnowledgeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="香蕉熟成階段" component={EatScreen}/>
+        <Stack.Screen name="香蕉熟成階段" component={EatScreen} options={{ headerShown: false }} />
         <Stack.Screen name="香蕉食譜" component={RecipeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
