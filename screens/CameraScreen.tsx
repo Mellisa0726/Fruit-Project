@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect, useRef } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
+import { api } from '../api'
+
 let camera: Camera
 export default function App() {
   const [startCamera, setStartCamera] = React.useState(false)
@@ -24,7 +26,9 @@ export default function App() {
     setPreviewVisible(true)
     setCapturedImage(photo)
   }
-  const __savePhoto = () => { }
+  const __savePhoto = () => {
+    api.getBoundingBox(capturedImage)
+  }
   const __retakePicture = () => {
     setCapturedImage(null)
     setPreviewVisible(false)

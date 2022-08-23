@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as SecureStore from 'expo-secure-store';
 
 const hostname = 'https://rn-backend-app.herokuapp.com/api/v1';
 
@@ -11,7 +12,7 @@ export const api = {
             })
             .then(res => {
                 // console.log(res);
-                // window.localStorage.setItem('JWT', res.data.jwt);
+                SecureStore.setItemAsync('JWT', res.data.jwt);
             })
         )
     },
@@ -30,6 +31,18 @@ export const api = {
         return (
             axios.get(hostname + '/recipe?fruit=' + fruit)
             .then(res => res.data)
+        )
+    },
+    getBoundingBox(image: File) {
+        return (
+            axios.post('https://judycpc.pythonanywhere.com/', {
+                image: image
+            }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(res => console.log(res))
         )
     }
 };
