@@ -56,6 +56,7 @@ class CalendarList extends Component {
         horizontal: false,
         scrollsToTop: false,
         scrollEnabled: true,
+        pagingEnabled: true,
         removeClippedSubviews: constants.isAndroid,
         keyExtractor: (_, index) => String(index),
         nestedScrollEnabled: true
