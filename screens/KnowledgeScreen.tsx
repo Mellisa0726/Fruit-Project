@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   myButton:{
-    marginTop: 20,
+    marginTop: 30,
     height: 220,
     width: 230,
     backgroundColor:'transparent',

@@ -12,6 +12,7 @@ import {
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AccountScreen from '../screens/AccountScreen';
+import LogInScreen from '../screens/LogInScreen';
 import * as SecureStore from 'expo-secure-store';
 
 function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
@@ -19,7 +20,7 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
         props.navigation.navigate('個人帳號');
     };
     
-    const LogOut = async () => {
+    const signOut = async () => {
         SecureStore.deleteItemAsync('JWT');
         // window.localStorage.clear();
         props.navigation.navigate('LogIn');
@@ -43,7 +44,7 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
                             <Text style={styles.text}> 個人帳號 </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={LogOut} style={styles.myButton} >
+                    <TouchableOpacity onPress={signOut} style={styles.myButton} >
                         <View>
                             <Text style={styles.text}> 登出 </Text>
                         </View>
@@ -62,6 +63,7 @@ export default function App() {
             <Stack.Navigator>
                 <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="個人帳號" component={AccountScreen} />
+                <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -78,6 +78,7 @@ function BottomTabNavigator() {
           title: '日曆',
           tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
           unmountOnBlur: true,
+          
         }}
       />
       <BottomTab.Screen
