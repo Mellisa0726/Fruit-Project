@@ -6,7 +6,9 @@ import {
     Image,
     Animated,
     Dimensions,
-    SafeAreaView
+    SafeAreaView,
+    TouchableOpacity,
+    Text,
 } from 'react-native';
 import { api } from '../api';
 import { Ionicons } from '@expo/vector-icons';
@@ -17,9 +19,89 @@ import RNAnimatedScrollIndicators from '../node_modules/react-native-animated-sc
 
 const { width } = Dimensions.get('window');
 
-export default function RecipeScreen() {
+function RecipeScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
+    const gotoKnowledgeScreen = () => {
+        props.navigation.navigate('Knowledge');
+    };
     const scrollX = new Animated.Value(0);
 
+    return (
+        <ScrollView>
+            <SafeAreaView style={styles.container}>
+                    <View style={styles.header}>
+                        <TouchableOpacity onPress={gotoKnowledgeScreen} style={styles.myButton}>
+                            <View>
+                                <Text style={styles.text_back}> ᐸ  返回 </Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={styles.first}>
+                            <Text style={styles.title}> 香蕉食譜 </Text>
+                            <TouchableOpacity>
+                                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                <View style={{ flex: 1 }}>
+                    <Animated.ScrollView
+                        horizontal
+                        pagingEnabled
+                        showsHorizontalScrollIndicator={false}
+                        contentContainerStyle={{ flexGrow: 1 }}
+                        onScroll={Animated.event(
+                            [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+                            { useNativeDriver: true })}
+                    >
+                        <ScrollView>
+                            <View style={styles.container}>
+                                <Image style={styles.pic1} source={require('../assets/images/烤香蕉片.png')} />
+                            </View>
+                        </ScrollView>
+                        <ScrollView>
+                            <View style={styles.container}>
+                                <Image style={styles.pic2} source={require('../assets/images/香蕉鬆餅.png')} />
+                            </View>
+                        </ScrollView>
+                        <ScrollView>
+                            <View style={styles.container}>
+                                <Image style={styles.pic3} source={require('../assets/images/香蕉蛋糕.png')} />
+                            </View>
+                        </ScrollView>
+                        <ScrollView>
+                            <View style={styles.container}>
+                                <Image style={styles.pic4} source={require('../assets/images/香蕉奶昔.png')} />
+                            </View>
+                        </ScrollView>
+                        <ScrollView>
+                            <View style={styles.container}>
+                                <Image style={styles.pic5} source={require('../assets/images/香蕉餅乾.png')} />
+                            </View>
+                        </ScrollView>
+                    </Animated.ScrollView>
+                    <View style={{
+                        left: 0,
+                        right: 0,
+                        bottom: 0,
+                        zIndex: 100,
+                        marginBottom: 20,
+                        position: 'absolute'
+                    }}>
+                        <RNAnimatedScrollIndicators
+                            numberOfCards={7}
+                            scrollWidth={width}
+                            activeColor={'#FF8000'}
+                            inActiveColor={'#BEBEBE'}
+                            scrollAnimatedValue={scrollX}
+                        />
+                    </View>
+                </View>
+            </SafeAreaView>
+        </ScrollView>
+    );
+}
+
+const Stack = createNativeStackNavigator();
+
+export default function App() {
     const [data, setData] = useState([]);
     
     useEffect(() => {
@@ -35,70 +117,57 @@ export default function RecipeScreen() {
     };
 
     return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <View style={{ flex: 1 }}>
-                <Animated.ScrollView
-                    horizontal
-                    pagingEnabled
-                    showsHorizontalScrollIndicator={false}
-                    contentContainerStyle={{ flexGrow: 1 }}
-                    onScroll={Animated.event(
-                        [{ nativeEvent: { contentOffset: { x: scrollX } } }],
-                        { useNativeDriver: true })}
-                >
-                    <ScrollView>
-                        <View style={styles.container}>
-                            <Image style={styles.pic1} source={require('../assets/images/烤香蕉片.png')} />
-                        </View>
-                    </ScrollView>
-                    <ScrollView>
-                        <View style={styles.container}>
-                            <Image style={styles.pic2} source={require('../assets/images/香蕉鬆餅.png')} />
-                        </View>
-                    </ScrollView>
-                    <ScrollView>
-                        <View style={styles.container}>
-                            <Image style={styles.pic3} source={require('../assets/images/香蕉蛋糕.png')} />
-                        </View>
-                    </ScrollView>
-                    <ScrollView>
-                        <View style={styles.container}>
-                            <Image style={styles.pic4} source={require('../assets/images/香蕉奶昔.png')} />
-                        </View>
-                    </ScrollView>
-                    <ScrollView>
-                        <View style={styles.container}>
-                            <Image style={styles.pic5} source={require('../assets/images/香蕉餅乾.png')} />
-                        </View>
-                    </ScrollView>
-                </Animated.ScrollView>
-                <View style={{
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    zIndex: 100,
-                    marginBottom: 20,
-                    position: 'absolute'
-                }}>
-                    <RNAnimatedScrollIndicators
-                        numberOfCards={7}
-                        scrollWidth={width}
-                        activeColor={'#FF8000'}
-                        inActiveColor={'#BEBEBE'}
-                        scrollAnimatedValue={scrollX}
-                    />
-                </View>
-            </View>
-        </SafeAreaView>
+        <NavigationContainer independent={true}>
+            <Stack.Navigator>
+                <Stack.Screen name="香蕉食譜" component={RecipeScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="Knowledge" component={KnowledgeScreen} options={{ headerShown: false }} />
+            </Stack.Navigator>
+        </NavigationContainer>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#FFF6DB",
+        backgroundColor: "#FFF",
         alignItems: "center",
         width,
+    },
+    header: {
+        flex: 1,
+        height: 210,
+        width: 420,
+        backgroundColor: '#FAE5A4',
+        borderBottomLeftRadius: 60,
+        borderBottomRightRadius: 60,
+    },
+    text_back: {
+        fontSize: 18,
+        color: "#7E6107",
+        marginLeft: 70,
+    },
+    first: {
+        flexDirection: 'row',
+        paddingTop: 80,
+    },
+    title: {
+        fontSize: 25,
+        color: "#7E6107",
+        fontWeight: 'bold',
+        paddingLeft: 60,
+    },
+    myButton: {
+        height: 50,
+        width: 200,
+        marginTop: 30,
+        justifyContent: 'center',
+        marginLeft: -25,
+    },
+    notification: {
+        color: "#7E6107",
+        fontWeight: 'bold',
+        paddingTop: 3,
+        paddingLeft: 150,
     },
     pic1: {
         flex: 1,

@@ -114,8 +114,7 @@ const styles = StyleSheet.create({
     text_back: {
         fontSize: 18,
         color: "#7E6107",
-        marginLeft: 50,
-        marginRight: 50,
+        marginLeft: 70,
     },
     first: {
         flexDirection: 'row',
