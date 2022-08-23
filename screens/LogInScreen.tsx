@@ -12,7 +12,7 @@ import { Text } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
 import { api } from '../api';
 
-export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'>) {
+export default function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
   const [data, setData] = React.useState({
     username: '',
     password: '',
@@ -76,7 +76,7 @@ export default function LogInScreen({ navigation }: RootStackScreenProps<'LogIn'
   function logIn() {
     // console.log(data);
     api.logIn(data.username, data.password)
-    .then(res => navigation.replace('Root'))
+    .then(res => props.navigation.navigate('Root'))
     .catch(err => {
       // console.log(err);
       window.alert('Log in failed');

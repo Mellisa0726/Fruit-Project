@@ -11,16 +11,17 @@ import {
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Link } from '@react-navigation/native';
 import AccountScreen from '../screens/AccountScreen';
+import * as SecureStore from 'expo-secure-store';
 
 function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
     const gotoAccountScreen = () => {
         props.navigation.navigate('個人帳號');
     };
     
-    const LogOut = () => {
-        window.localStorage.clear();
+    const LogOut = async () => {
+        SecureStore.deleteItemAsync('JWT');
+        // window.localStorage.clear();
         props.navigation.navigate('LogIn');
       };
 
