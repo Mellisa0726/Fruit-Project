@@ -9,7 +9,10 @@ import {
     SafeAreaView
 } from 'react-native';
 import { api } from '../api';
-
+import { Ionicons } from '@expo/vector-icons';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import KnowledgeScreen from '../screens/KnowledgeScreen';
 import RNAnimatedScrollIndicators from '../node_modules/react-native-animated-scroll-indicators';
 
 const { width } = Dimensions.get('window');
