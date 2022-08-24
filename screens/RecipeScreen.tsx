@@ -1,4 +1,5 @@
 import React , { useState, useEffect } from 'react';
+import { StatusBar } from 'expo-status-bar';
 import {
     View,
     StyleSheet,
@@ -26,22 +27,23 @@ function RecipeScreen(props: { navigation: { navigate: (arg0: string) => void; }
     const scrollX = new Animated.Value(0);
 
     return (
-        <ScrollView>
+        <>
+            <StatusBar />
             <SafeAreaView style={styles.container}>
-                    <View style={styles.header}>
-                        <TouchableOpacity onPress={gotoKnowledgeScreen} style={styles.myButton}>
-                            <View>
-                                <Text style={styles.text_back}> ᐸ  返回 </Text>
-                            </View>
-                        </TouchableOpacity>
-                        <View style={styles.first}>
-                            <Text style={styles.title}> 香蕉食譜 </Text>
-                            <TouchableOpacity>
-                                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
-                            </TouchableOpacity>
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={gotoKnowledgeScreen} style={styles.myButton}>
+                        <View>
+                            <Text style={styles.text_back}> ᐸ  返回 </Text>
                         </View>
+                    </TouchableOpacity>
+                    <View style={styles.first}>
+                        <Text style={styles.title}> 香蕉食譜 </Text>
+                        <TouchableOpacity>
+                            <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                        </TouchableOpacity>
                     </View>
-                <View style={{ flex: 1 }}>
+                </View>
+                <View style={styles.main}>
                     <Animated.ScrollView
                         horizontal
                         pagingEnabled
@@ -86,7 +88,7 @@ function RecipeScreen(props: { navigation: { navigate: (arg0: string) => void; }
                         position: 'absolute'
                     }}>
                         <RNAnimatedScrollIndicators
-                            numberOfCards={7}
+                            numberOfCards={5}
                             scrollWidth={width}
                             activeColor={'#FF8000'}
                             inActiveColor={'#BEBEBE'}
@@ -95,7 +97,7 @@ function RecipeScreen(props: { navigation: { navigate: (arg0: string) => void; }
                     </View>
                 </View>
             </SafeAreaView>
-        </ScrollView>
+        </>
     );
 }
 
@@ -168,6 +170,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         paddingTop: 3,
         paddingLeft: 150,
+    },
+    main: {
+        flex:2.275,
+        backgroundColor: 'white',
+        alignItems: 'center',
     },
     pic1: {
         flex: 1,

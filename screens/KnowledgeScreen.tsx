@@ -31,14 +31,14 @@ function KnowledgeScreen(props: { navigation: { navigate: (arg0: string) => void
           <View style={styles.main}>
             <TouchableOpacity onPress={gotoEatStackScreen} style={styles.myButton_1}>
               <View>
-                <ImageBackground style={styles.banana} source={require('../assets/images/香蕉熟成階段2.png')}>
+                <ImageBackground style={styles.banana} source={require('../assets/images/香蕉熟成階段.png')}>
                   <Text style={styles.text}> 香蕉熟成階段 </Text>
                 </ImageBackground>
               </View>
             </TouchableOpacity>
             <TouchableOpacity onPress={gotoRecipeStackScreen} style={styles.myButton_2}>
               <View>
-                <ImageBackground style={styles.banana} source={require('../assets/images/廚房用具7.png')}>
+                <ImageBackground style={styles.banana} source={require('../assets/images/廚房用具.png')}>
                   <Text style={styles.text}> 香蕉食譜 </Text>
                 </ImageBackground>
               </View>
