@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
         width,
     },
     header: {
-        flex: 1,
         height: 210,
         width: 420,
         backgroundColor: '#FAE5A4',
@@ -169,7 +168,7 @@ const styles = StyleSheet.create({
         color: "#7E6107",
         fontWeight: 'bold',
         paddingTop: 3,
-        paddingLeft: 150,
+        paddingLeft: 148,
     },
     main: {
         flex:2.275,
@@ -180,30 +179,28 @@ const styles = StyleSheet.create({
         flex: 1,
         resizeMode: 'contain',
         width: "80%",
-        marginTop: -10,
     },
     pic2: {
         flex: 1,
         resizeMode: 'contain',
         width: "80%",
-        marginTop: -12,
+        marginTop: -2,
     },
     pic3: {
         flex: 1,
         resizeMode: 'contain',
         width: "80%",
-        marginTop: -26,
+        marginTop: -12,
     },
     pic4: {
         flex: 1,
         resizeMode: 'contain',
         width: "80%",
-        marginTop: -8,
     },
     pic5: {
         flex: 1,
         resizeMode: 'contain',
         width: "80%",
-        marginTop: -22,
+        marginTop: -6,
     },
 });

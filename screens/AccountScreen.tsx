@@ -20,7 +20,7 @@ function AccountScreen(props: { navigation: { navigate: (arg0: string) => void; 
 
     return (
         <>
-        <StatusBar />
+            <StatusBar />
             <SafeAreaView style={styles.container}>
                 <View style={styles.header}>
                     <TouchableOpacity onPress={gotoSettingScreen} style={styles.myButton}>
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAE5A4',
         borderBottomLeftRadius: 60,
         borderBottomRightRadius: 60,
-        marginLeft: -13,
+        marginLeft: -4.5,
     },
     myButton: {
         height: 50,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         color: "#7E6107",
         fontWeight: 'bold',
         paddingTop: 3,
-        paddingLeft: 99.5,
+        paddingLeft: 95.5,
     },
     main: {
         flex: 4,

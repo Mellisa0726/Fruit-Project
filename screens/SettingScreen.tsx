@@ -7,7 +7,6 @@ import {
     TouchableOpacity,
     Text,
     View,
-    Image,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -63,7 +62,6 @@ export default function App() {
             <Stack.Navigator>
                 <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="變更帳戶資料" component={AccountScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

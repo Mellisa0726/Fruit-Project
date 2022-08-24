@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#FAE5A4',
         borderBottomLeftRadius: 60,
         borderBottomRightRadius: 60,
-        marginLeft: -13,
+        marginLeft: -4.5,
     },
     myButton: {
         height: 50,
@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         color: "#7E6107",
         fontWeight: 'bold',
         paddingTop: 3,
-        paddingLeft: 99.5,
+        paddingLeft: 95.5,
     },
     center: {
         flex: 1,

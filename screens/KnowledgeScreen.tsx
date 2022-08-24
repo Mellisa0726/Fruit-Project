@@ -67,6 +67,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1, //佔據所有空間
+    backgroundColor: '#fff',
   },
   header: {
     flex: 2,
@@ -96,22 +97,27 @@ const styles = StyleSheet.create({
     paddingLeft: 150,
   },
   main: {
-    flex: 5,
-    backgroundColor: 'white',
+    flex: 1,
+    width: '100%',
+    height:'100%',
+    backgroundColor: '#fff',
     alignItems: 'center',
   },
   myButton_1:{
     paddingTop: 80,
     height: 180,
     width: '50%',
+    alignItems: 'center',
     justifyContent: 'center',
   },
   myButton_2: {
-    height: 180,
-    width: '50%',
+    height: 0,
+    width: '0%',
     paddingTop: 80,
     paddingBottom: 230,
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#000',
   },
   banana: {
     borderRadius: 20,
@@ -120,6 +126,7 @@ const styles = StyleSheet.create({
     marginLeft: -10,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#fff',
   },
   text:{
     fontSize: 27,
