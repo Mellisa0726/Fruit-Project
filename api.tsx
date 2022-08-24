@@ -33,13 +33,11 @@ export const api = {
             .then(res => res.data)
         )
     },
-    getBoundingBox(image: File) {
+    getBoundingBox(image: any) {
         return (
-            axios.post('https://judycpc.pythonanywhere.com/', {
-                image: image
-            }, {
+            axios.post('https://judycpc.pythonanywhere.com/', image, {
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Content-Type': 'application/json'
                 }
             })
             .then(res => console.log(res))

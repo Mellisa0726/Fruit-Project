@@ -28,6 +28,7 @@ export default function App() {
   }
   const __savePhoto = () => {
     api.getBoundingBox(capturedImage)
+    .catch(err => console.log(err))
   }
   const __retakePicture = () => {
     setCapturedImage(null)
@@ -117,7 +118,7 @@ export default function App() {
 }
 
 const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
-  console.log('sdsfds', photo)
+  // console.log('sdsfds', JSON.stringify(photo))
   return (
     <View
       style={{
