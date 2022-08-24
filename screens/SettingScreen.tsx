@@ -17,7 +17,7 @@ import * as SecureStore from 'expo-secure-store';
 
 function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
     const gotoAccountScreen = () => {
-        props.navigation.navigate('個人帳號');
+        props.navigation.navigate('變更帳戶資料');
     };
     
     const signOut = async () => {
@@ -41,7 +41,7 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
                 <View style={styles.main}>
                     <TouchableOpacity onPress={gotoAccountScreen} style={styles.myButton}>
                         <View>
-                            <Text style={styles.text}> 個人帳號 </Text>
+                            <Text style={styles.text}> 變更帳戶資料 </Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={signOut} style={styles.myButton} >
@@ -62,7 +62,7 @@ export default function App() {
         <NavigationContainer independent={true}>
             <Stack.Navigator>
                 <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="個人帳號" component={AccountScreen} />
+                <Stack.Screen name="變更帳戶資料" component={AccountScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
