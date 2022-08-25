@@ -12,7 +12,7 @@ export const api = {
             })
             .then(res => {
                 // console.log(res);
-                SecureStore.setItemAsync('JWT', res.data.jwt);
+                // SecureStore.setItemAsync('JWT', res.data.jwt);
             })
         )
     },
@@ -40,7 +40,7 @@ export const api = {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res => console.log(res))
+            .then(res => res)
         )
     }
 };
