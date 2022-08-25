@@ -28,6 +28,7 @@ export default function App() {
   }
   const __savePhoto = () => {
     api.getBoundingBox(capturedImage)
+    .then(res => window.alert(res))
     .catch(err => console.log(err))
   }
   const __retakePicture = () => {
