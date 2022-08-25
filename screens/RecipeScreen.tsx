@@ -146,6 +146,7 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: "#7E6107",
         marginLeft: 70,
+        marginTop: 30,
     },
     first: {
         flexDirection: 'row',
