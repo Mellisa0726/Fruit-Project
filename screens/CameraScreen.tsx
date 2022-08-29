@@ -9,6 +9,8 @@ export default function App() {
   const [startCamera, setStartCamera] = React.useState(false)
   const [previewVisible, setPreviewVisible] = React.useState(false)
   const [capturedImage, setCapturedImage] = React.useState<any>(null)
+  const [boundingBox, setBoundingBox] = React.useState<any>(null)
+  const [croppedImage, setCroppedImage] = React.useState<any>(null)
   const [type, setType] = useState(CameraType.back)
 
   const __startCamera = async () => {
@@ -28,7 +30,13 @@ export default function App() {
   }
   const __savePhoto = () => {
     api.getBoundingBox(capturedImage)
-    .then(res => window.alert(res))
+    .then(res => {
+      setBoundingBox(res)
+      console.log(res)
+      if (res['counts'] > 0)
+        cropImg({x: res['data0']['x'], y: res['data0']['y'], w: res['data0']['w'], h: res['data0']['h']})
+      else window.alert('No banana.')
+    })
     .catch(err => console.log(err))
   }
   const __retakePicture = () => {
@@ -36,6 +44,14 @@ export default function App() {
     setPreviewVisible(false)
     __startCamera()
   }
+
+  function cropImg({x, y, w, h}: any){
+    const canvas: any = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    setCroppedImage(ctx.drawImage(capturedImage, x, y, w, h, 0, 0, w, h));
+  }
+
+  console.log('cropped:', croppedImage)
 
   return (
     <View style={styles.container}>

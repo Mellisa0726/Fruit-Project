@@ -40,7 +40,7 @@ export const api = {
                     'Content-Type': 'application/json'
                 }
             })
-            .then(res => res)
+            .then(res => res.data)
         )
     }
 };
