@@ -12,7 +12,7 @@ export const api = {
             })
             .then(res => {
                 // console.log(res);
-                // SecureStore.setItemAsync('JWT', res.data.jwt);
+                SecureStore.setItemAsync('JWT', res.data.jwt);
             })
         )
     },
