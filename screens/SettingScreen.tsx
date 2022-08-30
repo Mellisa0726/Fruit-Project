@@ -19,12 +19,11 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
         props.navigation.navigate('變更帳戶資料');
     };
     
-    const signOut = async () => {
+    function SignOut() {
         SecureStore.deleteItemAsync('JWT');
         // window.localStorage.clear();
         props.navigation.navigate('LogIn');
-      };
-
+    };
     return (
         <>
             <StatusBar />
@@ -43,7 +42,7 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
                             <Text style={styles.text}> 變更帳戶資料 </Text>
                         </View>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={signOut} style={styles.myButton} >
+                    <TouchableOpacity onPress={() => SignOut()} style={styles.myButton} >
                         <View>
                             <Text style={styles.text}> 登出 </Text>
                         </View>
@@ -56,7 +55,8 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
 
 const Stack = createNativeStackNavigator();
 
-export default function App() {
+export default function App(props: { navigation: { navigate: (arg0: string) => void; }; }) {
+
     return (
         <NavigationContainer independent={true}>
             <Stack.Navigator>

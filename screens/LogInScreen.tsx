@@ -11,8 +11,11 @@ import React, { useState } from "react";
 import { Text } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
 import { api } from '../api';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import SignUpScreen from '../screens/SignUpScreen';
 
-export default function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
+function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
   const [data, setData] = React.useState({
     username: '',
     password: '',
@@ -28,7 +31,7 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
     });
   }
   const textInputChange = (val:any) => {
-    if (val.trim().length >= 8) {
+    if (val.trim().length >= 0) {
       setData({
         ...data,
         username: val,
@@ -45,7 +48,7 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
     }
   }
   const handlePasswordChange = (val:any) => {
-    if (val.trim().length >= 8) {
+    if (val.trim().length >= 0) {
       setData({
         ...data,
         password: val,
@@ -60,7 +63,7 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
     }
   }
   const handleValidUser = (val:any) => {
-    if (val.trim().length >= 4) {
+    if (val.trim().length >= 0) {
       setData({
         ...data,
         isValidUser: true
@@ -82,7 +85,9 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
       window.alert('Log in failed');
     });
   }
-
+  const gotoSignUpScreen = () => {
+    props.navigation.navigate('SignUp');
+  };
   return (
     <ScrollView 
       contentContainerStyle={{ flex: 1 }}
@@ -137,7 +142,7 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
           <TouchableOpacity onPress={() => logIn()} style={styles.link}>
             <Text style={styles.text}> 登入 </Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={gotoSignUpScreen} >
             <Text style={styles.signup_button}>註冊</Text>
           </TouchableOpacity>
         </View>
@@ -146,6 +151,19 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
   );
 }
 
+const Stack = createNativeStackNavigator();
+
+export default function App(props: { navigation: { navigate: (arg0: string) => void; }; }) {
+
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator>
+        <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

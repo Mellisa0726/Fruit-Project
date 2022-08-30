@@ -10,6 +10,7 @@ import useColorScheme from '../hooks/useColorScheme';
 import ModalScreen from '../screens/ModalScreen';
 import NotFoundScreen from '../screens/NotFoundScreen';
 import LogInScreen from '../screens/LogInScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 import CameraScreen from '../screens/CameraScreen';
 import SettingScreen from '../screens/SettingScreen';
 import CalendarScreen from '../screens/CalendarScreen';
