@@ -85,7 +85,7 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
       window.alert('Log in failed');
     });
   }
-  const gotoSignUpScreen = () => {
+  function gotoSignUpScreen() {
     props.navigation.navigate('SignUp');
   };
   return (
@@ -136,13 +136,10 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
             </TouchableOpacity>
             <Text>   </Text>
           </View>
-          <TouchableOpacity>
-            <Text style={styles.forgot_button}>忘記密碼？</Text>
-          </TouchableOpacity>
           <TouchableOpacity onPress={() => logIn()} style={styles.link}>
             <Text style={styles.text}> 登入 </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={gotoSignUpScreen} >
+          <TouchableOpacity onPress={() => gotoSignUpScreen()} >
             <Text style={styles.signup_button}>註冊</Text>
           </TouchableOpacity>
         </View>

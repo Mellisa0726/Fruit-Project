@@ -26,32 +26,44 @@ function SignUpScreen(props: { navigation: { navigate: (arg0: string) => void; }
             scrollEnabled={false}
         >
             <View style={styles.container}>
-                <TouchableOpacity onPress={gotoLogInScreen} style={styles.myButton}>
-                    <View>
-                        <Text style={styles.text_back}> ᐸ  返回 </Text>
-                    </View>
-                </TouchableOpacity>
-                <View style={styles.first}>
-                    <StatusBar />
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.TextInput}
-                            placeholder="Username"
-                            placeholderTextColor="#9B9B9B"
-                        />
-                    </View>
-
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.TextInput}
-                            placeholder="Password"
-                            placeholderTextColor="#9B9B9B"
-                        />
-                    </View>
-                    <TouchableOpacity style={styles.link}>
-                        <Text style={styles.text}> 登入 </Text>
+                <View style={styles.header}>
+                    <TouchableOpacity onPress={gotoLogInScreen} style={styles.myButton}>
+                        <View>
+                            <Text style={styles.text_back}> ᐸ  返回登入 </Text>
+                        </View>
                     </TouchableOpacity>
+                    <StatusBar />
+                    <View style={styles.first}>
+                        <Text style={styles.slogan}>
+                            為你的香蕉註冊帳號吧 ！
+                        </Text>
+                        <View style={styles.inputView}>
+                            <TextInput
+                                style={styles.TextInput}
+                                placeholder="Email"
+                                placeholderTextColor="#9B9B9B"
+                            />
+                        </View>
 
+                        <View style={styles.inputView}>
+                            <TextInput
+                                style={styles.TextInput}
+                                placeholder="Password"
+                                placeholderTextColor="#9B9B9B"
+                            />
+                        </View>
+
+                        <View style={styles.inputView}>
+                            <TextInput
+                                style={styles.TextInput}
+                                placeholder="Repeat password"
+                                placeholderTextColor="#9B9B9B"
+                            />
+                        </View>
+                        <TouchableOpacity style={styles.link}>
+                            <Text style={styles.text}> 送出 </Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </View>
         </ScrollView>
@@ -76,17 +88,34 @@ const styles = StyleSheet.create({
         backgroundColor: "#fff",
         alignItems: "center",
     },
-    first: {
+    header: {
         height: 600,
         width: 420,
         backgroundColor: '#FAE5A4',
         borderBottomLeftRadius: 130,
         borderBottomRightRadius: 130,
-        paddingTop: 100,
-        alignItems: 'center',
+        paddingTop: 50,
+    },
+    slogan: {
+        fontSize: 30,
+        color: "#000",
+        fontWeight: 'bold',
+        paddingBottom: 30,
+        paddingLeft: 20,
+    },
+    myButton: {
+        height: 50,
+        width: 200,
+        marginTop: 10,
+        marginLeft: -25,
+    },
+    first: {
+        flexDirection: "column",
+        paddingTop: 110,
+        alignItems: "center",
     },
     link: {
-        marginTop: 10,
+        marginTop: 15,
         height: 40,
         width: 200,
         borderRadius: 10,
@@ -99,13 +128,6 @@ const styles = StyleSheet.create({
         color: "#000",
         fontWeight: 'bold',
     },
-    logo: {
-        height: 160,
-        width: 160,
-        borderRadius: 100,
-        backgroundColor: '#000',
-        marginBottom: 60,
-    },
     inputView: {
         backgroundColor: "#fff",
         borderRadius: 10,
@@ -113,8 +135,8 @@ const styles = StyleSheet.create({
         height: 40,
         marginBottom: 10,
         flexDirection: 'row',
-        alignItems: 'center',
         paddingLeft: 15,
+        marginTop: 10,
     },
     TextInput: {
         flex: 1,
@@ -135,12 +157,5 @@ const styles = StyleSheet.create({
         color: "#7E6107",
         marginLeft: 70,
         marginTop: 30,
-    },
-    myButton: {
-        height: 50,
-        width: 200,
-        marginTop: 30,
-        justifyContent: 'center',
-        marginLeft: -25,
     },
 });

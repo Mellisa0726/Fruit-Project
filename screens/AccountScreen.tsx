@@ -8,7 +8,7 @@ import {
     TextInput,
     Text,
     View,
-    Image,
+    ScrollView,
 } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -21,58 +21,65 @@ function AccountScreen(props: { navigation: { navigate: (arg0: string) => void; 
 
     return (
         <>
-            <StatusBar />
-            <SafeAreaView style={styles.container}>
-                <View style={styles.header}>
-                    <TouchableOpacity onPress={gotoSettingScreen} style={styles.myButton}>
-                        <View>
-                            <Text style={styles.text_back}> ᐸ  返回 </Text>
+            <ScrollView
+                contentContainerStyle={{ flex: 1 }}
+                keyboardDismissMode="on-drag"
+                keyboardShouldPersistTaps="never"
+                scrollEnabled={false}
+            >
+                <StatusBar />
+                <SafeAreaView style={styles.container}>
+                    <View style={styles.header}>
+                        <TouchableOpacity onPress={gotoSettingScreen} style={styles.myButton}>
+                            <View>
+                                <Text style={styles.text_back}> ᐸ  返回 </Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={styles.first}>
+                            <Text style={styles.title}> 變更帳戶資料 </Text>
+                            <TouchableOpacity>
+                                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                            </TouchableOpacity>
                         </View>
-                    </TouchableOpacity>
-                    <View style={styles.first}>
-                        <Text style={styles.title}> 變更帳戶資料 </Text>
-                        <TouchableOpacity>
-                            <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                    </View>
+                    <View style={styles.main}>
+                        <Text style={styles.main_text}>變更信箱</Text>
+                        <View style={styles.inputView}>
+                            <TextInput
+                                style={styles.TextInput}
+                                placeholder="example@gmail.com"
+                                placeholderTextColor="#BBBBBB"
+                                underlineColorAndroid={'#E0E0E0'}
+                            />
+                        </View>
+                        <Text> </Text>
+                        <Text style={styles.main_text}>變更密碼</Text>
+                        <View>
+                            <Text style={styles.main_text_pass}>原始密碼</Text>
+                            <View style={styles.inputView}>
+                                <TextInput
+                                    style={styles.TextInput}
+                                    placeholder="password"
+                                    placeholderTextColor="#BBBBBB"
+                                    underlineColorAndroid={'#E0E0E0'}
+                                />
+                            </View>
+                            <Text style={styles.main_text_pass}>新密碼</Text>
+                            <View style={styles.inputView}>
+                                <TextInput
+                                    style={styles.TextInput}
+                                    placeholder="password"
+                                    placeholderTextColor="#BBBBBB"
+                                    underlineColorAndroid={'#E0E0E0'}
+                                />
+                            </View>
+                        </View>
+                        <TouchableOpacity style={styles.link}>
+                            <Text style={styles.link_text}> 送出 </Text>
                         </TouchableOpacity>
                     </View>
-                </View>
-                <View style={styles.main}>
-                    <Text style={styles.main_text}>變更信箱</Text>
-                    <View style={styles.inputView}>
-                        <TextInput
-                            style={styles.TextInput}
-                            placeholder="example@gmail.com"
-                            placeholderTextColor="#BBBBBB"
-                            underlineColorAndroid={'#E0E0E0'}
-                        />
-                    </View>
-                    <Text> </Text>
-                    <Text style={styles.main_text}>變更密碼</Text>
-                    <View>
-                        <Text style={styles.main_text_pass}>原始密碼</Text>
-                        <View style={styles.inputView}>
-                            <TextInput
-                                style={styles.TextInput}
-                                placeholder="password"
-                                placeholderTextColor="#BBBBBB"
-                                underlineColorAndroid={'#E0E0E0'}
-                            />
-                        </View>
-                        <Text style={styles.main_text_pass}>新密碼</Text>
-                        <View style={styles.inputView}>
-                            <TextInput
-                                style={styles.TextInput}
-                                placeholder="password"
-                                placeholderTextColor="#BBBBBB"
-                                underlineColorAndroid={'#E0E0E0'}
-                            />
-                        </View>
-                    </View>
-                    <TouchableOpacity style={styles.link}>
-                        <Text style={styles.link_text}> 送出 </Text>
-                    </TouchableOpacity>
-                </View>
-            </SafeAreaView>
+                </SafeAreaView>
+            </ScrollView>
         </>
     );
 }
