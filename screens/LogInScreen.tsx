@@ -14,8 +14,9 @@ import { api } from '../api';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import SignUpScreen from '../screens/SignUpScreen';
+import ToggleSwitch from 'toggle-switch-react-native'
 
-function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
+export default function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
   const [data, setData] = React.useState({
     email: '',
     password: '',
@@ -85,10 +86,6 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
       window.alert('Log in failed');
     });
   }
-  
-  function gotoSignUpScreen() {
-    props.navigation.navigate('SignUp');
-  };
 
   return (
     <ScrollView 
@@ -101,6 +98,17 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
         <View style={styles.first}>
           <View style={styles.logo}/>
           <StatusBar />
+          <ToggleSwitch
+            isOn={true}
+            onColor="green"
+            offColor="red"
+            label="Example label"
+            labelStyle={{ color: "black", fontWeight: "900" }}
+            size="large"
+            onToggle={isOn => console.log("changed to : ", isOn)}
+          />
+          
+
           <View style={styles.inputView}>
             <TextInput
               style={styles.TextInput}
@@ -141,7 +149,7 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
           <TouchableOpacity onPress={() => logIn()} style={styles.link}>
             <Text style={styles.text}> 登入 </Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => gotoSignUpScreen()} >
+          <TouchableOpacity>
             <Text style={styles.signup_button}>註冊</Text>
           </TouchableOpacity>
         </View>
@@ -149,18 +157,7 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
     </ScrollView>
   );
 }
-const Stack = createNativeStackNavigator();
 
-export default function App() {
-  return (
-    <NavigationContainer independent={true}>
-      <Stack.Navigator>
-        <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
-}
 const styles = StyleSheet.create({
   container: {
     flex: 1,
