@@ -17,7 +17,6 @@ import CalendarScreen from '../screens/CalendarScreen';
 import { RootStackParamList, RootTabParamList, RootTabScreenProps } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import KnowledgeScreen from '../screens/KnowledgeScreen';
-import EatScreen from '../screens/EatScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -35,6 +34,7 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
       <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
       <Stack.Screen name="NotFound" component={NotFoundScreen} options={{ title: 'Oops!' }} />
       <Stack.Group screenOptions={{ presentation: 'modal' }}>

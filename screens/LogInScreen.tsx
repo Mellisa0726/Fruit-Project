@@ -17,7 +17,7 @@ import SignUpScreen from '../screens/SignUpScreen';
 
 function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
   const [data, setData] = React.useState({
-    username: '',
+    email: '',
     password: '',
     check_textInputChange: false,
     secureTextEntry: true,
@@ -31,24 +31,24 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
     });
   }
   const textInputChange = (val:any) => {
-    if (val.trim().length >= 0) {
+    if (val.trim().length >= 4) {
       setData({
         ...data,
-        username: val,
+        email: val,
         check_textInputChange: true,
         isValidUser: true
       });
     } else {
       setData({
         ...data,
-        username: val,
+        email: val,
         check_textInputChange: false,
         isValidUser: false
       });
     }
   }
   const handlePasswordChange = (val:any) => {
-    if (val.trim().length >= 0) {
+    if (val.trim().length >= 4) {
       setData({
         ...data,
         password: val,
@@ -63,7 +63,7 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
     }
   }
   const handleValidUser = (val:any) => {
-    if (val.trim().length >= 0) {
+    if (val.trim().length >= 4) {
       setData({
         ...data,
         isValidUser: true
@@ -78,16 +78,18 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
 
   function logIn() {
     // console.log(data);
-    api.logIn(data.username, data.password)
+    api.logIn(data.email, data.password)
     .then(res => props.navigation.navigate('Root'))
     .catch(err => {
       // console.log(err);
       window.alert('Log in failed');
     });
   }
+  
   function gotoSignUpScreen() {
     props.navigation.navigate('SignUp');
   };
+
   return (
     <ScrollView 
       contentContainerStyle={{ flex: 1 }}
@@ -102,7 +104,7 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
           <View style={styles.inputView}>
             <TextInput
               style={styles.TextInput}
-              placeholder="Username"
+              placeholder="Email"
               placeholderTextColor="#9B9B9B"
               onChangeText={(val) => textInputChange(val)}
               onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
@@ -147,11 +149,9 @@ function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; };
     </ScrollView>
   );
 }
-
 const Stack = createNativeStackNavigator();
 
-export default function App(props: { navigation: { navigate: (arg0: string) => void; }; }) {
-
+export default function App() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator>

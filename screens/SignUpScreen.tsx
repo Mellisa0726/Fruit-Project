@@ -10,14 +10,15 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { Text } from '../components/Themed';
 import { api } from '../api';
-import LogInScreen from '../screens/LogInScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import LogInScreen from '../screens/LogInScreen';
 
-function SignUpScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
-    const gotoLogInScreen = () => {
-        props.navigation.navigate('LogIn');
-    };
+export default function SignUpScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
+    
+    function SignUp() {
+        props.navigation.navigate('Root')
+    }
     return (
         <ScrollView
             contentContainerStyle={{ flex: 1 }}
@@ -27,7 +28,7 @@ function SignUpScreen(props: { navigation: { navigate: (arg0: string) => void; }
         >
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <TouchableOpacity onPress={gotoLogInScreen} style={styles.myButton}>
+                    <TouchableOpacity style={styles.myButton}>
                         <View>
                             <Text style={styles.text_back}> ᐸ  返回登入 </Text>
                         </View>
@@ -60,7 +61,7 @@ function SignUpScreen(props: { navigation: { navigate: (arg0: string) => void; }
                                 placeholderTextColor="#9B9B9B"
                             />
                         </View>
-                        <TouchableOpacity style={styles.link}>
+                        <TouchableOpacity onPress={() => SignUp()} style={styles.link}>
                             <Text style={styles.text}> 送出 </Text>
                         </TouchableOpacity>
                     </View>
@@ -69,19 +70,7 @@ function SignUpScreen(props: { navigation: { navigate: (arg0: string) => void; }
         </ScrollView>
     );
 }
-const Stack = createNativeStackNavigator();
 
-export default function App(props: { navigation: { navigate: (arg0: string) => void; }; }) {
-
-    return (
-        <NavigationContainer independent={true}>
-            <Stack.Navigator>
-                <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-}
 const styles = StyleSheet.create({
     container: {
         flex: 1,
