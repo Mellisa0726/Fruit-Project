@@ -17,7 +17,7 @@ function KnowledgeScreen(props: { navigation: { navigate: (arg0: string) => void
   };
   return (
     <>
-      <StatusBar/>
+      <StatusBar />
       <ScrollView>
         <SafeAreaView style={styles.container}>
           <View style={styles.header}>
@@ -59,6 +59,7 @@ export default function App() {
         <Stack.Screen name="Knowledge" component={KnowledgeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="香蕉熟成階段" component={EatScreen} options={{ headerShown: false }} />
         <Stack.Screen name="香蕉食譜" component={RecipeScreen} options={{ headerShown: false }} />
+
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
-  first:{
+  first: {
     height: 210,
     width: 420,
     backgroundColor: '#FAE5A4',
@@ -98,11 +99,11 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     width: '100%',
-    height:'100%',
+    height: '100%',
     backgroundColor: '#fff',
     alignItems: 'center',
   },
-  myButton_1:{
+  myButton_1: {
     paddingTop: 80,
     height: 180,
     width: '50%',
@@ -127,10 +128,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
   },
-  text:{
+  text: {
     fontSize: 27,
     color: "#fff",
     fontWeight: 'bold',
   },
 });
-

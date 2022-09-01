@@ -98,17 +98,7 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
         <View style={styles.first}>
           <View style={styles.logo}/>
           <StatusBar />
-          <ToggleSwitch
-            isOn={true}
-            onColor="green"
-            offColor="red"
-            label="Example label"
-            labelStyle={{ color: "black", fontWeight: "900" }}
-            size="large"
-            onToggle={isOn => console.log("changed to : ", isOn)}
-          />
           
-
           <View style={styles.inputView}>
             <TextInput
               style={styles.TextInput}

@@ -1,6 +1,7 @@
 {
   "extends": "expo/tsconfig.base",
   "suppressImplicitAnyIndexErrors": true,
+  "noImplicitAny": true,
   "compilerOptions": {
     "strict": true
   }
