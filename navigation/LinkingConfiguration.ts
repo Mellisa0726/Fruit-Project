@@ -9,11 +9,6 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          LogIn: {
-            screens: {
-              LogInScreen: 'LogIn',
-            },
-          },
           SignUp: {
             screens: {
               SignUpScreen: 'SignUp',
@@ -21,22 +16,22 @@ const linking: LinkingOptions<RootStackParamList> = {
           },
           Knowledge: {
             screens: {
-              KnowledgeScreen: 'one',
+              KnowledgeScreen: 'Knowledge',
             },
           },
           Camera: {
             screens: {
-              CameraScreen: 'camera',
+              CameraScreen: 'Camera',
             },
           },
           Calendar: {
             screens: {
-              CalendarScreen: 'three',
+              CalendarScreen: 'Calendar',
             },
           },
           Setting: {
             screens: {
-              SettingScreen: 'four',
+              SettingScreen: 'Setting',
             },
           },
         },

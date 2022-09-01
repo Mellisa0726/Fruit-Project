@@ -62,6 +62,7 @@ export default function App(props: { navigation: { navigate: (arg0: string) => v
             <Stack.Navigator>
                 <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="變更帳戶資料" component={AccountScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
