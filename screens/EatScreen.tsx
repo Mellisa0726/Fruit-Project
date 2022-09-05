@@ -1,13 +1,15 @@
 import React, { Component, useState, useEffect } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView, SafeAreaView, TouchableOpacity, StatusBar, StyleSheet, View, Text, Image } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import {  useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import KnowledgeScreen from '../screens/KnowledgeScreen';
 import { api } from '../api';
 
 function EatScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
+    
     const gotoKnowledgeScreen = () => {
+        const navigation = useNavigation();
         props.navigation.navigate('Knowledge');
     };
 

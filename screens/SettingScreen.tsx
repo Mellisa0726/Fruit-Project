@@ -22,7 +22,7 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
     function SignOut() {
         SecureStore.deleteItemAsync('JWT');
         // window.localStorage.clear();
-        props.navigation.navigate('LogIn');
+        //props.navigation.navigate('LogIn');
     };
     return (
         <>
@@ -62,7 +62,6 @@ export default function App(props: { navigation: { navigate: (arg0: string) => v
             <Stack.Navigator>
                 <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="變更帳戶資料" component={AccountScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

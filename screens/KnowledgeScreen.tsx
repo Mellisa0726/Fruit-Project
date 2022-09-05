@@ -1,20 +1,38 @@
+import * as React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import * as React from 'react';
-import { ScrollView, SafeAreaView, StyleSheet, TouchableOpacity, Text, View, Image, ImageBackground } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { ScrollView, SafeAreaView, StyleSheet, Button, TouchableOpacity, Text, View, Image, ImageBackground } from 'react-native';
+import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import EatScreen from '../screens/EatScreen';
-import RecipeScreen from '../screens/RecipeScreen';
 
+function GoToButton1({ screenName }:any) {
+  const navigation = useNavigation();
 
-function KnowledgeScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
-  const gotoEatStackScreen = () => {
-    props.navigation.navigate('香蕉熟成階段');
-  };
-  const gotoRecipeStackScreen = () => {
-    props.navigation.navigate('香蕉食譜');
-  };
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.myButton_1}>
+      <View>
+        <ImageBackground style={styles.banana} source={require('../assets/images/香蕉熟成階段.png')}>
+          <Text style={styles.text}> 香蕉熟成階段 </Text>
+        </ImageBackground>
+      </View>
+    </TouchableOpacity>
+  );
+} 
+function GoToButton2({ screenName }: any) {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.myButton_2}>
+      <View>
+        <ImageBackground style={styles.banana} source={require('../assets/images/廚房用具.png')}>
+          <Text style={styles.text}> 香蕉食譜 </Text>
+        </ImageBackground>
+      </View>
+    </TouchableOpacity>
+  );
+}
+
+function KnowledgeScreen() {
   return (
     <>
       <StatusBar />
@@ -29,24 +47,32 @@ function KnowledgeScreen(props: { navigation: { navigate: (arg0: string) => void
             </View>
           </View>
           <View style={styles.main}>
-            <TouchableOpacity onPress={gotoEatStackScreen} style={styles.myButton_1}>
-              <View>
-                <ImageBackground style={styles.banana} source={require('../assets/images/香蕉熟成階段.png')}>
-                  <Text style={styles.text}> 香蕉熟成階段 </Text>
-                </ImageBackground>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={gotoRecipeStackScreen} style={styles.myButton_2}>
-              <View>
-                <ImageBackground style={styles.banana} source={require('../assets/images/廚房用具.png')}>
-                  <Text style={styles.text}> 香蕉食譜 </Text>
-                </ImageBackground>
-              </View>
-            </TouchableOpacity>
+            <GoToButton1 screenName="香蕉熟成階段"/>
+            <GoToButton2 screenName="香蕉食譜" />
           </View>
         </SafeAreaView>
       </ScrollView>
     </>
+  );
+}
+
+function EatScreen({ navigation}:any) {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>EatScreen</Text>
+
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+function RecipeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Details Screen</Text>
+
+      <GoToButton2 screenName="Knowledge" />
+    </View>
   );
 }
 
@@ -55,17 +81,14 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <NavigationContainer independent={true}>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName="Knowledge">
         <Stack.Screen name="Knowledge" component={KnowledgeScreen} options={{ headerShown: false }} />
         <Stack.Screen name="香蕉熟成階段" component={EatScreen} options={{ headerShown: false }} />
         <Stack.Screen name="香蕉食譜" component={RecipeScreen} options={{ headerShown: false }} />
-
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
-
-const styles = StyleSheet.create({
+} const styles = StyleSheet.create({
   container: {
     flex: 1, //佔據所有空間
     backgroundColor: '#fff',
@@ -104,26 +127,27 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   myButton_1: {
-    paddingTop: 80,
+    marginTop: 70,
     height: 180,
     width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'transparent',
   },
   myButton_2: {
-    height: 0,
-    width: '0%',
-    paddingTop: 80,
-    paddingBottom: 230,
+    height: 10,
+    width: '50%',
+    paddingBottom: 150,
+    marginTop: 60,
+    marginBottom: 100,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#000',
+    backgroundColor: 'transparent',
   },
   banana: {
     borderRadius: 20,
     width: 216,
     height: 202,
-    marginLeft: -10,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
