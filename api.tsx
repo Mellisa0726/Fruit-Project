@@ -42,5 +42,17 @@ export const api = {
             })
             .then(res => res.data)
         )
+    },
+    async getCalendar() {
+        const jwt = await SecureStore.getItemAsync('JWT');
+
+        return (
+            axios.get(hostname + '/calendar', {
+                headers: {
+                    'Authorization': 'Bearer ' + jwt
+                }
+            })
+            .then(res => res.data)
+        )
     }
 };
