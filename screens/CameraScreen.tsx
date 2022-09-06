@@ -26,8 +26,9 @@ function CameraScreen() {
     }
   }
   const __takePicture = async () => {
-    const photo: any = await camera.takePictureAsync()
-    // console.log(photo)
+    const options = { base64: true };
+    const photo: any = await camera.takePictureAsync(options)
+    //console.log(photo)
     setPreviewVisible(true)
     setCapturedImage(photo)
   }
@@ -194,11 +195,12 @@ function SelectScreen({navigation, route}: any) {
   const ref = useRef(null)
   const { capturedImage } = route.params
   console.log(capturedImage)
+  const encodedImg: Object = {'uri': 'data:image/png;base64,' + capturedImage.base64}
 
-  // useEffect(() => getBoundingBox(), [])
+  useEffect(() => getBoundingBox(), [])
   
   function getBoundingBox(){
-    api.getBoundingBox(capturedImage)
+    api.getBoundingBox(encodedImg)
     .then(res => {
       setBoundingBox(res)
       console.log(res)
