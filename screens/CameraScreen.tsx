@@ -192,9 +192,9 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
 
 function SelectScreen({navigation, route}: any) {
   const [boundingBox, setBoundingBox] = React.useState<any>(null)
-  const ref = useRef(null)
+  const ref = useRef<any>(null)
   const { capturedImage } = route.params
-  console.log(capturedImage)
+  // console.log(capturedImage)
   const encodedImg: Object = {'uri': 'data:image/png;base64,' + capturedImage.base64}
 
   useEffect(() => getBoundingBox(), [])
@@ -203,11 +203,11 @@ function SelectScreen({navigation, route}: any) {
     api.getBoundingBox(encodedImg)
     .then(res => {
       setBoundingBox(res)
-      console.log(res)
+      // console.log(res)
       if (res['counts'] > 0) {
         for (let i in res['object']) {
           const object: any = res['object'][i]
-          console.log(object)
+          // console.log(object['x'])
           cropImg({x: object['x'], y: object['y'], w: object['w'], h: object['h']})
         }
       }
@@ -217,11 +217,20 @@ function SelectScreen({navigation, route}: any) {
   }
 
   function cropImg({ x, y, w, h }: any) {
-    const canvas: any = ref.current;
+    console.log('>>>x', x);
+    let canvas: any = ref.current;
+    canvas.width = 400;
+    canvas.height = 700;
+    // console.log(capturedImage)
+
     const ctx = canvas.getContext('2d');
 
-    var img: any = document.createElement('img');
-    img.src = capturedImage['uri'];
+    let img: any = React.createElement(
+      "img",
+      { src: 'data:image/png;base64,' + capturedImage.base64 },
+      null
+    );
+
     img.onload = function () {
       ctx.drawImage(img, x, y, w, h, 0, 0, w, h);
     }
@@ -230,7 +239,7 @@ function SelectScreen({navigation, route}: any) {
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Text>SelectScreen</Text>
-      <Canvas ref={ref} />
+      <Canvas ref={ref} style={{ zIndex: 99 }}/>
       <Button title="Go back" onPress={() => navigation.goBack()} />
     </View>
   );
