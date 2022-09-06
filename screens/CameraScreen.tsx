@@ -1,16 +1,20 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect, useRef } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
+import { StyleSheet, Text, View, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
 import { api } from '../api'
+import { useNavigation, NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Canvas from 'react-native-canvas'
 
 let camera: Camera
-export default function App() {
+function CameraScreen() {
   const [startCamera, setStartCamera] = React.useState(false)
   const [previewVisible, setPreviewVisible] = React.useState(false)
   const [capturedImage, setCapturedImage] = React.useState<any>(null)
-  const [boundingBox, setBoundingBox] = React.useState<any>(null)
   const [type, setType] = useState(CameraType.back)
+
+  const navigation = useNavigation();
 
   const __startCamera = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync()
@@ -23,41 +27,20 @@ export default function App() {
   }
   const __takePicture = async () => {
     const photo: any = await camera.takePictureAsync()
-    console.log(photo)
+    // console.log(photo)
     setPreviewVisible(true)
     setCapturedImage(photo)
   }
   const __savePhoto = () => {
-    api.getBoundingBox(capturedImage)
-    .then(res => {
-      setBoundingBox(res)
-      console.log(res)
-      if (res['counts'] > 0) {
-        for (let i in res['object']) {
-          const object: any = res['object'][i]
-          console.log(object)
-          cropImg({x: object['x'], y: object['y'], w: object['w'], h: object['h']})
-        }  
-      }
-      else window.alert('No banana.')
-    })
-    .catch(err => console.log(err))
+    const screenName: any = 'Select';
+    return (
+      navigation.navigate(screenName, {capturedImage: capturedImage})
+      );
   }
   const __retakePicture = () => {
     setCapturedImage(null)
     setPreviewVisible(false)
     __startCamera()
-  }
-
-  function cropImg({x, y, w, h}: any){
-    const canvas: any = document.getElementById('canvas');
-    const ctx = canvas.getContext('2d');
-
-    var img: any = document.createElement('img');
-    img.src = capturedImage['uri'];
-    img.onload = function(){
-      ctx.drawImage(img, x, y, w, h, 0, 0, w, h);
-    }
   }
 
   return (
@@ -140,7 +123,7 @@ export default function App() {
     </View>
   )
 }
-
+//<canvas id="canvas" width="1000px" height="500px"></canvas>
 const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
   // console.log('sdsfds', JSON.stringify(photo))
   return (
@@ -158,7 +141,6 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
           flex: 1
         }}
       >
-        <canvas id="canvas" width="1000px" height="500px"></canvas>
         <View
           style={{
             flex: 1,
@@ -206,6 +188,65 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
     </View>
   )
 }
+
+function SelectScreen({navigation, route}: any) {
+  const [boundingBox, setBoundingBox] = React.useState<any>(null)
+  const ref = useRef(null)
+  const { capturedImage } = route.params
+  console.log(capturedImage)
+
+  // useEffect(() => getBoundingBox(), [])
+  
+  function getBoundingBox(){
+    api.getBoundingBox(capturedImage)
+    .then(res => {
+      setBoundingBox(res)
+      console.log(res)
+      if (res['counts'] > 0) {
+        for (let i in res['object']) {
+          const object: any = res['object'][i]
+          console.log(object)
+          cropImg({x: object['x'], y: object['y'], w: object['w'], h: object['h']})
+        }
+      }
+      else window.alert('No banana.')
+    })
+    .catch(err => console.log(err))
+  }
+
+  function cropImg({ x, y, w, h }: any) {
+    const canvas: any = ref.current;
+    const ctx = canvas.getContext('2d');
+
+    var img: any = document.createElement('img');
+    img.src = capturedImage['uri'];
+    img.onload = function () {
+      ctx.drawImage(img, x, y, w, h, 0, 0, w, h);
+    }
+  }
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>SelectScreen</Text>
+      <Canvas ref={ref} />
+      <Button title="Go back" onPress={() => navigation.goBack()} />
+    </View>
+  );
+}
+
+
+const Stack = createNativeStackNavigator();
+export default function App() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator initialRouteName="CameraScreen">
+        <Stack.Screen name="CameraScreen" component={CameraScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Select" component={SelectScreen} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
