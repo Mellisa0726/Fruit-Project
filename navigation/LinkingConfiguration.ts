@@ -9,9 +9,9 @@ const linking: LinkingOptions<RootStackParamList> = {
     screens: {
       Root: {
         screens: {
-          SignUp: {
+          LogIn: {
             screens: {
-              SignUpScreen: 'SignUp',
+              LogInScreen: 'LogIn',
             },
           },
           Knowledge: {

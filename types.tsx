@@ -13,7 +13,7 @@ export type RootStackParamList = {
   Modal: undefined;
   NotFound: undefined;
   Setting: undefined;
-  SignUp: undefined;
+  LogIn: undefined;
 };
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> = NativeStackScreenProps<
@@ -22,7 +22,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 >;
 
 export type RootTabParamList = {
-  SignUp: undefined;
+  LogIn: undefined;
   Knowledge: undefined;
   Camera: undefined;
   Setting: undefined;

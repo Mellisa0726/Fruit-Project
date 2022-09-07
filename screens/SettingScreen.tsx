@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import * as React from 'react';
 import { SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Text, TextInput, View } from 'react-native';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SecureStore from 'expo-secure-store';
+import React, { useState } from 'react';
+
 
 function GoToAccount({ screenName }: any) {
     const navigation = useNavigation();
