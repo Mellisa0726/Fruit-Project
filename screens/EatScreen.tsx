@@ -137,13 +137,6 @@ const styles = StyleSheet.create({
         paddingTop: 3,
         paddingLeft: 99.5,
     },
-    center: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        width:420,
-        height:27,
-    },
     middle:{
         flex: 1,
         alignItems: 'center',

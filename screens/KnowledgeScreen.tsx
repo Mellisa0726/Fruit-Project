@@ -1,18 +1,21 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import { ScrollView, SafeAreaView, StyleSheet, Button, TouchableOpacity, Text, View, Image, ImageBackground } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, Dimensions, Animated, TouchableOpacity, Text, View, Image, ImageBackground } from 'react-native';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import RNAnimatedScrollIndicators from '../node_modules/react-native-animated-scroll-indicators';
+import { api } from '../api';
 
+const { width } = Dimensions.get('window');
 function GoToButton1({ screenName }:any) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.myButton_1}>
+    <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.Button_E}>
       <View>
-        <ImageBackground style={styles.banana} source={require('../assets/images/香蕉熟成階段.png')}>
-          <Text style={styles.text}> 香蕉熟成階段 </Text>
+        <ImageBackground style={styles.banana_K} source={require('../assets/images/香蕉熟成階段.png')}>
+          <Text style={styles.text_K}> 香蕉熟成階段 </Text>
         </ImageBackground>
       </View>
     </TouchableOpacity>
@@ -22,10 +25,10 @@ function GoToButton2({ screenName }: any) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.myButton_2}>
+    <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.Button_R}>
       <View>
-        <ImageBackground style={styles.banana} source={require('../assets/images/廚房用具.png')}>
-          <Text style={styles.text}> 香蕉食譜 </Text>
+        <ImageBackground style={styles.banana_K} source={require('../assets/images/廚房用具.png')}>
+          <Text style={styles.text_K}> 香蕉食譜 </Text>
         </ImageBackground>
       </View>
     </TouchableOpacity>
@@ -37,16 +40,16 @@ function KnowledgeScreen() {
     <>
       <StatusBar />
       <ScrollView>
-        <SafeAreaView style={styles.container}>
-          <View style={styles.header}>
-            <View style={styles.first}>
-              <Text style={styles.title}> 關於香蕉 </Text>
+        <SafeAreaView style={styles.container_K}>
+          <View style={styles.header_K}>
+            <View style={styles.first_K}>
+              <Text style={styles.title_K}> 關於香蕉 </Text>
               <TouchableOpacity>
-                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                <Ionicons name="notifications-outline" size={25} style={styles.notification_K} />
               </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.main}>
+          <View style={styles.main_K}>
             <GoToButton1 screenName="香蕉熟成階段"/>
             <GoToButton2 screenName="香蕉食譜" />
           </View>
@@ -58,21 +61,148 @@ function KnowledgeScreen() {
 
 function EatScreen({ navigation}:any) {
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>EatScreen</Text>
+    <>
+      <StatusBar />
+        <SafeAreaView style={styles.container}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
+              <View>
+                <Text style={styles.text_back}> ᐸ  返回 </Text>
+              </View>
+            </TouchableOpacity>
+            <View style={styles.first}>
+              <Text style={styles.title}> 香蕉熟成階段 </Text>
+                <TouchableOpacity>
+                  <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                </TouchableOpacity>
+            </View>
+          </View>
+          <ScrollView>
+            <View>
+              <View style={styles.middle}>
+                <Text style={styles.header_text} />
+                <Text style={styles.header_text}>  墨綠色                   {"\n"}</Text>
+                <Image style={styles.banana} source={require('../assets/images/banana_1.png')} />
+                <Text style={styles.header_text} />
+                <Text style={styles.text}>
+                  未熟，不宜食用{"\n"}
+                </Text>
 
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
+                <Text style={styles.header_text}>  淡青色至半青半黃{"\n"}</Text>
+                <Image style={styles.banana} source={require('../assets/images/banana_2.png')} />
+                <Text style={styles.header_text} />
+                <Text style={styles.text}>
+                  口感苦澀、皮厚肉硬，含有「難消化性麥芽糊精」，不易被小腸吸收，升糖指數較低，可被腸道細菌發酵，具有穩定血糖之作用，有助於改善腸道健康。具有抗性澱粉、提供高飽足感，但不易消化，吃多容易引起腹脹、消化不良等反應。{"\n"}
+                </Text>
+
+                <Text style={styles.header_text}>  四分之三至全黃香蕉{"\n"}</Text>
+                <Image style={styles.banana} source={require('../assets/images/banana_3.png')} />
+                <Text style={styles.header_text} />
+                <Text style={styles.text}>
+                  味道香濃、口感軟滑，含有豐富維他命B2、B6及C，能促進新陳代謝，具養顏美白效果。此階段香蕉中含有豐富的鉀和鎂，能消除疲勞，減少運動時抽筋的機會。助消化、安眠、抗憂鬱。{"\n"}
+                </Text>
+
+                <Text style={styles.header_text}>  帶有啡點之全熟香蕉{"\n"}</Text>
+                <Image style={styles.banana} source={require('../assets/images/banana_4.png')} />
+                <Text style={styles.header_text} />
+                <Text style={styles.text}>
+                  口感軟爛，適合牙口不好者食用，含有大量多酚，能夠延緩衰老，研究顯示啡點越多，免疫活性越高，當中的磷脂質能有助抑制胃潰瘍，幫助消化。{"\n"}
+                </Text>
+              </View>
+            </View>
+          </ScrollView>
+        </SafeAreaView>
+    </>
   );
 }
 
-function RecipeScreen() {
-  return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>Details Screen</Text>
+function RecipeScreen({ navigation }: any) {
+  const scrollX = new Animated.Value(0);
+  const [data, setData] = useState([]);
 
-      <GoToButton2 screenName="Knowledge" />
-    </View>
+  useEffect(() => {
+    getData();
+  }, []);
+
+  function getData() {
+    api.getRecipe('banana')
+      .then(res => {
+        console.log(res);
+        setData(res);
+      });
+  };
+  return (
+    <>
+      <StatusBar />
+      <SafeAreaView style={styles.container_R}>
+        <View style={styles.header_R}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton_R}>
+            <View>
+              <Text style={styles.text_back_R}> ᐸ  返回 </Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.first}>
+            <Text style={styles.title}> 香蕉食譜 </Text>
+            <TouchableOpacity>
+              <Ionicons name="notifications-outline" size={25} style={styles.notification_R} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.main_R}>
+          <Animated.ScrollView
+            horizontal
+            pagingEnabled
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={{ flexGrow: 1 }}
+            onScroll={Animated.event(
+              [{ nativeEvent: { contentOffset: { x: scrollX } } }],
+              { useNativeDriver: true })}
+          >
+            <ScrollView>
+              <View style={styles.container_R}>
+                <Image style={styles.pic1} source={require('../assets/images/烤香蕉片.png')} />
+              </View>
+            </ScrollView>
+            <ScrollView>
+              <View style={styles.container_R}>
+                <Image style={styles.pic2} source={require('../assets/images/香蕉鬆餅.png')} />
+              </View>
+            </ScrollView>
+            <ScrollView>
+              <View style={styles.container_R}>
+                <Image style={styles.pic3} source={require('../assets/images/香蕉蛋糕.png')} />
+              </View>
+            </ScrollView>
+            <ScrollView>
+              <View style={styles.container_R}>
+                <Image style={styles.pic4} source={require('../assets/images/香蕉奶昔.png')} />
+              </View>
+            </ScrollView>
+            <ScrollView>
+              <View style={styles.container_R}>
+                <Image style={styles.pic5} source={require('../assets/images/香蕉餅乾.png')} />
+              </View>
+            </ScrollView>
+          </Animated.ScrollView>
+          <View style={{
+            left: 0,
+            right: 0,
+            bottom: 0,
+            zIndex: 100,
+            marginBottom: 20,
+            position: 'absolute'
+          }}>
+            <RNAnimatedScrollIndicators
+              numberOfCards={5}
+              scrollWidth={width}
+              activeColor={'#FF8000'}
+              inActiveColor={'#BEBEBE'}
+              scrollAnimatedValue={scrollX}
+            />
+          </View>
+        </View>
+      </SafeAreaView>
+    </>
   );
 }
 
@@ -88,17 +218,19 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
-} const styles = StyleSheet.create({
-  container: {
+} 
+
+const styles = StyleSheet.create({
+  container_K: {
     flex: 1, //佔據所有空間
     backgroundColor: '#fff',
   },
-  header: {
+  header_K: {
     flexDirection: 'row',
     backgroundColor: '#fff',
     justifyContent: 'center',
   },
-  first: {
+  first_K: {
     height: 210,
     width: 420,
     backgroundColor: '#FAE5A4',
@@ -106,6 +238,74 @@ export default function App() {
     borderBottomRightRadius: 60,
     paddingTop: 160,
     flexDirection: 'row',
+  },
+  title_K: {
+    fontSize: 25,
+    color: "#7E6107",
+    fontWeight: 'bold',
+    paddingLeft: 60,
+  },
+  notification_K: {
+    color: "#7E6107",
+    fontWeight: 'bold',
+    paddingTop: 3,
+    paddingLeft: 150,
+  },
+  main_K: {
+    flex: 1,
+    width: '100%',
+    height: '100%',
+    backgroundColor: '#fff',
+    alignItems: 'center',
+  }, 
+  Button_E: {
+    marginTop: 70,
+    height: 180,
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  Button_R: {
+    height: 10,
+    width: '50%',
+    paddingBottom: 150,
+    marginTop: 60,
+    marginBottom: 100,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'transparent',
+  },
+  banana_K: {
+    borderRadius: 20,
+    width: 216,
+    height: 202,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
+  },
+  text_K: {
+    fontSize: 27,
+    color: "#fff",
+    fontWeight: 'bold',
+  },
+
+  // EatScreen
+  container: {
+    flex: 1, //佔據所有空間
+    backgroundColor: '#fff',
+  },
+  header: {
+    height: 210,
+    width: 420,
+    backgroundColor: '#FAE5A4',
+    borderBottomLeftRadius: 60,
+    borderBottomRightRadius: 60,
+    marginLeft: -13,
+  },
+  first: {
+    flexDirection: 'row',
+    paddingTop: 80,
   },
   title: {
     fontSize: 25,
@@ -117,44 +317,112 @@ export default function App() {
     color: "#7E6107",
     fontWeight: 'bold',
     paddingTop: 3,
-    paddingLeft: 150,
+    paddingLeft: 99.5,
   },
-  main: {
+  text_back: {
+    fontSize: 18,
+    color: "#7E6107",
+    marginLeft: 70,
+    marginTop: 30,
+  },
+  button_back: {
+    height: 50,
+    width: 200,
+    marginTop: 30,
+    justifyContent: 'center',
+    marginLeft: -25,
+  },
+  middle: {
     flex: 1,
-    width: '100%',
-    height: '100%',
-    backgroundColor: '#fff',
-    alignItems: 'center',
-  },
-  myButton_1: {
-    marginTop: 70,
-    height: 180,
-    width: '50%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'transparent',
   },
-  myButton_2: {
-    height: 10,
-    width: '50%',
-    paddingBottom: 150,
-    marginTop: 60,
-    marginBottom: 100,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'transparent',
-  },
-  banana: {
-    borderRadius: 20,
-    width: 216,
-    height: 202,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
+  header_text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: "#4D3604",
+    marginLeft: -120,
   },
   text: {
-    fontSize: 27,
-    color: "#fff",
+    fontSize: 18,
+    color: "#7E6107",
+    marginLeft: 50,
+    marginRight: 50,
+  },
+  banana: {
+    flex: 1,
+    borderRadius: 20,
+    width: "75%",
+    height: 180,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  // RecipeScreen
+  container_R: {
+    flex: 1,
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    width,
+  },
+  header_R: {
+    height: 210,
+    width: 420,
+    backgroundColor: '#FAE5A4',
+    borderBottomLeftRadius: 60,
+    borderBottomRightRadius: 60,
+  },
+  text_back_R: {
+    fontSize: 18,
+    color: "#7E6107",
+    marginLeft: 70,
+    marginTop: 30,
+  },
+
+  myButton_R: {
+    height: 50,
+    width: 200,
+    marginTop: 30,
+    justifyContent: 'center',
+    marginLeft: -25,
+  },
+  notification_R: {
+    color: "#7E6107",
     fontWeight: 'bold',
+    paddingTop: 3,
+    paddingLeft: 148,
+  },
+  main_R: {
+    flex: 2.275,
+    backgroundColor: 'white',
+    alignItems: 'center',
+  },
+  pic1: {
+    flex: 1,
+    resizeMode: 'contain',
+    width: "80%",
+  },
+  pic2: {
+    flex: 1,
+    resizeMode: 'contain',
+    width: "80%",
+    marginTop: -2,
+  },
+  pic3: {
+    flex: 1,
+    resizeMode: 'contain',
+    width: "80%",
+    marginTop: -12,
+  },
+  pic4: {
+    flex: 1,
+    resizeMode: 'contain',
+    width: "80%",
+  },
+  pic5: {
+    flex: 1,
+    resizeMode: 'contain',
+    width: "80%",
+    marginTop: -6,
   },
 });

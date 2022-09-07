@@ -1,7 +1,8 @@
 import { StatusBar } from 'expo-status-bar'
-import React, { useState, useEffect, useRef } from 'react'
-import { StyleSheet, Text, View, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
+import React, { useState, useEffect, useRef, forwardRef } from 'react'
+import { ScrollView, SafeAreaView, StyleSheet, Text, View, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
+import { Ionicons } from '@expo/vector-icons';
 import { api } from '../api'
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -237,11 +238,29 @@ function SelectScreen({navigation, route}: any) {
   }
 
   return (
-    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Text>SelectScreen</Text>
-      <Canvas ref={ref} style={{ zIndex: 99 }}/>
-      <Button title="Go back" onPress={() => navigation.goBack()} />
-    </View>
+    <>
+      <StatusBar />
+        <ScrollView>
+          <SafeAreaView style={styles.container}>
+            <View style={styles.header}>
+              <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
+                <View>
+                  <Text style={styles.text_back}> ᐸ  返回 </Text>
+                </View>
+              </TouchableOpacity>
+              <View style={styles.first}>
+                <Text style={styles.title}> 選擇香蕉 </Text>
+                  <TouchableOpacity>
+                     <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                  </TouchableOpacity>
+              </View>
+            </View>
+            <View style={styles.main}>
+              <Canvas ref={ref} style={{ zIndex: 99 }} />
+            </View>
+          </SafeAreaView>
+        </ScrollView>
+    </>
   );
 }
 
@@ -262,11 +281,52 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  header: {
+    height: 210,
+    width: 420,
+    backgroundColor: '#FAE5A4',
+    borderBottomLeftRadius: 60,
+    borderBottomRightRadius: 60,
+  },
+  myButton: {
+    height: 50,
+    width: 200,
+    marginTop: 30,
+    justifyContent: 'center',
+    marginLeft: -25,
+  },
+  text_back: {
+    fontSize: 18,
+    color: "#7E6107",
+    marginLeft: 70,
+    marginTop: 30,
+  },
+  first: {
+    flexDirection: 'row',
+    paddingTop: 80,
+  },
+  title: {
+    fontSize: 25,
+    color: "#7E6107",
+    fontWeight: 'bold',
+    paddingLeft: 60,
+  },
+  notification: {
+    color: "#7E6107",
+    fontWeight: 'bold',
+    paddingTop: 3,
+    paddingLeft: 150,
+  },
+  main: {
+    flex: 1,
+    width: 420,
+    height: 539,
+    backgroundColor: '#fff',
     alignItems: 'center',
-    justifyContent: 'center'
   },
   text: {
     fontSize: 18,
     color: 'white',
   },
-})
+});
