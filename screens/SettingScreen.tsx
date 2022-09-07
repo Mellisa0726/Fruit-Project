@@ -4,6 +4,7 @@ import { SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Text, TextInput
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SecureStore from 'expo-secure-store';
+import LogInScreen from '../screens/LogInScreen'
 import React, { useState } from 'react';
 
 
@@ -20,6 +21,7 @@ function GoToAccount({ screenName }: any) {
 }
 
 function SettingScreen() {
+    const navigation = useNavigation();
     return (
         <>
             <StatusBar />
@@ -34,7 +36,7 @@ function SettingScreen() {
                 </View>
                 <View style={styles.main_S}>
                     <GoToAccount screenName="Account" />
-                    <TouchableOpacity style={styles.myButton_S} >
+                    <TouchableOpacity onPress={() => navigation.navigate('LogIn')}  style={styles.myButton_S} >
                         <View>
                             <Text style={styles.text_S}> 登出 </Text>
                         </View>
@@ -118,6 +120,7 @@ export default function App() {
             <Stack.Navigator>
                 <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
                 <Stack.Screen name="Account" component={AccountScreen} options={{ headerShown: false }} />
+                <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

@@ -1,10 +1,4 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  TextInput,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Image, TextInput, ScrollView} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
@@ -119,7 +113,7 @@ function LogInScreen() {
       >
       <View style={styles.container}>
         <View style={styles.first}>
-          <View style={styles.logo}/>
+          <Image source={require('../assets/images/logo.jpg')} style={styles.logo} />
           <StatusBar />
           
           <View style={styles.inputView}>
@@ -278,9 +272,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   logo: {
-    height: 160,
-    width: 160,
-    borderRadius: 100,
+    height: 170,
+    width: 170,
+    borderRadius: 60,
     backgroundColor: '#000',
     marginBottom: 60,
   },
