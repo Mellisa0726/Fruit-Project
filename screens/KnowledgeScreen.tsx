@@ -8,7 +8,7 @@ import RNAnimatedScrollIndicators from '../node_modules/react-native-animated-sc
 import { api } from '../api';
 
 const { width } = Dimensions.get('window');
-function GoToButton1({ screenName }:any) {
+function GoToEat({ screenName }:any) {
   const navigation = useNavigation();
 
   return (
@@ -21,7 +21,7 @@ function GoToButton1({ screenName }:any) {
     </TouchableOpacity>
   );
 } 
-function GoToButton2({ screenName }: any) {
+function GoToRecipe({ screenName }: any) {
   const navigation = useNavigation();
 
   return (
@@ -50,8 +50,8 @@ function KnowledgeScreen() {
             </View>
           </View>
           <View style={styles.main_K}>
-            <GoToButton1 screenName="香蕉熟成階段"/>
-            <GoToButton2 screenName="香蕉食譜" />
+            <GoToEat screenName="香蕉熟成階段"/>
+            <GoToRecipe screenName="香蕉食譜" />
           </View>
         </SafeAreaView>
       </ScrollView>
