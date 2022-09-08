@@ -1,22 +1,42 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  TextInput,
-  ScrollView,
-} from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Image, TextInput, ScrollView} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { Text } from '../components/Themed';
-import { RootStackScreenProps } from '../types';
 import { api } from '../api';
-import { NavigationContainer } from '@react-navigation/native';
+import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import SignUpScreen from '../screens/SignUpScreen';
-import ToggleSwitch from 'toggle-switch-react-native'
+import { Ionicons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
-export default function LogInScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
+import Colors from '../constants/Colors';
+import useColorScheme from '../hooks/useColorScheme';
+import CameraScreen from '../screens/CameraScreen';
+import SettingScreen from '../screens/SettingScreen';
+import { RootTabParamList } from '../types';
+import KnowledgeScreen from '../screens/KnowledgeScreen';
+import AgendaScreen from '../screens/AgendaScreen';
+
+function GoToLogIn({ screenName }: any) {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate('Root')} style={styles.link}>
+       <Text style={styles.text}> 登入 </Text>
+    </TouchableOpacity>
+    
+  );
+};
+function GoToSignUp({ screenName }: any) {
+  const navigation = useNavigation();
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(screenName)}>
+      <Text style={styles.signup_button}>註冊</Text>
+    </TouchableOpacity>
+  );
+};
+
+function LogInScreen() {
   const [data, setData] = React.useState({
     email: '',
     password: '',
@@ -76,16 +96,13 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
       });
     }
   }
-
-  function logIn() {
-    // console.log(data);
-    api.logIn(data.email, data.password)
-    .then(res => props.navigation.navigate('Root'))
+  // console.log(data);
+  api.logIn(data.email, data.password)
+    .then()
     .catch(err => {
       // console.log(err);
       window.alert('Log in failed');
     });
-  }
 
   return (
     <ScrollView 
@@ -96,7 +113,7 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
       >
       <View style={styles.container}>
         <View style={styles.first}>
-          <View style={styles.logo}/>
+          <Image source={require('../assets/images/logo.jpg')} style={styles.logo} />
           <StatusBar />
           
           <View style={styles.inputView}>
@@ -136,17 +153,94 @@ export default function LogInScreen(props: { navigation: { navigate: (arg0: stri
             </TouchableOpacity>
             <Text>   </Text>
           </View>
-          <TouchableOpacity onPress={() => logIn()} style={styles.link}>
-            <Text style={styles.text}> 登入 </Text>
-          </TouchableOpacity>
-          <TouchableOpacity>
-            <Text style={styles.signup_button}>註冊</Text>
-          </TouchableOpacity>
+          <GoToLogIn screenName="LogIn" />
+          <GoToSignUp screenName="SignUp" />
         </View>
       </View>
     </ScrollView>
   );
 }
+function SignUpScreen({ navigation }: any) {
+
+  return (
+    <>
+      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
+        <View>
+          <Text style={styles.text_back}> ᐸ  返回 </Text>
+        </View>
+      </TouchableOpacity>
+    </>
+  );
+}
+const Stack = createNativeStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer independent={true}>
+      <Stack.Navigator>
+        <Stack.Screen name="LogIn" component={LogInScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="SignUp" component={SignUpScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Root" component={BottomTabNavigator} options={{ headerShown: false }} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+const BottomTab = createBottomTabNavigator<RootTabParamList>();
+
+function BottomTabNavigator() {
+  const colorScheme = useColorScheme();
+
+  return (
+    <BottomTab.Navigator
+      initialRouteName="Knowledge"
+      screenOptions={{
+        tabBarActiveTintColor: Colors[colorScheme].tint,
+        headerShown: false,
+      }}>
+      <BottomTab.Screen //按鈕1
+        name="Knowledge"
+        component={KnowledgeScreen}
+        options={{
+          title: '關於香蕉',
+          tabBarIcon: ({ color }) => <TabBarIcon name="bulb-outline" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Camera"
+        component={CameraScreen}
+        options={{
+          title: '相機',
+          tabBarIcon: ({ color }) => <TabBarIcon name="camera" color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Calendar"
+        component={AgendaScreen}
+        options={{
+          title: '日曆',
+          tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
+          unmountOnBlur: true,
+        }}
+      />
+      <BottomTab.Screen
+        name="Setting"
+        component={SettingScreen}
+        options={{
+          title: '設定',
+          tabBarIcon: ({ color }) => <TabBarIcon name="settings-outline" color={color} />,
+        }}
+      />
+    </BottomTab.Navigator>
+  );
+}
+
+function TabBarIcon(props: {
+  name: React.ComponentProps<typeof Ionicons>['name'];
+  color: string;
+}) {
+  return <Ionicons size={26} style={{ marginBottom: -2 }} {...props} />;
+}
+
 
 const styles = StyleSheet.create({
   container: {
@@ -178,9 +272,9 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   logo: {
-    height: 160,
-    width: 160,
-    borderRadius: 100,
+    height: 170,
+    width: 170,
+    borderRadius: 60,
     backgroundColor: '#000',
     marginBottom: 60,
   },
@@ -207,5 +301,18 @@ const styles = StyleSheet.create({
     height: 30,
     paddingTop: 8,
     textDecorationLine: 'underline',
+  },
+  myButton: {
+    height: 50,
+    width: 200,
+    marginTop: 30,
+    justifyContent: 'center',
+    marginLeft: -25,
+  },
+  text_back: {
+    fontSize: 18,
+    color: "#7E6107",
+    marginLeft: 70,
+    marginTop: 30,
   },
 });
