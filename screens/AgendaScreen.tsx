@@ -133,6 +133,7 @@ class AgendaScreen extends Component {
           renderHeader={this.renderCustomHeader}
           enableSwipeMonths={true}
           onDayPress={this.handleDayPress}
+          onMonthChange={this.handleMonthChange}
           theme={{
             arrowColor: 'orange',
             todayTextColor: 'orange',
@@ -182,7 +183,11 @@ class AgendaScreen extends Component {
   };
 
   handleDayPress = (day: any) => {
-    this.setState({ selected: day.dateString});
+    this.setState({ selected: day.dateString });
+  };
+
+  handleMonthChange = (month: any) => {
+    this.setState({ selected: month.dateString });
   };
 
   renderDateBox = (date: string) => {
