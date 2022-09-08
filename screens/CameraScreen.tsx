@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import React, { useState, useEffect, useRef, forwardRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { ScrollView, SafeAreaView, StyleSheet, Text, View, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons';
@@ -44,6 +44,8 @@ function CameraScreen() {
     setPreviewVisible(false)
     __startCamera()
   }
+
+  __startCamera()
 
   return (
     <View style={styles.container}>
@@ -125,9 +127,8 @@ function CameraScreen() {
     </View>
   )
 }
-//<canvas id="canvas" width="1000px" height="500px"></canvas>
+
 const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
-  // console.log('sdsfds', JSON.stringify(photo))
   return (
     <View
       style={{
@@ -191,6 +192,7 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
   )
 }
 
+
 function SelectScreen({navigation, route}: any) {
   const [boundingBox, setBoundingBox] = React.useState<any>(null)
   const ref = useRef<any>(null)
@@ -201,10 +203,11 @@ function SelectScreen({navigation, route}: any) {
   useEffect(() => getBoundingBox(), [])
   
   function getBoundingBox(){
+    window.alert('Getting bounding box')
     api.getBoundingBox(encodedImg)
     .then(res => {
       setBoundingBox(res)
-      // console.log(res)
+      window.alert('get res')
       if (res['counts'] > 0) {
         for (let i in res['object']) {
           const object: any = res['object'][i]
@@ -214,14 +217,12 @@ function SelectScreen({navigation, route}: any) {
       }
       else window.alert('No banana.')
     })
-    .catch(err => console.log(err))
+    .catch(err => window.alert(err))
   }
 
   function cropImg({ x, y, w, h }: any) {
-    console.log('>>>x', x);
+    // window.alert(x);
     let canvas: any = ref.current;
-    canvas.width = 400;
-    canvas.height = 700;
     // console.log(capturedImage)
 
     const ctx = canvas.getContext('2d');
@@ -256,7 +257,7 @@ function SelectScreen({navigation, route}: any) {
               </View>
             </View>
             <View style={styles.main}>
-              <Canvas ref={ref} style={{ zIndex: 99 }} />
+              <Canvas ref={ref} style={{ width: 1000, height: 1000, zIndex: 99 }} />
             </View>
           </SafeAreaView>
         </ScrollView>
