@@ -1,17 +1,31 @@
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import { SafeAreaView, StyleSheet, TouchableOpacity, Text,  View } from 'react-native';
+import { SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Text, TextInput, View } from 'react-native';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SecureStore from 'expo-secure-store';
-import LogInScreen from '../screens/LogInScreen';
-import AccountScreen from '../screens/AccountScreen';
+import LogInScreen from '../screens/LogInScreen'
 import React, { useState } from 'react';
 
+function GoToAccount({ screenName }: any) {
+    const navigation = useNavigation();
 
-function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; }; }) {
-    const gotoAccountScreen = () => {
-        props.navigation.navigate('Account');
+    return (
+        <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.myButton_S}>
+            <View>
+                <Text style={styles.text}> 變更帳戶資料 </Text>
+            </View>
+        </TouchableOpacity>
+    );
+}
+
+function SettingScreen() {
+    const navigation = useNavigation();
+    
+    function SignOut() {
+        SecureStore.deleteItemAsync('JWT');
+        // window.localStorage.clear();
+        navigation.pop();
     };
 
     return (
@@ -27,12 +41,8 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
                     </View>
                 </View>
                 <View style={styles.main_S}>
-                    <TouchableOpacity onPress={ gotoAccountScreen } style={styles.myButton_S}>
-                        <View>
-                            <Text style={styles.text}> 變更帳戶資料 </Text>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity  style={styles.myButton_S} >
+                    <GoToAccount screenName="Account" />
+                    <TouchableOpacity onPress={ SignOut }  style={styles.myButton_S} >
                         <View>
                             <Text style={styles.text_S}> 登出 </Text>
                         </View>
@@ -42,17 +52,80 @@ function SettingScreen(props: { navigation: { navigate: (arg0: string) => void; 
         </>
     );
 }
+function AccountScreen({ navigation }: any) {
+    return (
+        <>
+            <ScrollView
+                contentContainerStyle={{ flex: 1 }}
+                keyboardDismissMode="on-drag"
+                keyboardShouldPersistTaps="never"
+                scrollEnabled={false}
+            >
+                <StatusBar />
+                <SafeAreaView style={styles.container}>
+                    <View style={styles.header}>
+                        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
+                            <View>
+                                <Text style={styles.text_back}> ᐸ  返回 </Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={styles.first}>
+                            <Text style={styles.title}> 變更帳戶資料 </Text>
+                            <TouchableOpacity>
+                                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                            </TouchableOpacity>
+                        </View>
+                    </View>
+                    <View style={styles.main}>
+                        <Text style={styles.main_text}>變更信箱</Text>
+                        <View style={styles.inputView}>
+                            <TextInput
+                                style={styles.TextInput}
+                                placeholder="example@gmail.com"
+                                placeholderTextColor="#BBBBBB"
+                                underlineColorAndroid={'#E0E0E0'}
+                            />
+                        </View>
+                        <Text> </Text>
+                        <Text style={styles.main_text}>變更密碼</Text>
+                        <View>
+                            <Text style={styles.main_text_pass}>原始密碼</Text>
+                            <View style={styles.inputView}>
+                                <TextInput
+                                    style={styles.TextInput}
+                                    placeholder="password"
+                                    placeholderTextColor="#BBBBBB"
+                                    underlineColorAndroid={'#E0E0E0'}
+                                />
+                            </View>
+                            <Text style={styles.main_text_pass}>新密碼</Text>
+                            <View style={styles.inputView}>
+                                <TextInput
+                                    style={styles.TextInput}
+                                    placeholder="password"
+                                    placeholderTextColor="#BBBBBB"
+                                    underlineColorAndroid={'#E0E0E0'}
+                                />
+                            </View>
+                        </View>
+                        <TouchableOpacity style={styles.link}>
+                            <Text style={styles.link_text}> 送出 </Text>
+                        </TouchableOpacity>
+                    </View>
+                </SafeAreaView>
+            </ScrollView>
+        </>
+    );
+}
 
 const Stack = createNativeStackNavigator();
 export default function App() {
 
     return (
-        <NavigationContainer independent={true}>
-            <Stack.Navigator>
-                <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
-                <Stack.Screen name="Account" component={AccountScreen} options={{ headerShown: false }} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <Stack.Navigator>
+            <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="Account" component={AccountScreen} options={{ headerShown: false }} />
+        </Stack.Navigator>
     );
 }
 
