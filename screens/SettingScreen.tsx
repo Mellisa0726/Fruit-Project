@@ -123,7 +123,7 @@ export default function App() {
 
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Setting" component={SettingScreen} options={{ headerShown: false }} />
+            <Stack.Screen name="SettingMain" component={SettingScreen} options={{ headerShown: false }} />
             <Stack.Screen name="Account" component={AccountScreen} options={{ headerShown: false }} />
         </Stack.Navigator>
     );

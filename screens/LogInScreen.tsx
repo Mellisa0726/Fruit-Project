@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, View, Image, TextInput, ScrollView} from 'react-native';
+import { StyleSheet, TouchableOpacity, View, Alert, Image, TextInput, ScrollView} from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
@@ -17,7 +17,7 @@ import { RootTabParamList } from '../types';
 import KnowledgeScreen from '../screens/KnowledgeScreen';
 import AgendaScreen from '../screens/AgendaScreen';
 
-function GoToLogIn({ screenName, data }: any) {
+function GoToLogIn({ data }: any) {
   const navigation = useNavigation();
 
   function logIn() {
@@ -169,13 +169,50 @@ function LogInScreen() {
 
 function SignUpScreen({ navigation }: any) {
   return (
-    <>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
-        <View>
-          <Text style={styles.text_back}> ᐸ  返回 </Text>
+    <ScrollView
+      contentContainerStyle={{ flex: 1 }}
+      keyboardDismissMode="on-drag"
+      keyboardShouldPersistTaps="never"
+      scrollEnabled={false}
+    >
+      <View style={styles.container}>
+        <View style={styles.first}>
+          <Image source={require('../assets/images/logo.jpg')} style={styles.logo} />
+          <Text style={styles.slogan}>
+            為你的香蕉註冊帳號吧 ！
+          </Text>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Email"
+              placeholderTextColor="#9B9B9B"
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Password"
+              placeholderTextColor="#9B9B9B"
+            />
+          </View>
+          <View style={styles.inputView}>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Repeat password"
+              placeholderTextColor="#9B9B9B"
+            />
+          </View>
+          <TouchableOpacity onPress={() => Alert.alert('註冊成功，請返回登入')} style={styles.link}>
+            <Text style={styles.text}> 送出 </Text>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.link}>
+            <View>
+              <Text style={styles.text}> 返回登入 </Text>
+            </View>
+          </TouchableOpacity>
         </View>
-      </TouchableOpacity>
-    </>
+      </View>
+    </ScrollView>
   );
 }
 
@@ -261,17 +298,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAE5A4',
     borderBottomLeftRadius: 130,
     borderBottomRightRadius: 130,
-    paddingTop: 100,
+    paddingTop: 90,
     alignItems: 'center',
   },
   link: {
-    marginTop: 10,
-    height: 40,
-    width: 200,
+    marginTop: 5,
+    height: 35,
+    width: 180,
     borderRadius: 10,
+    marginBottom: 5,
     justifyContent: 'center',
     alignItems: "center",
-    backgroundColor: "#D3A51D",
+    backgroundColor: "#E7B008",
   },
   text: {
     fontSize: 15,
@@ -281,7 +319,7 @@ const styles = StyleSheet.create({
   logo: {
     height: 170,
     width: 170,
-    borderRadius: 60,
+    borderRadius: 90,
     backgroundColor: '#000',
     marginBottom: 60,
   },
@@ -298,13 +336,8 @@ const styles = StyleSheet.create({
   TextInput: {
     flex: 1,
   },
-  forgot_button: {
-    fontSize: 11,
-    height: 30,
-    textDecorationLine: 'underline',
-  },
   signup_button:{
-    fontSize: 11,
+    fontSize: 13,
     height: 30,
     paddingTop: 8,
     textDecorationLine: 'underline',
@@ -321,5 +354,22 @@ const styles = StyleSheet.create({
     color: "#7E6107",
     marginLeft: 70,
     marginTop: 30,
+  },
+
+  //SignUpScreen
+  header: {
+    height: 600,
+    width: 420,
+    backgroundColor: '#FAE5A4',
+    borderBottomLeftRadius: 130,
+    borderBottomRightRadius: 130,
+  },
+  slogan: {
+    fontSize: 20,
+    color: "#000",
+    fontWeight: 'bold',
+    paddingBottom: 20,
+    paddingLeft: 20,
+    marginTop: -40,
   },
 });
