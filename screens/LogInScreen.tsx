@@ -17,16 +17,25 @@ import { RootTabParamList } from '../types';
 import KnowledgeScreen from '../screens/KnowledgeScreen';
 import AgendaScreen from '../screens/AgendaScreen';
 
-function GoToLogIn({ screenName }: any) {
+function GoToLogIn({ screenName, data }: any) {
   const navigation = useNavigation();
 
+  function logIn() {
+  api.logIn(data.email, data.password)
+    .then(() => navigation.navigate('Root'))
+    .catch(err => {
+      // console.log(err);
+      window.alert('Log in failed');
+    });
+  }
+
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Root')} style={styles.link}>
+    <TouchableOpacity onPress={logIn} style={styles.link}>
        <Text style={styles.text}> 登入 </Text>
-    </TouchableOpacity>
-    
+    </TouchableOpacity> 
   );
 };
+
 function GoToSignUp({ screenName }: any) {
   const navigation = useNavigation();
   return (
@@ -45,12 +54,14 @@ function LogInScreen() {
     isValidUser: true,
     isValidPassword: true,
   });
+
   const updateSecureTextEntry = () => {
     setData({
       ...data,
       secureTextEntry: !data.secureTextEntry
     });
   }
+
   const textInputChange = (val:any) => {
     if (val.trim().length >= 4) {
       setData({
@@ -68,6 +79,7 @@ function LogInScreen() {
       });
     }
   }
+
   const handlePasswordChange = (val:any) => {
     if (val.trim().length >= 4) {
       setData({
@@ -83,6 +95,7 @@ function LogInScreen() {
       });
     }
   }
+
   const handleValidUser = (val:any) => {
     if (val.trim().length >= 4) {
       setData({
@@ -96,13 +109,6 @@ function LogInScreen() {
       });
     }
   }
-  // console.log(data);
-  api.logIn(data.email, data.password)
-    .then()
-    .catch(err => {
-      // console.log(err);
-      window.alert('Log in failed');
-    });
 
   return (
     <ScrollView 
@@ -110,12 +116,12 @@ function LogInScreen() {
       keyboardDismissMode="on-drag"
       keyboardShouldPersistTaps="never"
       scrollEnabled={false}
-      >
+    >
       <View style={styles.container}>
         <View style={styles.first}>
           <Image source={require('../assets/images/logo.jpg')} style={styles.logo} />
           <StatusBar />
-          
+
           <View style={styles.inputView}>
             <TextInput
               style={styles.TextInput}
@@ -153,15 +159,15 @@ function LogInScreen() {
             </TouchableOpacity>
             <Text>   </Text>
           </View>
-          <GoToLogIn screenName="LogIn" />
+          <GoToLogIn screenName="LogIn" data={data} />
           <GoToSignUp screenName="SignUp" />
         </View>
       </View>
     </ScrollView>
   );
 }
-function SignUpScreen({ navigation }: any) {
 
+function SignUpScreen({ navigation }: any) {
   return (
     <>
       <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
@@ -172,6 +178,7 @@ function SignUpScreen({ navigation }: any) {
     </>
   );
 }
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
