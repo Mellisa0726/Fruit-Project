@@ -6,7 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { api } from '../api'
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Canvas from 'react-native-canvas'
+import Canvas, { Image as CanvasImage } from 'react-native-canvas'
 
 let camera: Camera
 function CameraScreen() {
@@ -195,6 +195,7 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
 
 function SelectScreen({navigation, route}: any) {
   const [boundingBox, setBoundingBox] = React.useState<any>(null)
+  const [output, setOutput] = React.useState<any>(null)
   const ref = useRef<any>(null)
   const { capturedImage } = route.params
   // console.log(capturedImage)
@@ -206,12 +207,12 @@ function SelectScreen({navigation, route}: any) {
     window.alert('Getting bounding box')
     api.getBoundingBox(encodedImg)
     .then(res => {
-      setBoundingBox(res)
       window.alert('get res')
       if (res['counts'] > 0) {
+        setBoundingBox(res['object'])
         for (let i in res['object']) {
           const object: any = res['object'][i]
-          // console.log(object['x'])
+          // window.alert(JSON.stringify(object))
           cropImg({x: object['x'], y: object['y'], w: object['w'], h: object['h']})
         }
       }
@@ -227,15 +228,25 @@ function SelectScreen({navigation, route}: any) {
 
     const ctx = canvas.getContext('2d');
 
-    let img: any = React.createElement(
-      "img",
-      { src: 'data:image/png;base64,' + capturedImage.base64 },
-      null
-    );
+    const img = new CanvasImage(canvas);
+    img.src = 'data:image/png;base64,' + capturedImage.base64;
+    // let img: any = React.createElement(
+    //   Image,
+    //   { source: 'data:image/png;base64,' + capturedImage.base64 },
+    //   null
+    // );
 
-    img.onload = function () {
+    // img.onload = function () {
+    //   ctx.drawImage(img, x, y, w, h, 0, 0, w, h);
+    // }
+
+    img.addEventListener('load', () => {
+      debugger;
       ctx.drawImage(img, x, y, w, h, 0, 0, w, h);
-    }
+    }); 
+
+    // const base64Image = canvas.toDataURL('image/png');
+    // setOutput(base64Image);
   }
 
   return (
@@ -257,7 +268,7 @@ function SelectScreen({navigation, route}: any) {
               </View>
             </View>
             <View style={styles.main}>
-              <Canvas ref={ref} style={{ width: 1000, height: 1000, zIndex: 99 }} />
+              <Canvas ref={ref} style={{ flex: 1 }} />
             </View>
           </SafeAreaView>
         </ScrollView>
