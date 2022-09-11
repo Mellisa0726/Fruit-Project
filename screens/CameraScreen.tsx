@@ -194,7 +194,8 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
 
 
 function SelectScreen({navigation, route}: any) {
-  const [boundingBox, setBoundingBox] = React.useState<any>(null)
+  // const [encodedImg, setEncodedImg] = React.useState<any>(null)
+  const [croppedImg, setCroppedImg] = React.useState<any>([])
   const [output, setOutput] = React.useState<any>(null)
   const ref = useRef<any>(null)
   const { capturedImage } = route.params
@@ -204,50 +205,19 @@ function SelectScreen({navigation, route}: any) {
   useEffect(() => getBoundingBox(), [])
   
   function getBoundingBox(){
-    window.alert('Getting bounding box')
+    // setEncodedImg({'uri': 'data:image/png;base64,' + capturedImage.base64})
+    // window.alert(encodedImg.uri)
     api.getBoundingBox(encodedImg)
     .then(res => {
-      window.alert('get res')
-      if (res['counts'] > 0) {
-        setBoundingBox(res['object'])
-        for (let i in res['object']) {
-          const object: any = res['object'][i]
-          // window.alert(JSON.stringify(object))
-          cropImg({x: object['x'], y: object['y'], w: object['w'], h: object['h']})
-        }
-      }
+      // window.alert('get res')
+      console.log(res)
+      if (res['counts'] > 0) setCroppedImg(res['object'])
       else window.alert('No banana.')
     })
     .catch(err => window.alert(err))
   }
 
-  function cropImg({ x, y, w, h }: any) {
-    // window.alert(x);
-    let canvas: any = ref.current;
-    // console.log(capturedImage)
-
-    const ctx = canvas.getContext('2d');
-
-    const img = new CanvasImage(canvas);
-    img.src = 'data:image/png;base64,' + capturedImage.base64;
-    // let img: any = React.createElement(
-    //   Image,
-    //   { source: 'data:image/png;base64,' + capturedImage.base64 },
-    //   null
-    // );
-
-    // img.onload = function () {
-    //   ctx.drawImage(img, x, y, w, h, 0, 0, w, h);
-    // }
-
-    img.addEventListener('load', () => {
-      debugger;
-      ctx.drawImage(img, x, y, w, h, 0, 0, w, h);
-    }); 
-
-    // const base64Image = canvas.toDataURL('image/png');
-    // setOutput(base64Image);
-  }
+  console.log('croppedImg', croppedImg)
 
   return (
     <>
@@ -268,7 +238,10 @@ function SelectScreen({navigation, route}: any) {
               </View>
             </View>
             <View style={styles.main}>
-              <Canvas ref={ref} style={{ flex: 1 }} />
+              {croppedImg.map((img: any, index: any) => {
+                const src: any = 'data:image/png;base64,' + img.img
+                return <Image key={index} source={{uri: src}} style={{width: 100, height: 100, resizeMode: 'contain'}} />
+              })}
             </View>
           </SafeAreaView>
         </ScrollView>
@@ -333,8 +306,9 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     width: 420,
-    height: 539,
     backgroundColor: '#fff',
+    display: 'flex',
+    flexDirection: 'column',
     alignItems: 'center',
   },
   text: {
