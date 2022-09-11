@@ -3,6 +3,8 @@ import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView, SafeAreaView, StyleSheet, Dimensions, Animated, TouchableOpacity, Text, View, Image, ImageBackground } from 'react-native';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RNAnimatedScrollIndicators from '../node_modules/react-native-animated-scroll-indicators';
 import { api } from '../api';
@@ -36,11 +38,14 @@ function GoToRecipe({ screenName }: any) {
 }
 
 function KnowledgeScreen() {
+  const insets = useSafeAreaInsets();
+
   return (
     <>
       <StatusBar />
       <ScrollView>
-        <SafeAreaView style={styles.container_K}>
+        {/* <SafeAreaView style={styles.container_K}> */}
+        <View style={[styles.container_K, { paddingTop: Math.max(insets.top, 16) }]}>
           <View style={styles.header_K}>
             <View style={styles.first_K}>
               <Text style={styles.title_K}> 關於香蕉 </Text>
@@ -53,17 +58,21 @@ function KnowledgeScreen() {
             <GoToEat screenName="香蕉熟成階段"/>
             <GoToRecipe screenName="香蕉食譜" />
           </View>
-        </SafeAreaView>
+          </View>
+        {/* </SafeAreaView> */}
       </ScrollView>
     </>
   );
 }
 
 function EatScreen({ navigation}:any) {
+  const insets = useSafeAreaInsets();
+
   return (
     <>
       <StatusBar />
-        <SafeAreaView style={styles.container}>
+        {/* <SafeAreaView style={styles.container}> */}
+        <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}>
           <View style={styles.header}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
               <View>
@@ -111,7 +120,8 @@ function EatScreen({ navigation}:any) {
               </View>
             </View>
           </ScrollView>
-        </SafeAreaView>
+        </View>
+        {/* </SafeAreaView> */}
     </>
   );
 }
@@ -127,14 +137,18 @@ function RecipeScreen({ navigation }: any) {
   function getData() {
     api.getRecipe('banana')
       .then(res => {
-        console.log(res);
+        // console.log(res);
         setData(res);
       });
   };
+
+  const insets = useSafeAreaInsets();
+
   return (
     <>
       <StatusBar />
-      <SafeAreaView style={styles.container_R}>
+      {/* <SafeAreaView style={styles.container_R}> */}
+      <View style={[styles.container_R, { paddingTop: Math.max(insets.top, 16) }]}>
         <View style={styles.header_R}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton_R}>
             <View>
@@ -201,7 +215,8 @@ function RecipeScreen({ navigation }: any) {
             />
           </View>
         </View>
-      </SafeAreaView>
+      </View>
+      {/* </SafeAreaView> */}
     </>
   );
 }

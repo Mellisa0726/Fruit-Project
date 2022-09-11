@@ -1,6 +1,6 @@
 import { Ionicons } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer, DefaultTheme, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer, DefaultTheme, DarkTheme, StackActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as React from 'react';
 import { ColorSchemeName, Pressable, Image, StyleSheet } from 'react-native';
@@ -53,6 +53,7 @@ function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
+        // unmountOnBlur: true
       }}>
       <BottomTab.Screen //按鈕1
         name="Knowledge"
@@ -76,7 +77,6 @@ function BottomTabNavigator() {
         options={{
           title: '日曆',
           tabBarIcon: ({ color }) => <TabBarIcon name="calendar" color={color} />,
-          unmountOnBlur: true,
         }}
       />
       <BottomTab.Screen

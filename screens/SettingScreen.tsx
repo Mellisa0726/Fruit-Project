@@ -6,6 +6,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SecureStore from 'expo-secure-store';
 import LogInScreen from '../screens/LogInScreen'
 import React, { useState } from 'react';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 
 function GoToAccount({ screenName }: any) {
     const navigation = useNavigation();
@@ -28,10 +30,13 @@ function SettingScreen() {
         navigation.pop();
     };
 
+  const insets = useSafeAreaInsets();
+
     return (
         <>
             <StatusBar />
-            <SafeAreaView style={styles.container}>
+            {/* <SafeAreaView style={styles.container}> */}
+            <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}>
                 <View style={styles.header_S}>
                     <View style={styles.first_S}>
                         <Text style={styles.title_S}> 設定 </Text>
@@ -48,11 +53,14 @@ function SettingScreen() {
                         </View>
                     </TouchableOpacity>
                 </View>
-            </SafeAreaView>
+            </View>
+            {/* </SafeAreaView> */}
         </>
     );
 }
 function AccountScreen({ navigation }: any) {
+    // const insets = useSafeAreaInsets();
+
     return (
         <>
             <ScrollView
@@ -63,6 +71,7 @@ function AccountScreen({ navigation }: any) {
             >
                 <StatusBar />
                 <SafeAreaView style={styles.container}>
+                {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
                     <View style={styles.header}>
                         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
                             <View>
@@ -112,6 +121,7 @@ function AccountScreen({ navigation }: any) {
                             <Text style={styles.link_text}> 送出 </Text>
                         </TouchableOpacity>
                     </View>
+                {/* </View> */}
                 </SafeAreaView>
             </ScrollView>
         </>

@@ -7,6 +7,8 @@ import { api } from '../api'
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Canvas, { Image as CanvasImage } from 'react-native-canvas'
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+
 
 let camera: Camera
 function CameraScreen() {
@@ -210,7 +212,7 @@ function SelectScreen({navigation, route}: any) {
     api.getBoundingBox(encodedImg)
     .then(res => {
       // window.alert('get res')
-      console.log(res)
+      // console.log(res)
       if (res['counts'] > 0) setCroppedImg(res['object'])
       else window.alert('No banana.')
     })
@@ -219,11 +221,14 @@ function SelectScreen({navigation, route}: any) {
 
   console.log('croppedImg', croppedImg)
 
+  const insets = useSafeAreaInsets();
+
   return (
     <>
       <StatusBar />
         <ScrollView>
-          <SafeAreaView style={styles.container}>
+          {/* <SafeAreaView style={styles.container}> */}
+          <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}>
             <View style={styles.header}>
               <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
                 <View>
@@ -243,7 +248,8 @@ function SelectScreen({navigation, route}: any) {
                 return <Image key={index} source={{uri: src}} style={{width: 100, height: 100, resizeMode: 'contain'}} />
               })}
             </View>
-          </SafeAreaView>
+          </View>
+          {/* </SafeAreaView> */}
         </ScrollView>
     </>
   );

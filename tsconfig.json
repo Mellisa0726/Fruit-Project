@@ -1,5 +1,6 @@
 {
   "extends": "expo/tsconfig.base",
+  "esModuleInterop": true,
   "suppressImplicitAnyIndexErrors": true,
   "noImplicitAny": true,
   "compilerOptions": {
