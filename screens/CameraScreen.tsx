@@ -201,7 +201,7 @@ function SelectScreen({navigation, route}: any) {
   const [output, setOutput] = React.useState<any>(null)
   const ref = useRef<any>(null)
   const { capturedImage } = route.params
-  // console.log(capturedImage)
+  console.log(capturedImage)
   const encodedImg: Object = {'uri': 'data:image/png;base64,' + capturedImage.base64}
 
   useEffect(() => getBoundingBox(), [])
@@ -209,12 +209,24 @@ function SelectScreen({navigation, route}: any) {
   function getBoundingBox(){
     // setEncodedImg({'uri': 'data:image/png;base64,' + capturedImage.base64})
     // window.alert(encodedImg.uri)
-    api.getBoundingBox(encodedImg)
+
+    api.getBoundingBox(encodedImg) // phone
+    // api.getBoundingBox(capturedImage) // web
     .then(res => {
       // window.alert('get res')
       // console.log(res)
       if (res['counts'] > 0) setCroppedImg(res['object'])
       else window.alert('No banana.')
+    })
+    .catch(err => window.alert(err))
+  }
+
+  function classify(index: any){
+    const data: Object = {'uri': 'data:image/png;base64,' + croppedImg[index].img}
+    console.log(data)
+    api.classify(data)
+    .then(res => {
+      window.alert(JSON.stringify(res))
     })
     .catch(err => window.alert(err))
   }
@@ -247,9 +259,11 @@ function SelectScreen({navigation, route}: any) {
               <View style={styles.main}>
                 {croppedImg.map((img: any, index: any) => {
                   const src: any = 'data:image/png;base64,' + img.img
-                  return <TouchableOpacity style={styles.Button_E}>
-                    <ImageBackground key={index} source={{ uri: src }} style={styles.banana_K} />
-                  </TouchableOpacity>
+                  return (
+                    <TouchableOpacity key={index} style={styles.Button_E} onPress={() => classify(index)}>
+                      <ImageBackground source={{ uri: src }} style={styles.banana_K} />
+                    </TouchableOpacity>
+                  )
                 })}
               </View>
             </ScrollView>

@@ -54,5 +54,17 @@ export const api = {
             })
             .then(res => res.data)
         )
+    },
+    async classify(image: any) {
+        const jwt = await SecureStore.getItemAsync('JWT');
+        return (
+            axios.post(hostname + '/classification', image, {
+                headers: {
+                    'Authorization': 'Bearer ' + jwt,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.data)
+        )
     }
 };
