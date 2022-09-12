@@ -43,7 +43,6 @@ function KnowledgeScreen() {
   return (
     <>
       <StatusBar />
-      <ScrollView>
         {/* <SafeAreaView style={styles.container_K}> */}
         {/* <View style={[styles.container_K, { paddingTop: Math.max(insets.top, 16) }]}> */}
         <View style={styles.container_K}>
@@ -61,7 +60,6 @@ function KnowledgeScreen() {
           </View>
           </View>
         {/* </SafeAreaView> */}
-      </ScrollView>
     </>
   );
 }

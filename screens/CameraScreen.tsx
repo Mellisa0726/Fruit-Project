@@ -226,32 +226,36 @@ function SelectScreen({navigation, route}: any) {
   return (
     <>
       <StatusBar />
-        <ScrollView>
-          {/* <SafeAreaView style={styles.container}> */}
-          {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
-                <View>
-                  <Text style={styles.text_back}> ᐸ  返回 </Text>
-                </View>
-              </TouchableOpacity>
-              <View style={styles.first}>
-                <Text style={styles.title}> 選擇香蕉 </Text>
-                  <TouchableOpacity>
-                     <Ionicons name="notifications-outline" size={25} style={styles.notification} />
-                  </TouchableOpacity>
+        {/* <SafeAreaView style={styles.container}> */}
+        {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
+              <View>
+                <Text style={styles.text_back}> ᐸ  返回 </Text>
               </View>
-            </View>
-            <View style={styles.main}>
-              {croppedImg.map((img: any, index: any) => {
-                const src: any = 'data:image/png;base64,' + img.img
-                return <Image key={index} source={{uri: src}} style={{width: 100, height: 100, resizeMode: 'contain'}} />
-              })}
+            </TouchableOpacity>
+            <View style={styles.first}>
+              <Text style={styles.title}> 選擇香蕉 </Text>
+                <TouchableOpacity>
+                   <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                </TouchableOpacity>
             </View>
           </View>
-          {/* </SafeAreaView> */}
-        </ScrollView>
+          <View style={styles.main_b}>
+            <ScrollView>
+              <View style={styles.main}>
+                {croppedImg.map((img: any, index: any) => {
+                  const src: any = 'data:image/png;base64,' + img.img
+                  return <TouchableOpacity style={styles.Button_E}>
+                    <ImageBackground key={index} source={{ uri: src }} style={styles.banana_K} />
+                  </TouchableOpacity>
+                })}
+              </View>
+            </ScrollView>
+          </View>
+        </View>
+      {/* </SafeAreaView> */}
     </>
   );
 }
@@ -310,6 +314,12 @@ const styles = StyleSheet.create({
     paddingTop: 3,
     paddingLeft: 150,
   },
+  main_b: {
+    flex: 1,
+    width: 420,
+    height: 538,
+    backgroundColor: '#fff',
+  },
   main: {
     flex: 1,
     width: 420,
@@ -317,9 +327,26 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
+    marginBottom: 50,
   },
   text: {
     fontSize: 18,
     color: 'white',
+  },
+  Button_E: {
+    marginTop: 70,
+    height: 180,
+    width: '50%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+  },
+  banana_K: {
+    borderRadius: 20,
+    width: 216,
+    height: 202,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff',
   },
 });
