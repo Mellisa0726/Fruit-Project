@@ -221,14 +221,15 @@ function SelectScreen({navigation, route}: any) {
 
   console.log('croppedImg', croppedImg)
 
-  const insets = useSafeAreaInsets();
+  // const insets = useSafeAreaInsets();
 
   return (
     <>
       <StatusBar />
         <ScrollView>
           {/* <SafeAreaView style={styles.container}> */}
-          <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}>
+          {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
+          <View style={styles.container}>
             <View style={styles.header}>
               <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
                 <View>

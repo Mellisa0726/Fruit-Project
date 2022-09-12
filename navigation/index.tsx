@@ -53,7 +53,7 @@ function BottomTabNavigator() {
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme].tint,
         headerShown: false,
-        // unmountOnBlur: true
+        unmountOnBlur: true
       }}>
       <BottomTab.Screen //按鈕1
         name="Knowledge"

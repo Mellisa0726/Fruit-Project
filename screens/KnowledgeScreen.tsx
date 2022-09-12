@@ -38,14 +38,15 @@ function GoToRecipe({ screenName }: any) {
 }
 
 function KnowledgeScreen() {
-  const insets = useSafeAreaInsets();
+  // const insets = useSafeAreaInsets();
 
   return (
     <>
       <StatusBar />
       <ScrollView>
         {/* <SafeAreaView style={styles.container_K}> */}
-        <View style={[styles.container_K, { paddingTop: Math.max(insets.top, 16) }]}>
+        {/* <View style={[styles.container_K, { paddingTop: Math.max(insets.top, 16) }]}> */}
+        <View style={styles.container_K}>
           <View style={styles.header_K}>
             <View style={styles.first_K}>
               <Text style={styles.title_K}> 關於香蕉 </Text>
@@ -66,13 +67,14 @@ function KnowledgeScreen() {
 }
 
 function EatScreen({ navigation}:any) {
-  const insets = useSafeAreaInsets();
+  // const insets = useSafeAreaInsets();
 
   return (
     <>
       <StatusBar />
         {/* <SafeAreaView style={styles.container}> */}
-        <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}>
+        {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
+        <View style={styles.container}>
           <View style={styles.header}>
             <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
               <View>
@@ -142,13 +144,14 @@ function RecipeScreen({ navigation }: any) {
       });
   };
 
-  const insets = useSafeAreaInsets();
+  // const insets = useSafeAreaInsets();
 
   return (
     <>
       <StatusBar />
       {/* <SafeAreaView style={styles.container_R}> */}
-      <View style={[styles.container_R, { paddingTop: Math.max(insets.top, 16) }]}>
+      {/* <View style={[styles.container_R, { paddingTop: Math.max(insets.top, 16) }]}> */}
+      <View style={styles.container_R}>
         <View style={styles.header_R}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton_R}>
             <View>

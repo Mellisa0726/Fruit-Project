@@ -30,13 +30,14 @@ function SettingScreen() {
         navigation.pop();
     };
 
-  const insets = useSafeAreaInsets();
+//   const insets = useSafeAreaInsets();
 
     return (
         <>
             <StatusBar />
             {/* <SafeAreaView style={styles.container}> */}
-            <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}>
+            {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
+            <View style={styles.container}>
                 <View style={styles.header_S}>
                     <View style={styles.first_S}>
                         <Text style={styles.title_S}> 設定 </Text>
@@ -70,8 +71,9 @@ function AccountScreen({ navigation }: any) {
                 scrollEnabled={false}
             >
                 <StatusBar />
-                <SafeAreaView style={styles.container}>
+                {/* <SafeAreaView style={styles.container}> */}
                 {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
+                <View style={styles.container}>
                     <View style={styles.header}>
                         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
                             <View>
@@ -121,8 +123,8 @@ function AccountScreen({ navigation }: any) {
                             <Text style={styles.link_text}> 送出 </Text>
                         </TouchableOpacity>
                     </View>
-                {/* </View> */}
-                </SafeAreaView>
+                </View>
+                {/* </SafeAreaView> */}
             </ScrollView>
         </>
     );
