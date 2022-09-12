@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     color: "#7E6107",
     fontWeight: 'bold',
     paddingTop: 3,
-    paddingLeft: 150,
+    paddingLeft: 147.5,
   },
   main_K: {
     flex: 1,
@@ -317,7 +317,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAE5A4',
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
-    marginLeft: -13,
+    marginLeft: -4,
   },
   first: {
     flexDirection: 'row',
@@ -333,20 +333,20 @@ const styles = StyleSheet.create({
     color: "#7E6107",
     fontWeight: 'bold',
     paddingTop: 3,
-    paddingLeft: 99.5,
-  },
-  text_back: {
-    fontSize: 18,
-    color: "#7E6107",
-    marginLeft: 70,
-    marginTop: 30,
+    paddingLeft: 94.5,
   },
   button_back: {
     height: 50,
     width: 200,
     marginTop: 30,
     justifyContent: 'center',
-    marginLeft: -25,
+    marginLeft: -30,
+  },
+  text_back: {
+    fontSize: 18,
+    color: "#7E6107",
+    marginLeft: 70,
+    marginTop: 25,
   },
   middle: {
     flex: 1,
@@ -388,25 +388,24 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
   },
-  text_back_R: {
-    fontSize: 18,
-    color: "#7E6107",
-    marginLeft: 70,
-    marginTop: 30,
-  },
-
   myButton_R: {
     height: 50,
     width: 200,
     marginTop: 30,
     justifyContent: 'center',
-    marginLeft: -25,
+    marginLeft: -30,
+  },
+  text_back_R: {
+    fontSize: 18,
+    color: "#7E6107",
+    marginLeft: 70,
+    marginTop: 25,
   },
   notification_R: {
     color: "#7E6107",
     fontWeight: 'bold',
     paddingTop: 3,
-    paddingLeft: 148,
+    paddingLeft: 147.5,
   },
   main_R: {
     flex: 2.275,

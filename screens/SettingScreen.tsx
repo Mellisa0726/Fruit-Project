@@ -210,13 +210,13 @@ const styles = StyleSheet.create({
         width: 200,
         marginTop: 30,
         justifyContent: 'center',
-        marginLeft: -25,
+        marginLeft: -30,
     },
     text_back: {
         fontSize: 18,
         color: "#7E6107",
         marginLeft: 70,
-        marginTop: 30,
+        marginTop: 25,
     },
     first: {
         flexDirection: 'row',
