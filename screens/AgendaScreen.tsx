@@ -6,6 +6,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { backgroundColor, textColor } from '../components/react-native-calendars/src/style';
 import { api } from '../api';
 import cloneDeep from 'lodash/cloneDeep';
+import Notification from './Notification';
 
 function compareDate(a: {[key:string]: any}, b: {[key:string]: any}) {
   let aDate = new Date(a.date).getTime();
@@ -43,7 +44,8 @@ class AgendaScreen extends Component {
   state = {
     selected: this.currentDateStr(),
     marked: {},
-    data: {}
+    data: {},
+    isModalVisible: false
   };
 
   componentDidMount() {
@@ -124,7 +126,7 @@ class AgendaScreen extends Component {
           <View style={styles.first}>
             <Text style={styles.title}> 日曆 </Text>
             <TouchableOpacity>
-                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                <Ionicons name="notifications-outline" size={25} style={styles.notification} onPress={() => this.setState({isModalVisible: true})}/>
             </TouchableOpacity>
           </View>
         </View>

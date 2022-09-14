@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
-import { ScrollView, SafeAreaView, StyleSheet, Dimensions, Animated, TouchableOpacity, Text, View, Image, ImageBackground } from 'react-native';
+import { ScrollView, SafeAreaView, StyleSheet, Dimensions, Animated, TouchableOpacity, Button, Text, View, Image, ImageBackground } from 'react-native';
 import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RNAnimatedScrollIndicators from '../node_modules/react-native-animated-scroll-indicators';
 import { api } from '../api';
+import Notification from './Notification';
 
 const { width } = Dimensions.get('window');
 function GoToEat({ screenName }:any) {
@@ -39,6 +40,11 @@ function GoToRecipe({ screenName }: any) {
 
 function KnowledgeScreen() {
   // const insets = useSafeAreaInsets();
+  const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+
+  const openNotification = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   return (
     <>
@@ -50,7 +56,7 @@ function KnowledgeScreen() {
             <View style={styles.first_K}>
               <Text style={styles.title_K}> 關於香蕉 </Text>
               <TouchableOpacity>
-                <Ionicons name="notifications-outline" size={25} style={styles.notification_K} />
+                <Ionicons name="notifications-outline" size={25} style={styles.notification_K} onPress={openNotification}/>
               </TouchableOpacity>
             </View>
           </View>
@@ -58,7 +64,8 @@ function KnowledgeScreen() {
             <GoToEat screenName="香蕉熟成階段"/>
             <GoToRecipe screenName="香蕉食譜" />
           </View>
-          </View>
+          <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
+        </View>
         {/* </SafeAreaView> */}
     </>
   );
@@ -66,6 +73,11 @@ function KnowledgeScreen() {
 
 function EatScreen({ navigation}:any) {
   // const insets = useSafeAreaInsets();
+  const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+
+  const openNotification = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   return (
     <>
@@ -82,7 +94,7 @@ function EatScreen({ navigation}:any) {
             <View style={styles.first}>
               <Text style={styles.title}> 香蕉熟成階段 </Text>
                 <TouchableOpacity>
-                  <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                  <Ionicons name="notifications-outline" size={25} style={styles.notification} onPress={openNotification}/>
                 </TouchableOpacity>
             </View>
           </View>
@@ -120,6 +132,7 @@ function EatScreen({ navigation}:any) {
               </View>
             </View>
           </ScrollView>
+          <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
         </View>
         {/* </SafeAreaView> */}
     </>
@@ -129,6 +142,11 @@ function EatScreen({ navigation}:any) {
 function RecipeScreen({ navigation }: any) {
   const scrollX = new Animated.Value(0);
   const [data, setData] = useState([]);
+  const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+
+  const openNotification = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   useEffect(() => {
     getData();
@@ -159,7 +177,7 @@ function RecipeScreen({ navigation }: any) {
           <View style={styles.first}>
             <Text style={styles.title}> 香蕉食譜 </Text>
             <TouchableOpacity>
-              <Ionicons name="notifications-outline" size={25} style={styles.notification_R} />
+              <Ionicons name="notifications-outline" size={25} style={styles.notification_R} onPress={openNotification}/>
             </TouchableOpacity>
           </View>
         </View>
@@ -216,6 +234,7 @@ function RecipeScreen({ navigation }: any) {
             />
           </View>
         </View>
+        <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
       </View>
       {/* </SafeAreaView> */}
     </>

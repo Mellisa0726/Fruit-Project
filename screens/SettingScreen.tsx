@@ -7,6 +7,7 @@ import * as SecureStore from 'expo-secure-store';
 import LogInScreen from '../screens/LogInScreen'
 import React, { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Notification from './Notification';
 
 
 function GoToAccount({ screenName }: any) {
@@ -23,6 +24,11 @@ function GoToAccount({ screenName }: any) {
 
 function SettingScreen() {
     const navigation = useNavigation();
+    const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+
+    const openNotification = () => {
+        setModalVisible(!isModalVisible);
+    };
     
     function SignOut() {
         SecureStore.deleteItemAsync('JWT');
@@ -39,10 +45,11 @@ function SettingScreen() {
             {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
             <View style={styles.container}>
                 <View style={styles.header_S}>
+                    <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
                     <View style={styles.first_S}>
                         <Text style={styles.title_S}> 設定 </Text>
                         <TouchableOpacity>
-                            <Ionicons name="notifications-outline" size={25} style={styles.notification_S} />
+                            <Ionicons name="notifications-outline" size={25} style={styles.notification_S} onPress={openNotification}/>
                         </TouchableOpacity>
                     </View>
                 </View>
@@ -61,6 +68,11 @@ function SettingScreen() {
 }
 function AccountScreen({ navigation }: any) {
     // const insets = useSafeAreaInsets();
+    const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+
+    const openNotification = () => {
+        setModalVisible(!isModalVisible);
+    };
 
     return (
         <>
@@ -83,7 +95,7 @@ function AccountScreen({ navigation }: any) {
                         <View style={styles.first}>
                             <Text style={styles.title}> 變更帳戶資料 </Text>
                             <TouchableOpacity>
-                                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+                                <Ionicons name="notifications-outline" size={25} style={styles.notification} onPress={openNotification}/>
                             </TouchableOpacity>
                         </View>
                     </View>
@@ -121,6 +133,7 @@ function AccountScreen({ navigation }: any) {
                         </View>
                         <TouchableOpacity style={styles.link}>
                             <Text style={styles.link_text}> 送出 </Text>
+                            <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
                         </TouchableOpacity>
                     </View>
                 </View>
