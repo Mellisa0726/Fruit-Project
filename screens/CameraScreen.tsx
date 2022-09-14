@@ -298,19 +298,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#FAE5A4',
     borderBottomLeftRadius: 60,
     borderBottomRightRadius: 60,
+    marginLeft: -4,
   },
   myButton: {
     height: 50,
     width: 200,
     marginTop: 30,
     justifyContent: 'center',
-    marginLeft: -25,
+    marginLeft: -30,
   },
   text_back: {
     fontSize: 18,
     color: "#7E6107",
     marginLeft: 70,
-    marginTop: 30,
+    marginTop: 25,
   },
   first: {
     flexDirection: 'row',
@@ -326,7 +327,7 @@ const styles = StyleSheet.create({
     color: "#7E6107",
     fontWeight: 'bold',
     paddingTop: 3,
-    paddingLeft: 150,
+    paddingLeft: 147.5,
   },
   main_b: {
     flex: 1,
