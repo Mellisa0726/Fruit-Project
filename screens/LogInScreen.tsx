@@ -167,7 +167,27 @@ function LogInScreen() {
   );
 }
 
+function signUp({data}: any) {
+    const navigation = useNavigation();
+    
+    api.signUp(data.email, data.password)
+      .then(() => navigation.navigate('Root'))
+      .catch(err => {
+        // console.log(err);
+        window.alert('Sign up failed');
+      });
+    }
+
 function SignUpScreen({ navigation }: any) {
+  const [data, setData] = React.useState({
+    email: '',
+    password: '',
+    check_textInputChange: false,
+    secureTextEntry: true,
+    isValidUser: true,
+    isValidPassword: true,
+  });
+
   return (
     <ScrollView
       contentContainerStyle={{ flex: 1 }}
@@ -202,7 +222,7 @@ function SignUpScreen({ navigation }: any) {
               placeholderTextColor="#9B9B9B"
             />
           </View>
-          <TouchableOpacity onPress={() => Alert.alert('註冊成功，請返回登入')} style={styles.link}>
+          <TouchableOpacity onPress={() => signUp(data)} style={styles.link}>
             <Text style={styles.text}> 送出 </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.link}>

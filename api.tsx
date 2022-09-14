@@ -16,6 +16,18 @@ export const api = {
             })
         )
     },
+    signUp(name: string, password: string) {
+        return (
+            axios.post(hostname + '/user/signup', {
+                'name': name,
+                'password': password
+            })
+            .then(res => {
+                // console.log(res);
+                SecureStore.setItemAsync('JWT', res.data.jwt);
+            })
+        )
+    },
     getKnowledge(fruit: string, kid: any) {
         let url: string;
         url = hostname + '/knowledge?fruit=' + fruit;
