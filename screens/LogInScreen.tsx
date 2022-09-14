@@ -28,7 +28,7 @@ function GoToLogIn({ data }: any) {
       window.alert('Log in failed');
     });
   }
-
+  
   return (
     <TouchableOpacity onPress={logIn} style={styles.link}>
        <Text style={styles.text}> 登入 </Text>

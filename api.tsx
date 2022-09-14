@@ -55,6 +55,18 @@ export const api = {
             .then(res => res.data)
         )
     },
+    async getNotification() {
+        const jwt = await SecureStore.getItemAsync('JWT');
+
+        return (
+            axios.get(hostname + '/calendar/notification', {
+                headers: {
+                    'Authorization': 'Bearer ' + jwt
+                }
+            })
+            .then(res => res.data)
+        )
+    },
     async classify(image: any) {
         const jwt = await SecureStore.getItemAsync('JWT');
         return (

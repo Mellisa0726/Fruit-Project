@@ -10,12 +10,17 @@ import RNAnimatedScrollIndicators from '../node_modules/react-native-animated-sc
 import { api } from '../api';
 import Notification from './Notification';
 
+interface Props {
+  isModalVisible: boolean;
+  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const { width } = Dimensions.get('window');
-function GoToEat({ screenName }:any) {
+function GoToEat({ screenName, isModalVisible, setModalVisible }: any) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.Button_E}>
+    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, setModalVisible: setModalVisible})} style={styles.Button_E}>
       <View>
         <ImageBackground style={styles.banana_K} source={require('../assets/images/香蕉熟成階段.png')}>
           <Text style={styles.text_K}> 香蕉熟成階段 </Text>
@@ -24,11 +29,11 @@ function GoToEat({ screenName }:any) {
     </TouchableOpacity>
   );
 } 
-function GoToRecipe({ screenName }: any) {
+function GoToRecipe({ screenName, isModalVisible, setModalVisible }: any) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.Button_R}>
+    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, setModalVisible: setModalVisible})} style={styles.Button_R}>
       <View>
         <ImageBackground style={styles.banana_K} source={require('../assets/images/廚房用具.png')}>
           <Text style={styles.text_K}> 香蕉食譜 </Text>
@@ -41,7 +46,6 @@ function GoToRecipe({ screenName }: any) {
 function KnowledgeScreen() {
   // const insets = useSafeAreaInsets();
   const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
-
   const openNotification = () => {
     setModalVisible(!isModalVisible);
   };
@@ -58,20 +62,20 @@ function KnowledgeScreen() {
               <TouchableOpacity>
                 <Ionicons name="notifications-outline" size={25} style={styles.notification_K} onPress={openNotification}/>
               </TouchableOpacity>
+              <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
             </View>
           </View>
           <View style={styles.main_K}>
-            <GoToEat screenName="香蕉熟成階段"/>
-            <GoToRecipe screenName="香蕉食譜" />
+            <GoToEat screenName="香蕉熟成階段" isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
+            <GoToRecipe screenName="香蕉食譜" isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
           </View>
-          <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
         </View>
         {/* </SafeAreaView> */}
     </>
   );
 }
 
-function EatScreen({ navigation}:any) {
+function EatScreen({navigation, route}: any) {
   // const insets = useSafeAreaInsets();
   const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
 
@@ -139,10 +143,10 @@ function EatScreen({ navigation}:any) {
   );
 }
 
-function RecipeScreen({ navigation }: any) {
+function RecipeScreen({navigation, route}: any) {
   const scrollX = new Animated.Value(0);
   const [data, setData] = useState([]);
-  const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+  const { isModalVisible, setModalVisible } = route.params
 
   const openNotification = () => {
     setModalVisible(!isModalVisible);
@@ -247,8 +251,8 @@ export default function App() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Knowledge">
-        <Stack.Screen name="Knowledge" component={KnowledgeScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="香蕉熟成階段" component={EatScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Knowledge" component={KnowledgeScreen}options={{ headerShown: false }} />
+        <Stack.Screen name="香蕉熟成階段" component={EatScreen} options={{  headerShown: false }} />
         <Stack.Screen name="香蕉食譜" component={RecipeScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>

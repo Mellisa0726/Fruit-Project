@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button, Text, View } from "react-native";
 import Modal from "react-native-modal";
+import { api } from '../api'
 
 interface NotificationProps {
   isModalVisible: boolean;
@@ -8,6 +9,21 @@ interface NotificationProps {
 }
 
 export default function Notification(props: NotificationProps) {
+  const [data, setData] = React.useState<object>({});
+
+  useEffect(() => {
+    api.getNotification()
+    .then(res => {
+        setData(res)
+        //console.warn(res)
+    })
+    /* .then(() =>
+      //console.warn('data', data?.rotten)
+
+    ) */
+    .catch(err => console.log(err))
+  });
+
   const closeNotification = () => {
       props.setModalVisible(!props.isModalVisible);
   };

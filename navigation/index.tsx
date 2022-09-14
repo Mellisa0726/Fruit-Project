@@ -46,6 +46,11 @@ const BottomTab = createBottomTabNavigator<RootTabParamList>();
 
 function BottomTabNavigator() {
   const colorScheme = useColorScheme();
+  const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+
+  const openNotification = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   return (
     <BottomTab.Navigator
@@ -57,7 +62,7 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen //按鈕1
         name="Knowledge"
-        component={KnowledgeScreen}
+        component={<KnowledgeScreen isModalVisible={isModalVisible}/>}
         options={{
           title: '關於香蕉',
           tabBarIcon: ({ color }) => <TabBarIcon name="bulb-outline" color={color} />,
