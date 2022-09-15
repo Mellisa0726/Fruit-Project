@@ -8,6 +8,7 @@ import LogInScreen from '../screens/LogInScreen'
 import React, { useState } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Notification from './Notification';
+import { api } from '../api';
 
 
 function GoToAccount({ screenName }: any) {
@@ -66,6 +67,16 @@ function SettingScreen() {
         </>
     );
 }
+
+function change({ data }: any) {
+    const navigation = useNavigation();
+
+    api.change(data.password, data.newPassword)
+      .then(res => {
+        console.log(res);
+    });
+};
+
 function AccountScreen({ navigation }: any) {
     // const insets = useSafeAreaInsets();
     const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
@@ -73,6 +84,12 @@ function AccountScreen({ navigation }: any) {
     const openNotification = () => {
         setModalVisible(!isModalVisible);
     };
+
+    const data = React.useState({
+        password: '',
+        newPassword: '',
+
+    });
 
     return (
         <>
@@ -125,13 +142,13 @@ function AccountScreen({ navigation }: any) {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="password"
+                                    placeholder="newPassword"
                                     placeholderTextColor="#BBBBBB"
                                     underlineColorAndroid={'#E0E0E0'}
                                 />
                             </View>
                         </View>
-                        <TouchableOpacity style={styles.link}>
+                        <TouchableOpacity onPress={() => change(data)} style={styles.link}>
                             <Text style={styles.link_text}> 送出 </Text>
                             <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
                         </TouchableOpacity>
