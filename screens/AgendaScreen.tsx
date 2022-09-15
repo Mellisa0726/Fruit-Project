@@ -75,15 +75,15 @@ class AgendaScreen extends Component {
 
         // mark position
         let markIdx = undefined;
-        // let startDate: any = new Date(start);
-        // startDate = startDate.toISOString().split('T')[0];
+
         if (start in marked && marked[start].periods[0].color !== 'transparent') {
           for (let j = 1; j < marked[start].periods.length; j++) {
             if (marked[start].periods[j].color === 'transparent') {
               markIdx = j;
+              break;
             }
           }
-          markIdx = marked[start].periods.length;
+          if (markIdx === undefined) { markIdx = marked[start].periods.length; }
         } else {
           markIdx = 0;
         }
