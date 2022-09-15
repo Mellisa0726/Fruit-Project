@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { SafeAreaView, StyleSheet, TouchableOpacity, ScrollView, Text, TextInput, View } from 'react-native';
-import { useNavigation, NavigationContainer } from '@react-navigation/native';
+import { useNavigation, NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SecureStore from 'expo-secure-store';
 import LogInScreen from '../screens/LogInScreen'
@@ -34,7 +34,15 @@ function SettingScreen() {
     function SignOut() {
         SecureStore.deleteItemAsync('JWT');
         // window.localStorage.clear();
-        navigation.pop();
+        // navigation.pop();
+        navigation.dispatch(
+            CommonActions.reset({
+                index: 0,
+                routes: [
+                    {name: 'LogIn'}
+                ]
+            })
+        )
     };
 
 //   const insets = useSafeAreaInsets();
