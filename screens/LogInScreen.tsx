@@ -188,6 +188,39 @@ function SignUpScreen({ navigation }: any) {
     isValidPassword: true,
   });
 
+  const textInputChange = (val:any) => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: true,
+        isValidUser: true
+      });
+    } else {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: false,
+        isValidUser: false
+      });
+    }
+  }
+  const handlePasswordChange = (val:any) => {
+    if (val.trim().length >= 4) {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: true
+      });
+    } else {
+      setData({
+        ...data,
+        password: val,
+        isValidPassword: false,
+      });
+    }
+  }
+
   return (
     <ScrollView
       contentContainerStyle={{ flex: 1 }}
@@ -206,6 +239,7 @@ function SignUpScreen({ navigation }: any) {
               style={styles.TextInput}
               placeholder="Email"
               placeholderTextColor="#9B9B9B"
+              onChangeText={(val) => textInputChange(val)}
             />
           </View>
           <View style={styles.inputView}>
@@ -213,6 +247,7 @@ function SignUpScreen({ navigation }: any) {
               style={styles.TextInput}
               placeholder="Password"
               placeholderTextColor="#9B9B9B"
+              onChangeText={(val) => handlePasswordChange(val)}
             />
           </View>
           <View style={styles.inputView}>
