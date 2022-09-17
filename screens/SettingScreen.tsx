@@ -93,7 +93,7 @@ function AccountScreen({ navigation }: any) {
         setModalVisible(!isModalVisible);
     };
 
-    const data = React.useState({
+    const [data, setData] = React.useState({
         password: '',
         newPassword: '',
         isValidPassword: false
