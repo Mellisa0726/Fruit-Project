@@ -77,7 +77,7 @@ function SettingScreen() {
 }
 
 function change({ data }: any) {
-    const navigation = useNavigation();
+    //const navigation = useNavigation();
 
     api.change(data.password, data.newPassword)
       .then(res => {
@@ -96,8 +96,40 @@ function AccountScreen({ navigation }: any) {
     const data = React.useState({
         password: '',
         newPassword: '',
-
+        isValidPassword: false
     });
+
+    const handlePasswordChange = (val:any) => {
+        if (val.trim().length >= 4) {
+          setData({
+            ...data,
+            password: val,
+            isValidPassword: true
+          });
+        } else {
+          setData({
+            ...data,
+            password: val,
+            isValidPassword: false,
+          });
+        }
+      }
+
+      const handleNewPasswordChange = (val:any) => {
+        if (val.trim().length >= 4) {
+          setData({
+            ...data,
+            newPassword: val,
+            isValidPassword: true
+          });
+        } else {
+          setData({
+            ...data,
+            newPassword: val,
+            isValidPassword: false,
+          });
+        }
+      }
 
     return (
         <>
@@ -144,6 +176,7 @@ function AccountScreen({ navigation }: any) {
                                     placeholder="password"
                                     placeholderTextColor="#BBBBBB"
                                     underlineColorAndroid={'#E0E0E0'}
+                                    onChangeText={(val) => handlePasswordChange(val)}
                                 />
                             </View>
                             <Text style={styles.main_text_pass}>新密碼</Text>
@@ -153,6 +186,7 @@ function AccountScreen({ navigation }: any) {
                                     placeholder="newPassword"
                                     placeholderTextColor="#BBBBBB"
                                     underlineColorAndroid={'#E0E0E0'}
+                                    onChangeText={(val) => handleNewPasswordChange(val)}
                                 />
                             </View>
                         </View>
