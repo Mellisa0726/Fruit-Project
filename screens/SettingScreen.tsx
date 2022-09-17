@@ -190,7 +190,7 @@ function AccountScreen({ navigation }: any) {
                                 />
                             </View>
                         </View>
-                        <TouchableOpacity onPress={() => change(data)} style={styles.link}>
+                        <TouchableOpacity onPress={(data) => change(data)} style={styles.link}>
                             <Text style={styles.link_text}> 送出 </Text>
                             <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
                         </TouchableOpacity>
