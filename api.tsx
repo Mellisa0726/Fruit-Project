@@ -4,10 +4,10 @@ import * as SecureStore from 'expo-secure-store';
 const hostname = 'https://rn-backend-app.herokuapp.com/api/v1';
 
 export const api = {
-    logIn(name: string, password: string) {
+    logIn(email: string, password: string) {
         return (
             axios.post(hostname + '/user/login', {
-                'name': name,
+                'email': email,
                 'password': password
             })
             .then(res => {
@@ -16,15 +16,11 @@ export const api = {
             })
         )
     },
-    signUp(name: string, password: string) {
+    signUp(email: string, password: string) {
         return (
             axios.post(hostname + '/user/signup', {
-                'name': name,
+                'email': email,
                 'password': password
-            })
-            .then(res => {
-                // console.log(res);
-                SecureStore.setItemAsync('JWT', res.data.jwt);
             })
         )
     },
@@ -89,6 +85,22 @@ export const api = {
                 }
             })
             .then(res => res.data)
+        )
+    },
+    async change(old_password: string, new_password: string) {
+        const jwt = await SecureStore.getItemAsync('JWT');
+        return (
+            axios.post(hostname + '/user/password', {
+                'old_password': old_password,
+                'new_password': new_password}, {
+                headers: {
+                    //'accept': 'application/json',
+                    'Authorization': 'Bearer ' + jwt,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.data)
+            
         )
     }
 };

@@ -76,13 +76,22 @@ function SettingScreen() {
     );
 }
 
-function change({ data }: any) {
+function GoToChange({ data }: any) {
+    
+    function change(){
     //const navigation = useNavigation();
-
-    api.change(data.password, data.newPassword)
-      .then(res => {
-        console.log(res);
-    });
+    api.change(data.old_password, data.new_password)
+      .then(() => window.alert('修改成功'))
+      .catch(err => {
+        window.alert(err.response)
+      });
+    }
+    return (
+        <TouchableOpacity onPress={change} style={styles.link}>
+            <Text style={styles.link_text}> 送出 </Text>
+        </TouchableOpacity>
+        //<Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
+    );  
 };
 
 function AccountScreen({ navigation }: any) {
@@ -94,8 +103,8 @@ function AccountScreen({ navigation }: any) {
     };
 
     const [data, setData] = React.useState({
-        password: '',
-        newPassword: '',
+        old_password: '',
+        new_password: '',
         isValidPassword: false
     });
 
@@ -103,13 +112,13 @@ function AccountScreen({ navigation }: any) {
         if (val.trim().length >= 4) {
           setData({
             ...data,
-            password: val,
+            old_password: val,
             isValidPassword: true
           });
         } else {
           setData({
             ...data,
-            password: val,
+            old_password: val,
             isValidPassword: false,
           });
         }
@@ -119,13 +128,13 @@ function AccountScreen({ navigation }: any) {
         if (val.trim().length >= 4) {
           setData({
             ...data,
-            newPassword: val,
+            new_password: val,
             isValidPassword: true
           });
         } else {
           setData({
             ...data,
-            newPassword: val,
+            new_password: val,
             isValidPassword: false,
           });
         }
@@ -173,7 +182,7 @@ function AccountScreen({ navigation }: any) {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="password"
+                                    placeholder="old_password"
                                     placeholderTextColor="#BBBBBB"
                                     underlineColorAndroid={'#E0E0E0'}
                                     onChangeText={(val) => handlePasswordChange(val)}
@@ -183,17 +192,14 @@ function AccountScreen({ navigation }: any) {
                             <View style={styles.inputView}>
                                 <TextInput
                                     style={styles.TextInput}
-                                    placeholder="newPassword"
+                                    placeholder="new_password"
                                     placeholderTextColor="#BBBBBB"
                                     underlineColorAndroid={'#E0E0E0'}
                                     onChangeText={(val) => handleNewPasswordChange(val)}
                                 />
                             </View>
                         </View>
-                        <TouchableOpacity onPress={(data) => change(data)} style={styles.link}>
-                            <Text style={styles.link_text}> 送出 </Text>
-                            <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
-                        </TouchableOpacity>
+                        <GoToChange screenName="change" data={data}/>
                     </View>
                 </View>
                 {/* </SafeAreaView> */}

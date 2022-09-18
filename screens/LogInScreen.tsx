@@ -167,16 +167,25 @@ function LogInScreen() {
   );
 }
 
-function signUp({data}: any) {
+
+function GoSignUp({data}: any) {
     const navigation = useNavigation();
     
-    api.signUp(data.email, data.password)
-      .then(() => navigation.navigate('Root'))
-      .catch(err => {
-        // console.log(err);
-        window.alert('Sign up failed');
-      });
+    function signUp() {
+      api.signUp(data.email, data.password)
+        .then(() => navigation.navigate('Root'))
+        .catch(err => {
+            // console.log(err);
+        window.alert(err);
+        });
     }
+
+    return (
+        <TouchableOpacity onPress={signUp} style={styles.link}>
+            <Text style={styles.text}> 送出 </Text>
+          </TouchableOpacity>
+    )
+}
 
 function SignUpScreen({ navigation }: any) {
   const [data, setData] = React.useState({
@@ -257,9 +266,7 @@ function SignUpScreen({ navigation }: any) {
               placeholderTextColor="#9B9B9B"
             />
           </View>
-          <TouchableOpacity onPress={() => signUp(data)} style={styles.link}>
-            <Text style={styles.text}> 送出 </Text>
-          </TouchableOpacity>
+          <GoSignUp screenName="SignUp" data={data}/>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.link}>
             <View>
               <Text style={styles.text}> 返回登入 </Text>
