@@ -206,14 +206,9 @@ function SelectScreen({navigation, route}: any) {
   useEffect(() => getBoundingBox(), [])
   
   function getBoundingBox(){
-    // setEncodedImg({'uri': 'data:image/png;base64,' + capturedImage.base64})
-    // window.alert(encodedImg.uri)
-
     api.getBoundingBox(encodedImg) // phone
     // api.getBoundingBox(capturedImage) // web
     .then(res => {
-      // window.alert('get res')
-      // console.log(res)
       if (res['counts'] > 0) setCroppedImg(res['object'])
       else window.alert('No banana.')
     })
@@ -222,11 +217,10 @@ function SelectScreen({navigation, route}: any) {
 
   function classify(index: any){
     const data: Object = {'uri': 'data:image/png;base64,' + croppedImg[index].img}
-    console.log(data)
     api.classify(data)
     .then(res => {
-      window.alert(JSON.stringify(res))
-      navigation.navigate('Result')
+      // window.alert(JSON.stringify(res))
+      navigation.navigate('Result', {res: res})
     })
     .catch(err => window.alert(err))
   }
@@ -275,6 +269,7 @@ function SelectScreen({navigation, route}: any) {
 }
 
 function ResultScreen({ navigation, route }: any) {
+  const { res } = route.params
   return (
     <>
       <StatusBar />
@@ -288,7 +283,7 @@ function ResultScreen({ navigation, route }: any) {
             </View>
           </TouchableOpacity>
           <View style={styles.first}>
-            <Text style={styles.title}> 結果 </Text>
+            <Text style={styles.title}> 分類結果 </Text>
             <TouchableOpacity>
               <Ionicons name="notifications-outline" size={25} style={styles.notification} />
             </TouchableOpacity>
@@ -296,7 +291,13 @@ function ResultScreen({ navigation, route }: any) {
         </View>
         <View style={styles.main_b}>
           <View style={styles.main}>
-              
+            <Text style={styles.header_text} />
+                <Text style={styles.header_text}>  {res.knowledge.condition}                   {"\n"}</Text>
+                <Image style={styles.banana} source={res.imageURL} />
+                <Text style={styles.header_text} />
+                <Text style={styles.text2}>
+                  {res.knowledge.info + "\n"}
+                </Text>
           </View>
         </View>
       </View>
@@ -304,6 +305,7 @@ function ResultScreen({ navigation, route }: any) {
     </>
   );
 }
+
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -393,5 +395,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#fff',
     resizeMode:'center',
+  },
+  header_text: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: "#4D3604",
+    marginLeft: -120,
+  },
+  text2: {
+    fontSize: 18,
+    color: "#7E6107",
+    marginLeft: 50,
+    marginRight: 50,
+  },
+  banana: {
+    flex: 1,
+    borderRadius: 20,
+    width: "75%",
+    height: 180,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
