@@ -235,6 +235,12 @@ function SignUpScreen({ navigation }: any) {
       secureTextEntry: !data.secureTextEntry
     });
   }
+  const updateSecureTextEntry_repeat = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry
+    });
+  }
   return (
     <ScrollView
       contentContainerStyle={{ flex: 1 }}
@@ -281,8 +287,9 @@ function SignUpScreen({ navigation }: any) {
                 />
               }
             </TouchableOpacity>
+            <Text>   </Text>
           </View>
-          
+
           <View style={styles.inputView}>
             <TextInput
               style={styles.TextInput}
@@ -307,6 +314,7 @@ function SignUpScreen({ navigation }: any) {
                 />
               }
             </TouchableOpacity>
+            <Text>   </Text>
           </View>
           
           <GoSignUp screenName="SignUp" data={data}/>
