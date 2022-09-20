@@ -229,7 +229,12 @@ function SignUpScreen({ navigation }: any) {
       });
     }
   }
-
+  const updateSecureTextEntry = () => {
+    setData({
+      ...data,
+      secureTextEntry: !data.secureTextEntry
+    });
+  }
   return (
     <ScrollView
       contentContainerStyle={{ flex: 1 }}
@@ -256,6 +261,7 @@ function SignUpScreen({ navigation }: any) {
               style={styles.TextInput}
               placeholder="Password"
               placeholderTextColor="#9B9B9B"
+              secureTextEntry={data.secureTextEntry ? true : false}
               onChangeText={(val) => handlePasswordChange(val)}
             />
           </View>
@@ -264,8 +270,26 @@ function SignUpScreen({ navigation }: any) {
               style={styles.TextInput}
               placeholder="Repeat password"
               placeholderTextColor="#9B9B9B"
+              secureTextEntry={data.secureTextEntry ? true : false}
             />
           </View>
+          <TouchableOpacity
+            onPress={updateSecureTextEntry}
+          >
+            {data.secureTextEntry ?
+              <Feather
+                name="eye-off"
+                color="grey"
+                size={20}
+              />
+              :
+              <Feather
+                name="eye"
+                color="grey"
+                size={20}
+              />
+            }
+          </TouchableOpacity>
           <GoSignUp screenName="SignUp" data={data}/>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.link}>
             <View>
