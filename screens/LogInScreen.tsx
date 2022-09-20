@@ -131,7 +131,7 @@ function LogInScreen() {
               onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
             />
           </View>
-
+          
           <View style={styles.inputView}>
             <TextInput
               style={styles.TextInput}
@@ -264,7 +264,25 @@ function SignUpScreen({ navigation }: any) {
               secureTextEntry={data.secureTextEntry ? true : false}
               onChangeText={(val) => handlePasswordChange(val)}
             />
+            <TouchableOpacity
+              onPress={updateSecureTextEntry}
+            >
+              {data.secureTextEntry ?
+                <Feather
+                  name="eye-off"
+                  color="grey"
+                  size={20}
+                />
+                :
+                <Feather
+                  name="eye"
+                  color="grey"
+                  size={20}
+                />
+              }
+            </TouchableOpacity>
           </View>
+          
           <View style={styles.inputView}>
             <TextInput
               style={styles.TextInput}
@@ -272,24 +290,25 @@ function SignUpScreen({ navigation }: any) {
               placeholderTextColor="#9B9B9B"
               secureTextEntry={data.secureTextEntry ? true : false}
             />
+            <TouchableOpacity
+              onPress={updateSecureTextEntry}
+            >
+              {data.secureTextEntry ?
+                <Feather
+                  name="eye-off"
+                  color="grey"
+                  size={20}
+                />
+                :
+                <Feather
+                  name="eye"
+                  color="grey"
+                  size={20}
+                />
+              }
+            </TouchableOpacity>
           </View>
-          <TouchableOpacity
-            onPress={updateSecureTextEntry}
-          >
-            {data.secureTextEntry ?
-              <Feather
-                name="eye-off"
-                color="grey"
-                size={20}
-              />
-              :
-              <Feather
-                name="eye"
-                color="grey"
-                size={20}
-              />
-            }
-          </TouchableOpacity>
+          
           <GoSignUp screenName="SignUp" data={data}/>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.link}>
             <View>
