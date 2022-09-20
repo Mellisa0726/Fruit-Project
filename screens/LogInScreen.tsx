@@ -173,7 +173,7 @@ function GoSignUp({data}: any) {
     
     function signUp() {
       api.signUp(data.email, data.password)
-        .then(() => navigation.navigate('Root'))
+        .then(() => navigation.navigate('LogIn'))
         .catch(err => {
             // console.log(err);
         window.alert(err);
