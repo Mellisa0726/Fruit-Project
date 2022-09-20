@@ -295,7 +295,7 @@ function ResultScreen({ navigation, route }: any) {
                 <Text style={styles.header_text}>  {res.knowledge.condition}                   {"\n"}</Text>
                 <Image style={styles.banana} source={res.imageURL} />
                 <Text style={styles.header_text} />
-                <Text style={styles.text}>
+                <Text style={styles.text2}>
                   {res.knowledge.info + "\n"}
                 </Text>
           </View>
@@ -402,7 +402,7 @@ const styles = StyleSheet.create({
     color: "#4D3604",
     marginLeft: -120,
   },
-  text: {
+  text2: {
     fontSize: 18,
     color: "#7E6107",
     marginLeft: 50,
