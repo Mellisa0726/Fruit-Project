@@ -119,7 +119,7 @@ function LogInScreen() {
     >
       <View style={styles.container}>
         <View style={styles.first}>
-          <Image source={require('../assets/images/logo.jpg')} style={styles.logo} />
+          <Image source={require('../assets/images/logo_new.jpg')} style={styles.logo} />
           <StatusBar />
 
           <View style={styles.inputView}>

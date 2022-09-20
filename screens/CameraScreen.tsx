@@ -194,7 +194,6 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
   )
 }
 
-
 function SelectScreen({navigation, route}: any) {
   // const [encodedImg, setEncodedImg] = React.useState<any>(null)
   const [croppedImg, setCroppedImg] = React.useState<any>([])
@@ -227,6 +226,7 @@ function SelectScreen({navigation, route}: any) {
     api.classify(data)
     .then(res => {
       window.alert(JSON.stringify(res))
+      navigation.navigate('Result')
     })
     .catch(err => window.alert(err))
   }
@@ -274,7 +274,36 @@ function SelectScreen({navigation, route}: any) {
   );
 }
 
-
+function ResultScreen({ navigation, route }: any) {
+  return (
+    <>
+      <StatusBar />
+      {/* <SafeAreaView style={styles.container}> */}
+      {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
+            <View>
+              <Text style={styles.text_back}> ᐸ  返回 </Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.first}>
+            <Text style={styles.title}> 結果 </Text>
+            <TouchableOpacity>
+              <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.main_b}>
+          <View style={styles.main}>
+              
+          </View>
+        </View>
+      </View>
+      {/* </SafeAreaView> */}
+    </>
+  );
+}
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -282,6 +311,7 @@ export default function App() {
       <Stack.Navigator initialRouteName="CameraScreen">
         <Stack.Screen name="CameraScreen" component={CameraScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Select" component={SelectScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Result" component={ResultScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -350,17 +380,18 @@ const styles = StyleSheet.create({
   },
   Button_E: {
     marginTop: 60,
-    height: 170,
-    width: '55%',
+    height: 220,
+    width: '60%',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
   banana_K: {
-    width: 230,
-    height: 180,
+    width: 280,
+    height: 220,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
+    resizeMode:'center',
   },
 });
