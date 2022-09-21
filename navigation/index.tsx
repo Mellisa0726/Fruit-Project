@@ -62,7 +62,7 @@ function BottomTabNavigator() {
       }}>
       <BottomTab.Screen //按鈕1
         name="Knowledge"
-        component={<KnowledgeScreen isModalVisible={isModalVisible}/>}
+        component={KnowledgeScreen}
         options={{
           title: '關於香蕉',
           tabBarIcon: ({ color }) => <TabBarIcon name="bulb-outline" color={color} />,

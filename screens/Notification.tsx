@@ -5,7 +5,7 @@ import { api } from '../api'
 
 interface NotificationProps {
   isModalVisible: boolean;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  changeModalState: () => void;
 }
 
 export default function Notification(props: NotificationProps) {
@@ -25,7 +25,7 @@ export default function Notification(props: NotificationProps) {
   });
 
   const closeNotification = () => {
-      props.setModalVisible(!props.isModalVisible);
+      props.changeModalState();
   };
 
   return (

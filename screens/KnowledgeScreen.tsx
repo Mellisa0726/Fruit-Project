@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { Ionicons } from '@expo/vector-icons';
 import { ScrollView, SafeAreaView, StyleSheet, Dimensions, Animated, TouchableOpacity, Button, Text, View, Image, ImageBackground } from 'react-native';
@@ -9,18 +9,19 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import RNAnimatedScrollIndicators from '../node_modules/react-native-animated-scroll-indicators';
 import { api } from '../api';
 import Notification from './Notification';
+import { Context } from '../contexts/Context';
 
-interface Props {
-  isModalVisible: boolean;
-  setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
-}
+// interface Props {
+//   isModalVisible: boolean;
+//   setModalVisible: React.Dispatch<React.SetStateAction<boolean>>;
+// }
 
 const { width } = Dimensions.get('window');
-function GoToEat({ screenName, isModalVisible, setModalVisible }: any) {
+function GoToEat({ screenName, isModalVisible, changeModalState }: any) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, setModalVisible: setModalVisible})} style={styles.Button_E}>
+    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, changeModalState: changeModalState})} style={styles.Button_E}>
       <View>
         <ImageBackground style={styles.banana_K} source={require('../assets/images/香蕉熟成階段.png')}>
           <Text style={styles.text_K}> 香蕉熟成階段 </Text>
@@ -29,11 +30,11 @@ function GoToEat({ screenName, isModalVisible, setModalVisible }: any) {
     </TouchableOpacity>
   );
 } 
-function GoToRecipe({ screenName, isModalVisible, setModalVisible }: any) {
+function GoToRecipe({ screenName, isModalVisible, changeModalState }: any) {
   const navigation = useNavigation();
 
   return (
-    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, setModalVisible: setModalVisible})} style={styles.Button_R}>
+    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, changeModalState: changeModalState})} style={styles.Button_R}>
       <View>
         <ImageBackground style={styles.banana_K} source={require('../assets/images/廚房用具.png')}>
           <Text style={styles.text_K}> 香蕉食譜 </Text>
@@ -45,9 +46,10 @@ function GoToRecipe({ screenName, isModalVisible, setModalVisible }: any) {
 
 function KnowledgeScreen() {
   // const insets = useSafeAreaInsets();
-  const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+  const { isModalVisible, changeModalState } = useContext(Context);
+  // const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
   const openNotification = () => {
-    setModalVisible(!isModalVisible);
+    changeModalState();
   };
 
   return (
@@ -62,12 +64,12 @@ function KnowledgeScreen() {
               <TouchableOpacity>
                 <Ionicons name="notifications-outline" size={25} style={styles.notification_K} onPress={openNotification}/>
               </TouchableOpacity>
-              <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
+              <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/>
             </View>
           </View>
           <View style={styles.main_K}>
-            <GoToEat screenName="香蕉熟成階段" isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
-            <GoToRecipe screenName="香蕉食譜" isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
+            <GoToEat screenName="香蕉熟成階段" isModalVisible={isModalVisible} changeModalState={changeModalState} />
+            <GoToRecipe screenName="香蕉食譜" isModalVisible={isModalVisible} changeModalState={changeModalState} />
           </View>
         </View>
         {/* </SafeAreaView> */}
