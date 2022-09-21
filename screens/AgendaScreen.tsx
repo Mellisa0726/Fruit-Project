@@ -1,4 +1,4 @@
-import React, {useState, Fragment, useCallback, useMemo, useRef, Component, memo} from 'react';
+import React, {useState, useContext, Fragment, useCallback, useMemo, useRef, Component, memo} from 'react';
 import {StyleSheet, View, ScrollView, Text, TouchableOpacity, TextStyle} from 'react-native';
 import {Calendar, CalendarUtils} from '../node_modules/react-native-calendars/src';
 import testIDs from '../testIDs';
@@ -7,6 +7,7 @@ import { backgroundColor, textColor } from '../components/react-native-calendars
 import { api } from '../api';
 import cloneDeep from 'lodash/cloneDeep';
 import Notification from './Notification';
+import { Context } from '../contexts/Context';
 
 function compareDate(a: {[key:string]: any}, b: {[key:string]: any}) {
   let aDate = new Date(a.date).getTime();
@@ -45,7 +46,6 @@ class AgendaScreen extends Component {
     selected: this.currentDateStr(),
     marked: {},
     data: {},
-    isModalVisible: false
   };
 
   componentDidMount() {
@@ -126,8 +126,9 @@ class AgendaScreen extends Component {
           <View style={styles.first}>
             <Text style={styles.title}> 日曆 </Text>
             <TouchableOpacity>
-                <Ionicons name="notifications-outline" size={25} style={styles.notification} onPress={() => this.setState({isModalVisible: true})}/>
+                <Ionicons name="notifications-outline" size={25} style={styles.notification} /* onPress={openNotification} *//>
             </TouchableOpacity>
+            {/* <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/> */}
           </View>
         </View>
         <Calendar

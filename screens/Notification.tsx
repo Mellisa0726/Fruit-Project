@@ -15,6 +15,7 @@ export default function Notification(props: NotificationProps) {
     api.getNotification()
     .then(res => {
         setData(res)
+        //window.alert(res.rotten[0].pid)
         //console.warn(res)
     })
     /* .then(() =>
@@ -22,10 +23,10 @@ export default function Notification(props: NotificationProps) {
 
     ) */
     .catch(err => console.log(err))
-  });
+  }, []);
 
   const closeNotification = () => {
-      props.changeModalState();
+      props.changeModalState(false);
   };
 
   return (

@@ -49,7 +49,7 @@ function KnowledgeScreen() {
   const { isModalVisible, changeModalState } = useContext(Context);
   // const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
   const openNotification = () => {
-    changeModalState();
+    changeModalState(true);
   };
 
   return (
@@ -79,10 +79,10 @@ function KnowledgeScreen() {
 
 function EatScreen({navigation, route}: any) {
   // const insets = useSafeAreaInsets();
-  const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
-
+  //const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+  const { isModalVisible, changeModalState } = route.params
   const openNotification = () => {
-    setModalVisible(!isModalVisible);
+    changeModalState(!isModalVisible);
   };
 
   return (
@@ -138,7 +138,7 @@ function EatScreen({navigation, route}: any) {
               </View>
             </View>
           </ScrollView>
-          <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
+          <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/>
         </View>
         {/* </SafeAreaView> */}
     </>
@@ -148,10 +148,9 @@ function EatScreen({navigation, route}: any) {
 function RecipeScreen({navigation, route}: any) {
   const scrollX = new Animated.Value(0);
   const [data, setData] = useState([]);
-  const { isModalVisible, setModalVisible } = route.params
-
+  const { isModalVisible, changeModalState } = route.params
   const openNotification = () => {
-    setModalVisible(!isModalVisible);
+    changeModalState(!isModalVisible);
   };
 
   useEffect(() => {
@@ -240,7 +239,7 @@ function RecipeScreen({navigation, route}: any) {
             />
           </View>
         </View>
-        <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
+        <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/>
       </View>
       {/* </SafeAreaView> */}
     </>

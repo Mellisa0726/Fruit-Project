@@ -5,17 +5,17 @@ import { useNavigation, NavigationContainer, CommonActions } from '@react-naviga
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import * as SecureStore from 'expo-secure-store';
 import LogInScreen from '../screens/LogInScreen'
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Notification from './Notification';
 import { api } from '../api';
+import { Context } from '../contexts/Context';
 
-
-function GoToAccount({ screenName }: any) {
+function GoToAccount({ screenName, isModalVisible, changeModalState }: any) {
     const navigation = useNavigation();
 
     return (
-        <TouchableOpacity onPress={() => navigation.navigate(screenName)} style={styles.myButton_S}>
+        <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, changeModalState: changeModalState})} style={styles.myButton_S}>
             <View>
                 <Text style={styles.text}> 變更帳戶資料 </Text>
             </View>
@@ -25,10 +25,10 @@ function GoToAccount({ screenName }: any) {
 
 function SettingScreen() {
     const navigation = useNavigation();
-    const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
+    const { isModalVisible, changeModalState } = useContext(Context);
 
     const openNotification = () => {
-        setModalVisible(!isModalVisible);
+        changeModalState(true);
     };
     
     function SignOut() {
@@ -54,7 +54,7 @@ function SettingScreen() {
             {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
             <View style={styles.container}>
                 <View style={styles.header_S}>
-                    <Notification isModalVisible={isModalVisible} setModalVisible={setModalVisible}/>
+                    <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/>
                     <View style={styles.first_S}>
                         <Text style={styles.title_S}> 設定 </Text>
                         <TouchableOpacity>
@@ -63,7 +63,7 @@ function SettingScreen() {
                     </View>
                 </View>
                 <View style={styles.main_S}>
-                    <GoToAccount screenName="Account" />
+                    <GoToAccount screenName="Account" isModalVisible={isModalVisible} changeModalState={changeModalState}/>
                     <TouchableOpacity onPress={ SignOut }  style={styles.myButton_S} >
                         <View>
                             <Text style={styles.text_S}> 登出 </Text>
@@ -94,12 +94,11 @@ function GoToChange({ data }: any) {
     );  
 };
 
-function AccountScreen({ navigation }: any) {
+function AccountScreen({ navigation, route }: any) {
     // const insets = useSafeAreaInsets();
-    const [isModalVisible, setModalVisible] = React.useState<boolean>(false);
-
+    const { isModalVisible, changeModalState } = route.params
     const openNotification = () => {
-        setModalVisible(!isModalVisible);
+        changeModalState(!isModalVisible);
     };
 
     const [data, setData] = React.useState({
@@ -163,6 +162,7 @@ function AccountScreen({ navigation }: any) {
                             <TouchableOpacity>
                                 <Ionicons name="notifications-outline" size={25} style={styles.notification} onPress={openNotification}/>
                             </TouchableOpacity>
+                            <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/>
                         </View>
                     </View>
                     <View style={styles.main}>
