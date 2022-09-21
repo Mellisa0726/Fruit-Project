@@ -270,6 +270,8 @@ function SelectScreen({navigation, route}: any) {
 
 function ResultScreen({ navigation, route }: any) {
   const { res } = route.params
+  window.alert(res.imageURL)
+
   return (
     <>
       <StatusBar />
@@ -293,7 +295,7 @@ function ResultScreen({ navigation, route }: any) {
           <View style={styles.main}>
             <Text style={styles.header_text} />
                 <Text style={styles.header_text}>  {res.knowledge.condition}                   {"\n"}</Text>
-                <Image style={styles.banana} source={res.imageURL} />
+                <Image style={styles.banana} source={{uri: res.imageURL}} />
                 <Text style={styles.header_text} />
                 <Text style={styles.text2}>
                   {res.knowledge.info + "\n"}
@@ -415,5 +417,6 @@ const styles = StyleSheet.create({
     height: 180,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'yellow'
   },
 });
