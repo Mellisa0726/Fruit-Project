@@ -43,16 +43,7 @@ function AccountScreen(props: { navigation: { navigate: (arg0: string) => void; 
                         </View>
                     </View>
                     <View style={styles.main}>
-                        <Text style={styles.main_text}>變更信箱</Text>
-                        <View style={styles.inputView}>
-                            <TextInput
-                                style={styles.TextInput}
-                                placeholder="example@gmail.com"
-                                placeholderTextColor="#BBBBBB"
-                                underlineColorAndroid={'#E0E0E0'}
-                            />
-                        </View>
-                        <Text> </Text>
+                        
                         <Text style={styles.main_text}>變更密碼</Text>
                         <View>
                             <Text style={styles.main_text_pass}>原始密碼</Text>
@@ -61,7 +52,7 @@ function AccountScreen(props: { navigation: { navigate: (arg0: string) => void; 
                                     style={styles.TextInput}
                                     placeholder="password"
                                     placeholderTextColor="#BBBBBB"
-                                    underlineColorAndroid={'#E0E0E0'}
+
                                 />
                             </View>
                             <Text style={styles.main_text_pass}>新密碼</Text>
@@ -70,7 +61,7 @@ function AccountScreen(props: { navigation: { navigate: (arg0: string) => void; 
                                     style={styles.TextInput}
                                     placeholder="password"
                                     placeholderTextColor="#BBBBBB"
-                                    underlineColorAndroid={'#E0E0E0'}
+
                                 />
                             </View>
                         </View>
@@ -175,7 +166,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 30,
-        width: '30%',
+        width: '20%',
         borderRadius: 12,
         backgroundColor: "#00A600",
         marginLeft: 88,

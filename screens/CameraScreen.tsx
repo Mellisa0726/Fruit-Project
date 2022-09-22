@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect, useRef } from 'react'
-import { ScrollView, SafeAreaView, StyleSheet, Text, View, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
+import { ScrollView, SafeAreaView, StyleSheet, TextInput, Text, View, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons';
 import { api } from '../api'
@@ -248,7 +248,7 @@ function SelectScreen({navigation, route}: any) {
                 </TouchableOpacity>
             </View>
           </View>
-          <View style={styles.main_b}>
+          <View style={styles.main_s}>
             <ScrollView>
               <View style={styles.main}>
                 {croppedImg.map((img: any, index: any) => {
@@ -291,7 +291,7 @@ function ResultScreen({ navigation, route }: any) {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={styles.main_b}>
+        <View style={styles.main_r}>
           <View style={styles.main}>
             <Text style={styles.header_text} />
               <Text style={styles.header_text}>  {res.knowledge.condition}                   {"\n"}</Text>
@@ -308,11 +308,64 @@ function ResultScreen({ navigation, route }: any) {
                 <Ionicons name="close-circle" size={50} style={styles.button} />
               </TouchableOpacity>
               <Text>           </Text>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('EditInfo')}>
                 <Ionicons name="checkmark-circle" size={50} style={styles.button} />
               </TouchableOpacity>
             </View>
           </View>
+        </View>
+      </View>
+      {/* </SafeAreaView> */}
+    </>
+  );
+}
+
+function EditInfoScreen({ navigation }: any) {
+
+  return (
+    <>
+      <StatusBar />
+      {/* <SafeAreaView style={styles.container}> */}
+      {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
+            <View>
+              <Text style={styles.text_back}> ᐸ  返回 </Text>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.first}>
+            <Text style={styles.title}> 編輯儲存資訊 </Text>
+            <TouchableOpacity>
+              <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.main_e}>
+          <View style={styles.Edit_name}>
+            <Text style={styles.Edit_name}> 名稱：</Text>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="Banana 01"
+              placeholderTextColor="#BBBBBB"
+            />
+          </View>
+
+          <View style={styles.Edit_name}>
+            <Text style={styles.Edit_name}> 日期：</Text>
+          </View>
+          
+          <View style={styles.Edit_name}>
+            <Text style={styles.Edit_name}> 購買地：</Text>
+            <TextInput
+              style={styles.TextInput}
+              placeholder="全聯"
+              placeholderTextColor="#BBBBBB"
+            />
+          </View>
+          <TouchableOpacity style={styles.button_calender}>
+            <Ionicons name="checkmark-circle" size={50} style={styles.button} />
+          </TouchableOpacity>
         </View>
       </View>
       {/* </SafeAreaView> */}
@@ -328,6 +381,7 @@ export default function App() {
         <Stack.Screen name="CameraScreen" component={CameraScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Select" component={SelectScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Result" component={ResultScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="EditInfo" component={EditInfoScreen} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -379,6 +433,25 @@ const styles = StyleSheet.create({
     flex: 1,
     width: 420,
     height: 538,
+    backgroundColor: '#fff',
+  },
+  main_s: {
+    flex: 1,
+    width: 420,
+    height: 538,
+    backgroundColor: '#fff',
+  },
+  main_r: {
+    flex: 1,
+    width: 420,
+    height: 538,
+    backgroundColor: '#fff',
+  },
+  main_e: {
+    flex: 1,
+    width: 420,
+    height: 538,
+    justifyContent: 'center',
     backgroundColor: '#fff',
   },
   main: {
@@ -443,5 +516,14 @@ const styles = StyleSheet.create({
     color: "#7E6107",
     paddingTop: 10,
     fontWeight: 'bold',
+  },
+  TextInput: {
+    flex: 1,
+    fontSize: 20,
+    paddingLeft: 5,
+  },
+  Edit_name:{
+    flexDirection: 'row',
+    fontSize: 20,
   },
 });
