@@ -129,7 +129,7 @@ class AgendaScreen extends Component<AgendaProps> {
   }
   
   render() {
-    const ContextValue = this.props.ContextValue;
+    const { isModalVisible, changeModalState } = this.props.ContextValue;
     const {selected} = this.state;
 
     return (
@@ -140,7 +140,7 @@ class AgendaScreen extends Component<AgendaProps> {
             <TouchableOpacity>
                 <Ionicons name="notifications-outline" size={25} style={styles.notification} /* onPress={openNotification} *//>
             </TouchableOpacity>
-            {/* <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/> */}
+            <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/>
           </View>
         </View>
         <Calendar
