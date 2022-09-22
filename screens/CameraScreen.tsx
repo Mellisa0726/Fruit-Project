@@ -294,12 +294,24 @@ function ResultScreen({ navigation, route }: any) {
         <View style={styles.main_b}>
           <View style={styles.main}>
             <Text style={styles.header_text} />
-                <Text style={styles.header_text}>  {res.knowledge.condition}                   {"\n"}</Text>
-                <Image style={styles.banana} source={{uri: res.imageURL}} />
-                <Text style={styles.header_text} />
-                <Text style={styles.text2}>
-                  {res.knowledge.info + "\n"}
-                </Text>
+              <Text style={styles.header_text}>  {res.knowledge.condition}                   {"\n"}</Text>
+              <Image style={styles.banana} source={res.imageURL} />
+              <Text style={styles.header_text} />
+              <Text style={styles.text2}>
+                {res.knowledge.info + "\n"}
+            </Text>
+            <Text style={styles.text_calender}>
+              是否加入日曆頁面
+            </Text>
+            <View style={styles.button_calender}>
+              <TouchableOpacity>
+                <Ionicons name="close-circle" size={50} style={styles.button} />
+              </TouchableOpacity>
+              <Text>           </Text>
+              <TouchableOpacity>
+                <Ionicons name="checkmark-circle" size={50} style={styles.button} />
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       </View>
@@ -417,6 +429,19 @@ const styles = StyleSheet.create({
     height: 180,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'yellow'
+  },
+  button_calender:{
+    flexDirection:'row',
+    marginHorizontal: 30,
+  },
+  text_calender:{
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: "#4D3604",
+  },
+  button:{
+    color: "#7E6107",
+    paddingTop: 10,
+    fontWeight: 'bold',
   },
 });
