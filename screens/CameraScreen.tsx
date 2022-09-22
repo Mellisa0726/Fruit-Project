@@ -335,7 +335,7 @@ function EditInfoScreen({ navigation }: any) {
             </View>
           </TouchableOpacity>
           <View style={styles.first}>
-            <Text style={styles.title}> 編輯儲存資訊 </Text>
+            <Text style={styles.title}> 儲存資訊 </Text>
             <TouchableOpacity>
               <Ionicons name="notifications-outline" size={25} style={styles.notification} />
             </TouchableOpacity>
@@ -521,6 +521,8 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     paddingLeft: 5,
+    borderBottomColor: '#000', 
+    borderBottomWidth: 1,
   },
   Edit_name:{
     flexDirection: 'row',

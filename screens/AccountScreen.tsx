@@ -52,6 +52,7 @@ function AccountScreen(props: { navigation: { navigate: (arg0: string) => void; 
                                     style={styles.TextInput}
                                     placeholder="password"
                                     placeholderTextColor="#BBBBBB"
+                                    
 
                                 />
                             </View>
@@ -150,6 +151,8 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 15,
         paddingLeft: 5,
+        borderBottomColor: '#000',
+        borderBottomWidth: 1,
     },
     main_text: {
         fontSize: 18,
