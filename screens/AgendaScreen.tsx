@@ -33,7 +33,18 @@ function compareRemain(a: {[key:string]: any}, b: {[key:string]: any}) {
   return 0;
 }
 
-class AgendaScreen extends Component {
+function withContext(Component: any) {
+  return function WrappedComponent(props: any) {
+    const ContextValue = useContext(Context);
+    return <Component {...props} ContextValue={ContextValue} />;
+  }
+}
+
+interface AgendaProps {
+  ContextValue: any;
+}
+
+class AgendaScreen extends Component<AgendaProps> {
 
   currentDateStr = () => {
     let currentDate = new Date();
@@ -118,6 +129,7 @@ class AgendaScreen extends Component {
   }
   
   render() {
+    const ContextValue = this.props.ContextValue;
     const {selected} = this.state;
 
     return (
@@ -259,7 +271,8 @@ class AgendaScreen extends Component {
   };
 }
 
-export default AgendaScreen;
+// export default AgendaScreen;
+export default withContext(AgendaScreen);
 
 
 
