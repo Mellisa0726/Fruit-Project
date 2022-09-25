@@ -304,7 +304,7 @@ function ResultScreen({ navigation, route }: any) {
               是否加入日曆頁面
             </Text>
             <View style={styles.button_calender}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.goBack()}>
                 <Ionicons name="close-circle" size={50} style={styles.button} />
               </TouchableOpacity>
               <Text>           </Text>
@@ -344,7 +344,12 @@ function EditInfoScreen({ navigation, route }: any) {
   }
 
   return (
-    <>
+    <ScrollView
+      contentContainerStyle={{ flex: 1 }}
+      keyboardDismissMode="on-drag"
+      keyboardShouldPersistTaps="never"
+      scrollEnabled={false}
+    >
       <StatusBar />
       {/* <SafeAreaView style={styles.container}> */}
       {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
@@ -396,7 +401,7 @@ function EditInfoScreen({ navigation, route }: any) {
         </View>
       </View>
       {/* </SafeAreaView> */}
-    </>
+    </ScrollView>
   );
 }
 

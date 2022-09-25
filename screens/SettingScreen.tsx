@@ -166,16 +166,6 @@ function AccountScreen({ navigation, route }: any) {
                         </View>
                     </View>
                     <View style={styles.main}>
-                        <Text style={styles.main_text}>變更信箱</Text>
-                        <View style={styles.inputView}>
-                            <TextInput
-                                style={styles.TextInput}
-                                placeholder="example@gmail.com"
-                                placeholderTextColor="#BBBBBB"
-                                underlineColorAndroid={'#E0E0E0'}
-                            />
-                        </View>
-                        <Text> </Text>
                         <Text style={styles.main_text}>變更密碼</Text>
                         <View>
                             <Text style={styles.main_text_pass}>原始密碼</Text>
@@ -184,7 +174,6 @@ function AccountScreen({ navigation, route }: any) {
                                     style={styles.TextInput}
                                     placeholder="old_password"
                                     placeholderTextColor="#BBBBBB"
-                                    underlineColorAndroid={'#E0E0E0'}
                                     onChangeText={(val) => handlePasswordChange(val)}
                                 />
                             </View>
@@ -194,7 +183,6 @@ function AccountScreen({ navigation, route }: any) {
                                     style={styles.TextInput}
                                     placeholder="new_password"
                                     placeholderTextColor="#BBBBBB"
-                                    underlineColorAndroid={'#E0E0E0'}
                                     onChangeText={(val) => handleNewPasswordChange(val)}
                                 />
                             </View>
@@ -332,6 +320,8 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 15,
         paddingLeft: 5,
+        borderBottomColor: '#000',
+        borderBottomWidth: 1,
     },
     main_text: {
         fontSize: 18,
