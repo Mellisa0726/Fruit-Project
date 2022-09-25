@@ -92,15 +92,32 @@ export const api = {
         return (
             axios.post(hostname + '/user/password', {
                 'old_password': old_password,
-                'new_password': new_password}, {
+                'new_password': new_password
+            }, {
                 headers: {
-                    //'accept': 'application/json',
                     'Authorization': 'Bearer ' + jwt,
                     'Content-Type': 'application/json'
                 }
             })
             .then(res => res.data)
             
+        )
+    },
+    async postCalendar(imageURL: string, name: string, source: string, kid: number) {
+        const jwt = await SecureStore.getItemAsync('JWT');
+        return (
+            axios.post(hostname + '/calendar', {
+                'imageURL': imageURL,
+                'name': name,
+                'source': source,
+                'kid': kid
+            }, {
+                headers: {
+                    'Authorization': 'Bearer ' + jwt,
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.data)
         )
     }
 };

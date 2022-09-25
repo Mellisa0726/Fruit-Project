@@ -270,7 +270,7 @@ function SelectScreen({navigation, route}: any) {
 
 function ResultScreen({ navigation, route }: any) {
   const { res } = route.params
-  window.alert(res.imageURL)
+  // window.alert(JSON.stringify(res))
 
   return (
     <>
@@ -295,7 +295,7 @@ function ResultScreen({ navigation, route }: any) {
           <View style={styles.main}>
             <Text style={styles.header_text} />
               <Text style={styles.header_text}>  {res.knowledge.condition}                   {"\n"}</Text>
-              <Image style={styles.banana} source={res.imageURL} />
+              <Image style={styles.banana} source={{ uri: res.imageURL }} />
               <Text style={styles.header_text} />
               <Text style={styles.text2}>
                 {res.knowledge.info + "\n"}
@@ -308,7 +308,7 @@ function ResultScreen({ navigation, route }: any) {
                 <Ionicons name="close-circle" size={50} style={styles.button} />
               </TouchableOpacity>
               <Text>           </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('EditInfo')}>
+              <TouchableOpacity onPress={() => navigation.navigate('EditInfo', {imageURL: res.imageURL, kid: res.knowledge.kid})}>
                 <Ionicons name="checkmark-circle" size={50} style={styles.button} />
               </TouchableOpacity>
             </View>
@@ -320,7 +320,28 @@ function ResultScreen({ navigation, route }: any) {
   );
 }
 
-function EditInfoScreen({ navigation }: any) {
+function EditInfoScreen({ navigation, route }: any) {
+  const { imageURL, kid } = route.params;
+  const date = new Date();
+  const formatDate = date.getFullYear() + " / " + (date.getMonth() + 1) + " / " + date.getDate();
+
+  const [name, setName] = useState('');
+  const [source, setSource] = useState('');
+
+  const nameInputChange = (val: any) => {
+    setName(val);
+  }
+
+  const shopInputChange = (val: any) => {
+    setSource(val);
+  }
+
+  function postCalendar(){
+    // window.alert(String(imageURL + name + source + kid))
+    api.postCalendar(imageURL, name, source, kid) 
+    .then(res => window.alert(res.success))
+    .catch(err => window.alert(err))
+  }
 
   return (
     <>
@@ -341,18 +362,22 @@ function EditInfoScreen({ navigation }: any) {
             </TouchableOpacity>
           </View>
         </View>
+        
         <View style={styles.main_e}>
+          <Image style={{ width: '70%', height: '35%', borderRadius: 20 }} source={{ uri: imageURL }} />
+          <View style={{ width: '70%', marginTop: 30 }}>
           <View style={styles.Edit_name}>
             <Text style={styles.Edit_name}> 名稱：</Text>
             <TextInput
               style={styles.TextInput}
               placeholder="Banana 01"
               placeholderTextColor="#BBBBBB"
+              onChangeText={(val) => nameInputChange(val)}
             />
           </View>
 
           <View style={styles.Edit_name}>
-            <Text style={styles.Edit_name}> 日期：</Text>
+            <Text style={styles.Edit_name}> 日期：{formatDate}</Text>
           </View>
           
           <View style={styles.Edit_name}>
@@ -361,10 +386,12 @@ function EditInfoScreen({ navigation }: any) {
               style={styles.TextInput}
               placeholder="全聯"
               placeholderTextColor="#BBBBBB"
+              onChangeText={(val) => shopInputChange(val)}
             />
           </View>
+          </View>
           <TouchableOpacity style={styles.button_calender}>
-            <Ionicons name="checkmark-circle" size={50} style={styles.button} />
+            <Ionicons name="checkmark-circle" size={50} style={styles.button} onPress={() => postCalendar()}/>
           </TouchableOpacity>
         </View>
       </View>
@@ -449,9 +476,12 @@ const styles = StyleSheet.create({
   },
   main_e: {
     flex: 1,
-    width: 420,
-    height: 538,
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
+    alignItems: 'center',
     backgroundColor: '#fff',
   },
   main: {
@@ -481,7 +511,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
-    resizeMode:'center',
+    resizeMode: 'contain',
   },
   header_text: {
     fontSize: 20,
@@ -504,8 +534,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   button_calender:{
-    flexDirection:'row',
-    marginHorizontal: 30,
+    flexDirection: 'row',
+    // marginHorizontal: 30,
+    alignItems: 'center'
   },
   text_calender:{
     fontSize: 20,
