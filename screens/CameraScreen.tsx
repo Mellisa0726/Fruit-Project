@@ -88,7 +88,7 @@ function CameraScreen() {
                     onPress={() => {
                       setType(type === CameraType.back ? CameraType.front : CameraType.back);
                     }}>
-                    <Text style={styles.text}> Flip </Text>
+                    <Text style={styles.text}> 切換鏡頭 </Text>
                   </TouchableOpacity>
                 </View>
                 <View
@@ -171,7 +171,7 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
               }}
             >
               <Text style={{ color: '#fff', fontSize: 20}}>
-                Re-take
+                重拍
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
@@ -184,7 +184,7 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
               }}
             >
               <Text style={{color: '#fff',fontSize: 20}}>
-                save photo
+                送出
               </Text>
             </TouchableOpacity>
           </View>
