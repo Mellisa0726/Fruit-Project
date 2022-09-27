@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect, useRef } from 'react'
-import { ScrollView, SafeAreaView, StyleSheet, TextInput, Text, View, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
+import { ScrollView, ActivityIndicator, StyleSheet, TextInput, Text, View, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons';
 import { api } from '../api'
@@ -198,6 +198,7 @@ function SelectScreen({navigation, route}: any) {
   // const [encodedImg, setEncodedImg] = React.useState<any>(null)
   const [croppedImg, setCroppedImg] = React.useState<any>([])
   const [output, setOutput] = React.useState<any>(null)
+  const [loading, setLoading] = React.useState<any>(false)
   const ref = useRef<any>(null)
   const { capturedImage } = route.params
   console.log(capturedImage)
@@ -206,28 +207,18 @@ function SelectScreen({navigation, route}: any) {
   useEffect(() => getBoundingBox(), [])
   
   function getBoundingBox(){
+    setLoading(true);
     api.getBoundingBox(encodedImg) // phone
     // api.getBoundingBox(capturedImage) // web
     .then(res => {
-      if (res['counts'] > 0) setCroppedImg(res['object'])
+      if (res['counts'] > 0){
+        setCroppedImg(res['object'])
+        setLoading(false)
+      }
       else window.alert('No banana.')
     })
     .catch(err => window.alert(err))
   }
-
-  function classify(index: any){
-    const data: Object = {'uri': 'data:image/png;base64,' + croppedImg[index].img}
-    api.classify(data)
-    .then(res => {
-      // window.alert(JSON.stringify(res))
-      navigation.navigate('Result', {res: res})
-    })
-    .catch(err => window.alert(err))
-  }
-
-  console.log('croppedImg', croppedImg)
-
-  // const insets = useSafeAreaInsets();
 
   return (
     <>
@@ -249,18 +240,20 @@ function SelectScreen({navigation, route}: any) {
             </View>
           </View>
           <View style={styles.main_s}>
+            {loading ? 
+            <ActivityIndicator size="large" color="#7E6107" /> : 
             <ScrollView>
               <View style={styles.main}>
                 {croppedImg.map((img: any, index: any) => {
                   const src: any = 'data:image/png;base64,' + img.img
                   return (
-                    <TouchableOpacity key={index} style={styles.Button_E} onPress={() => classify(index)}>
+                    <TouchableOpacity key={index} style={styles.Button_E} onPress={() => navigation.navigate('Result', {img: croppedImg[index].img})}>
                       <ImageBackground source={{ uri: src }} style={styles.banana_K} />
                     </TouchableOpacity>
                   )
                 })}
               </View>
-            </ScrollView>
+            </ScrollView>}
           </View>
         </View>
       {/* </SafeAreaView> */}
@@ -269,8 +262,23 @@ function SelectScreen({navigation, route}: any) {
 }
 
 function ResultScreen({ navigation, route }: any) {
-  const { res } = route.params
+  const { img } = route.params
+  const [result, setResult] = useState({ knowledge: { condition: '', info: ''}, imageURL: ''});
+  const [loading, setLoading] = useState(false)
   // window.alert(JSON.stringify(res))
+
+  useEffect(() => classify(), [])
+
+  function classify(){
+    setLoading(true)
+    const data: Object = {'uri': 'data:image/png;base64,' + img}
+    api.classify(data)
+    .then(res => {
+      setResult(res);
+      setLoading(false);
+    })
+    .catch(err => window.alert(err))
+  }
 
   return (
     <>
@@ -292,13 +300,15 @@ function ResultScreen({ navigation, route }: any) {
           </View>
         </View>
         <View style={styles.main_r}>
+        {loading ? 
+          <ActivityIndicator size="large" color="#7E6107" /> : 
           <View style={styles.main}>
             <Text style={styles.header_text} />
-              <Text style={styles.header_text}>  {res.knowledge.condition}                   {"\n"}</Text>
-              <Image style={styles.banana} source={{ uri: res.imageURL }} />
+              <Text style={styles.header_text}>  {result.knowledge.condition}                   {"\n"}</Text>
+              <Image style={styles.banana} source={{ uri: result.imageURL }} />
               <Text style={styles.header_text} />
               <Text style={styles.text2}>
-                {res.knowledge.info + "\n"}
+                {result.knowledge.info + "\n"}
             </Text>
             <Text style={styles.text_calender}>
               是否加入日曆頁面
@@ -312,7 +322,7 @@ function ResultScreen({ navigation, route }: any) {
                 <Ionicons name="checkmark-circle" size={50} style={styles.button} />
               </TouchableOpacity>
             </View>
-          </View>
+          </View>}
         </View>
       </View>
       {/* </SafeAreaView> */}
@@ -469,14 +479,20 @@ const styles = StyleSheet.create({
   },
   main_s: {
     flex: 1,
-    width: 420,
-    height: 538,
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#fff',
   },
   main_r: {
     flex: 1,
-    width: 420,
-    height: 538,
+    width: '100%',
+    height: '100%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: '#fff',
   },
   main_e: {
