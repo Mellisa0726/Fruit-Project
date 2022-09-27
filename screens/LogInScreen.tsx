@@ -290,33 +290,6 @@ function SignUpScreen({ navigation }: any) {
             <Text>   </Text>
           </View>
 
-          <View style={styles.inputView}>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Repeat password"
-              placeholderTextColor="#9B9B9B"
-              secureTextEntry={data.secureTextEntry ? true : false}
-            />
-            <TouchableOpacity
-              onPress={updateSecureTextEntry}
-            >
-              {data.secureTextEntry ?
-                <Feather
-                  name="eye-off"
-                  color="grey"
-                  size={20}
-                />
-                :
-                <Feather
-                  name="eye"
-                  color="grey"
-                  size={20}
-                />
-              }
-            </TouchableOpacity>
-            <Text>   </Text>
-          </View>
-          
           <GoSignUp screenName="SignUp" data={data}/>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.link}>
             <View>

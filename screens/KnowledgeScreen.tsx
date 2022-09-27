@@ -112,28 +112,34 @@ function EatScreen({navigation, route}: any) {
                 <Image style={styles.banana} source={require('../assets/images/banana_1.png')} />
                 <Text style={styles.header_text} />
                 <Text style={styles.text}>
-                  未熟，不宜食用{"\n"}
+                ✦ 未熟，不宜食用{"\n"}
                 </Text>
 
                 <Text style={styles.header_text}>  第二階段   淡青色至半青半黃{"\n"}</Text>
                 <Image style={styles.banana} source={require('../assets/images/banana_2.png')} />
                 <Text style={styles.header_text} />
                 <Text style={styles.text}>
-                  口感苦澀、皮厚肉硬，含有「難消化性麥芽糊精」，不易被小腸吸收，升糖指數較低，可被腸道細菌發酵，具有穩定血糖之作用，有助於改善腸道健康。具有抗性澱粉、提供高飽足感，但不易消化，吃多容易引起腹脹、消化不良等反應。{"\n"}
+                ✦ 口感苦澀、皮厚肉硬{"\n"}
+                ✦ 含有「難消化性麥芽糊精」，不易被小腸吸收，升糖指數較低，可穩定血糖，有助於改善腸道健康{"\n"}
+                ✦ 具有抗性澱粉、提供高飽足感，但不易消化，吃多容易引起腹脹、消化不良等反應{"\n"}
                 </Text>
 
                 <Text style={styles.header_text}>  第三階段   四分之三至全黃香蕉{"\n"}</Text>
                 <Image style={styles.banana} source={require('../assets/images/banana_3.png')} />
                 <Text style={styles.header_text} />
                 <Text style={styles.text}>
-                  味道香濃、口感軟滑，含有豐富維他命B2、B6及C，能促進新陳代謝，具養顏美白效果。此階段香蕉中含有豐富的鉀和鎂，能消除疲勞，減少運動時抽筋的機會。助消化、安眠、抗憂鬱。{"\n"}
+                ✦ 味道香濃、口感軟滑{"\n"}
+                ✦ 含有維他命B2、B6及C，促進新陳代謝，養顏美白效果{"\n"}
+                ✦ 豐富的鉀和鎂能消除疲勞，減少運動抽筋的機會。助消化、安眠、抗憂鬱{"\n"}
                 </Text>
 
                 <Text style={styles.header_text}>  第四階段   帶有啡點之全熟香蕉{"\n"}</Text>
                 <Image style={styles.banana} source={require('../assets/images/banana_4.png')} />
                 <Text style={styles.header_text} />
                 <Text style={styles.text}>
-                  口感軟爛，適合牙口不好者食用，含有大量多酚，能夠延緩衰老，研究顯示啡點越多，免疫活性越高，當中的磷脂質能有助抑制胃潰瘍，幫助消化。{"\n"}
+                ✦ 口感軟爛，適合牙口不好者食用{"\n"}
+                ✦ 含有大量多酚，能夠延緩衰老{"\n"}
+                ✦ 啡點越多，免疫活性越高，當中的磷脂質有助抑制胃潰瘍，幫助消化{"\n"}
                 </Text>
               </View>
             </View>
@@ -386,8 +392,8 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color: "#7E6107",
-    marginLeft: 50,
-    marginRight: 50,
+    marginLeft: 100,
+    marginRight: 90,
   },
   banana: {
     flex: 1,

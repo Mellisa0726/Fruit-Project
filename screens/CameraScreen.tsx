@@ -244,6 +244,12 @@ function SelectScreen({navigation, route}: any) {
             <ActivityIndicator size="large" color="#7E6107" /> : 
             <ScrollView>
               <View style={styles.main}>
+                <Text style={styles.description}>
+                  點擊下方任一照片即可查看香蕉目前的成熟階段
+                </Text>
+                <Text style={styles.description}>
+                  並選擇是否要加入您的日曆頁面中
+                </Text>
                 {croppedImg.map((img: any, index: any) => {
                   const src: any = 'data:image/png;base64,' + img.img
                   return (
@@ -523,6 +529,13 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 18,
     color: 'white',
+  },
+  description: {
+    fontSize: 19,
+    color: '#7E6107',
+    fontWeight: 'bold',
+    alignItems: 'center',
+    marginTop: 10,
   },
   Button_E: {
     marginTop: 60,
