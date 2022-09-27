@@ -263,7 +263,7 @@ function SelectScreen({navigation, route}: any) {
 
 function ResultScreen({ navigation, route }: any) {
   const { img } = route.params
-  const [result, setResult] = useState({ knowledge: { condition: '', info: ''}, imageURL: ''});
+  const [result, setResult] = useState({ knowledge: { condition: '', info: '', kid: -1}, imageURL: ''});
   const [loading, setLoading] = useState(false)
   // window.alert(JSON.stringify(res))
 
@@ -318,7 +318,7 @@ function ResultScreen({ navigation, route }: any) {
                 <Ionicons name="close-circle" size={50} style={styles.button} />
               </TouchableOpacity>
               <Text>           </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('EditInfo', {imageURL: res.imageURL, kid: res.knowledge.kid})}>
+              <TouchableOpacity onPress={() => navigation.navigate('EditInfo', {imageURL: result.imageURL, kid: result.knowledge.kid})}>
                 <Ionicons name="checkmark-circle" size={50} style={styles.button} />
               </TouchableOpacity>
             </View>
@@ -335,8 +335,8 @@ function EditInfoScreen({ navigation, route }: any) {
   const date = new Date();
   const formatDate = date.getFullYear() + " / " + (date.getMonth() + 1) + " / " + date.getDate();
 
-  const [name, setName] = useState('');
-  const [source, setSource] = useState('');
+  const [name, setName] = useState('Banana 01');
+  const [source, setSource] = useState('全聯');
 
   const nameInputChange = (val: any) => {
     setName(val);
@@ -349,7 +349,13 @@ function EditInfoScreen({ navigation, route }: any) {
   function postCalendar(){
     // window.alert(String(imageURL + name + source + kid))
     api.postCalendar(imageURL, name, source, kid) 
-    .then(res => window.alert(res.success))
+    .then(res => {
+      if(res.success){
+        window.alert('成功加入日曆！')
+        navigation.navigate('Calendar')
+      }
+      else window.alert('有地方出錯了⋯⋯')
+    })
     .catch(err => window.alert(err))
   }
 
