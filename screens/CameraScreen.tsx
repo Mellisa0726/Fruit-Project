@@ -198,7 +198,7 @@ function SelectScreen({navigation, route}: any) {
   // const [encodedImg, setEncodedImg] = React.useState<any>(null)
   const [croppedImg, setCroppedImg] = React.useState<any>([])
   const [output, setOutput] = React.useState<any>(null)
-  const [loading, setLoading] = React.useState<any>(false)
+  const [loading, setLoading] = React.useState<any>(true)
   const ref = useRef<any>(null)
   const { capturedImage } = route.params
   console.log(capturedImage)
@@ -207,7 +207,6 @@ function SelectScreen({navigation, route}: any) {
   useEffect(() => getBoundingBox(), [])
   
   function getBoundingBox(){
-    setLoading(true);
     api.getBoundingBox(encodedImg) // phone
     // api.getBoundingBox(capturedImage) // web
     .then(res => {
@@ -270,13 +269,12 @@ function SelectScreen({navigation, route}: any) {
 function ResultScreen({ navigation, route }: any) {
   const { img } = route.params
   const [result, setResult] = useState({ knowledge: { condition: '', info: '', kid: -1}, imageURL: ''});
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   // window.alert(JSON.stringify(res))
 
   useEffect(() => classify(), [])
 
   function classify(){
-    setLoading(true)
     const data: Object = {'uri': 'data:image/png;base64,' + img}
     api.classify(data)
     .then(res => {
@@ -309,13 +307,11 @@ function ResultScreen({ navigation, route }: any) {
         {loading ? 
           <ActivityIndicator size="large" color="#7E6107" /> : 
           <View style={styles.main}>
-            <Text style={styles.header_text} />
-              <Text style={styles.header_text}>  {result.knowledge.condition}                   {"\n"}</Text>
+              <Text style={styles.header_text}>{result.knowledge.condition}</Text>
               <Image style={styles.banana} source={{ uri: result.imageURL }} />
-              <Text style={styles.header_text} />
               <Text style={styles.text2}>
                 {result.knowledge.info + "\n"}
-            </Text>
+              </Text>
             <Text style={styles.text_calender}>
               是否加入日曆頁面
             </Text>
@@ -358,7 +354,7 @@ function EditInfoScreen({ navigation, route }: any) {
     .then(res => {
       if(res.success){
         window.alert('成功加入日曆！')
-        navigation.navigate('Calendar')
+        // navigation.navigate('Calendar')
       }
       else window.alert('有地方出錯了⋯⋯')
     })
@@ -554,10 +550,12 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   header_text: {
+    width: '100%',
     fontSize: 20,
     fontWeight: 'bold',
     color: "#4D3604",
-    marginLeft: -120,
+    textAlign: 'center',
+    margin: 10
   },
   text2: {
     fontSize: 18,
@@ -567,6 +565,7 @@ const styles = StyleSheet.create({
   },
   banana: {
     flex: 1,
+    margin: 10,
     borderRadius: 20,
     width: "75%",
     height: 180,
