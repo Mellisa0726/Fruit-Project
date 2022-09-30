@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState, useEffect, useRef } from 'react'
-import { ScrollView, ActivityIndicator, StyleSheet, TextInput, Text, View, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
+import { ScrollView, ActivityIndicator, StyleSheet, TextInput, Text, View, ColorSchemeName, Button, TouchableOpacity, Alert, ImageBackground, Image } from 'react-native'
 import { Camera, CameraType } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons';
 import { api } from '../api'
@@ -8,6 +8,7 @@ import { useNavigation, NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Canvas, { Image as CanvasImage } from 'react-native-canvas'
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Agenda from '../screens/AgendaScreen';
 
 
 let camera: Camera
@@ -354,7 +355,8 @@ function EditInfoScreen({ navigation, route }: any) {
     .then(res => {
       if(res.success){
         window.alert('成功加入日曆！')
-        // navigation.navigate('Calendar')
+        navigation.navigate('Agenda')
+
       }
       else window.alert('有地方出錯了⋯⋯')
     })
@@ -432,6 +434,7 @@ export default function App() {
         <Stack.Screen name="Select" component={SelectScreen} options={{ headerShown: false }} />
         <Stack.Screen name="Result" component={ResultScreen} options={{ headerShown: false }} />
         <Stack.Screen name="EditInfo" component={EditInfoScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="Agenda" component={Agenda} options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );

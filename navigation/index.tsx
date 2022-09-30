@@ -17,11 +17,9 @@ import LinkingConfiguration from './LinkingConfiguration';
 import KnowledgeScreen from '../screens/KnowledgeScreen';
 import AgendaScreen from '../screens/AgendaScreen';
 
-export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
+export default function Navigation() {
   return (
-    <NavigationContainer
-      linking={LinkingConfiguration}
-      theme={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+    <NavigationContainer>
       <RootNavigator />
     </NavigationContainer>
   );
