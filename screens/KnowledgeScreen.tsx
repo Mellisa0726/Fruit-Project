@@ -173,12 +173,10 @@ function RecipeScreen({navigation, route}: any) {
       <StatusBar />
       {/* <SafeAreaView style={styles.container_R}> */}
       {/* <View style={[styles.container_R, { paddingTop: Math.max(insets.top, 16) }]}> */}
-      <View style={styles.container_R}>
-        <View style={styles.header_R}>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton_R}>
-            <View>
-              <Text style={styles.text_back_R}> ᐸ  返回 </Text>
-            </View>
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
+            <Text style={styles.text_back}> ᐸ  返回 </Text>
           </TouchableOpacity>
           <View style={styles.first}>
             <Text style={styles.title}> 香蕉食譜 </Text>
@@ -199,7 +197,7 @@ function RecipeScreen({navigation, route}: any) {
           >
             <ScrollView>
               <View style={styles.container_R}>
-                <Image style={styles.pic1} source={require('../assets/images/烤香蕉片.png')} />
+                <Image style={styles.pic} source={require('../assets/images/烤香蕉片.png')} />
               </View>
             </ScrollView>
             <ScrollView>
@@ -392,26 +390,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     alignItems: "center",
     width,
-  },
-  header_R: {
-    height: 210,
-    width: 420,
-    backgroundColor: '#FAE5A4',
-    borderBottomLeftRadius: 60,
-    borderBottomRightRadius: 60,
-  },
-  myButton_R: {
-    height: 50,
-    width: 200,
-    marginTop: 30,
-    justifyContent: 'center',
-    marginLeft: -30,
-  },
-  text_back_R: {
-    fontSize: 18,
-    color: "#7E6107",
-    marginLeft: 70,
-    marginTop: 25,
+    height: '100%'
   },
   notification_R: {
     color: "#7E6107",
@@ -420,11 +399,11 @@ const styles = StyleSheet.create({
     paddingLeft: 147.5,
   },
   main_R: {
-    flex: 2.275,
+    flex: 30,
     backgroundColor: 'white',
     alignItems: 'center',
   },
-  pic1: {
+  pic: {
     flex: 1,
     resizeMode: 'contain',
     width: "80%",
