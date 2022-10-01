@@ -317,30 +317,6 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontWeight: 'bold',
   },
-
-  // EatScreen
-  // container: {
-  //   flex: 1, //佔據所有空間
-  //   backgroundColor: '#fff',
-  // },
-  // header: {
-  //   height: 210,
-  //   width: 420,
-  //   backgroundColor: '#FAE5A4',
-  //   borderBottomLeftRadius: 60,
-  //   borderBottomRightRadius: 60,
-  //   marginLeft: -4,
-  // },
-  // first: {
-  //   flexDirection: 'row',
-  //   paddingTop: 80,
-  // },
-  // title: {
-  //   fontSize: 25,
-  //   color: "#7E6107",
-  //   fontWeight: 'bold',
-  //   paddingLeft: 60,
-  // },
   notification: {
     color: "#7E6107",
     fontWeight: 'bold',
