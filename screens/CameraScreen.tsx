@@ -355,8 +355,7 @@ function EditInfoScreen({ navigation, route }: any) {
     .then(res => {
       if(res.success){
         window.alert('成功加入日曆！')
-        navigation.navigate('Agenda')
-
+        // navigation.navigate('Agenda')
       }
       else window.alert('有地方出錯了⋯⋯')
     })
