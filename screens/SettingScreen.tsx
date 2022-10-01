@@ -28,13 +28,11 @@ function SettingScreen() {
     const { isModalVisible, changeModalState } = useContext(Context);
 
     const openNotification = () => {
-        changeModalState(true);
+        changeModalState();
     };
     
     function SignOut() {
         SecureStore.deleteItemAsync('JWT');
-        // window.localStorage.clear();
-        // navigation.pop();
         navigation.dispatch(
             CommonActions.reset({
                 index: 0,
@@ -53,10 +51,10 @@ function SettingScreen() {
             {/* <SafeAreaView style={styles.container}> */}
             {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
             <View style={styles.container}>
-                <View style={styles.header_S}>
+                <View style={styles.header}>
                     <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/>
-                    <View style={styles.first_S}>
-                        <Text style={styles.title_S}> 設定 </Text>
+                    <View style={styles.first}>
+                        <Text style={styles.title}> 設定 </Text>
                         <TouchableOpacity>
                             <Ionicons name="notifications-outline" size={25} style={styles.notification_S} onPress={openNotification}/>
                         </TouchableOpacity>
@@ -152,13 +150,13 @@ function AccountScreen({ navigation, route }: any) {
                 {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
                 <View style={styles.container}>
                     <View style={styles.header}>
-                        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
+                        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
                             <View>
-                                <Text style={styles.text_back}> ᐸ  返回 </Text>
+                                <Text style={styles.text_back}>ᐸ  返回</Text>
                             </View>
                         </TouchableOpacity>
                         <View style={styles.first}>
-                            <Text style={styles.title}> 變更帳戶資料 </Text>
+                            <Text style={styles.title}>變更帳戶資料</Text>
                             <TouchableOpacity>
                                 <Ionicons name="notifications-outline" size={25} style={styles.notification} onPress={openNotification}/>
                             </TouchableOpacity>
@@ -212,27 +210,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1, //佔據所有空間
         backgroundColor: '#fff',
-    }, 
-    header_S: {
-        flex: 2,
-        flexDirection: 'row',
-        backgroundColor: '#fff',
-        justifyContent: 'center',
-    },
-    first_S: {
-        height: 210,
-        width: 420,
-        backgroundColor: '#FAE5A4',
-        borderBottomLeftRadius: 60,
-        borderBottomRightRadius: 60,
-        paddingTop: 160,
-        flexDirection: 'row',
-    },
-    title_S: {
-        fontSize: 25,
-        color: "#7E6107",
-        fontWeight: 'bold',
-        paddingLeft: 60,
     },
     notification_S: {
         color: "#7E6107",
@@ -244,7 +221,7 @@ const styles = StyleSheet.create({
         flex: 4,
         backgroundColor: 'white',
         alignItems: 'center',
-        zIndex: -1,
+        marginTop: 50
     },
     myButton_S: {
         marginTop: 30,
@@ -264,29 +241,28 @@ const styles = StyleSheet.create({
     },
     // AccountScreen
     header: {
-        height: 210,
-        width: 420,
-        backgroundColor: '#FAE5A4',
-        borderBottomLeftRadius: 60,
-        borderBottomRightRadius: 60,
-        marginLeft: -13,
-    },
-    myButton: {
-        height: 50,
-        width: 200,
-        marginTop: 30,
+        flexDirection: 'row',
+        backgroundColor: '#fff',
         justifyContent: 'center',
-        marginLeft: -30,
+    },
+    button_back: {
+        position: 'absolute',
+        top: 60,
+        left: 60,
+        zIndex: 1,
     },
     text_back: {
         fontSize: 18,
         color: "#7E6107",
-        marginLeft: 70,
-        marginTop: 25,
     },
     first: {
+        height: 210,
+        width: '100%',
+        backgroundColor: '#FAE5A4',
+        borderBottomLeftRadius: 60,
+        borderBottomRightRadius: 60,
+        paddingTop: 160,
         flexDirection: 'row',
-        paddingTop: 80,
     },
     title: {
         fontSize: 25,
@@ -334,14 +310,15 @@ const styles = StyleSheet.create({
         marginLeft: 5,
     },
     link: {
-        flex: 0.25,
+        marginLeft: 46,
+        marginTop: 5,
+        height: 35,
+        width: 180,
+        borderRadius: 10,
+        marginBottom: 5,
         justifyContent: 'center',
-        alignItems: 'center',
-        marginTop: 30,
-        width: '30%',
-        borderRadius: 12,
-        backgroundColor: "#00A600",
-        marginLeft: 88,
+        alignItems: "center",
+        backgroundColor: "#E7B008",
     },
     link_text: {
         fontSize: 15,
