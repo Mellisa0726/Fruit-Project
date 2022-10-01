@@ -95,13 +95,13 @@ function EatScreen({navigation, route}: any) {
           </View>
           <ScrollView>
             <View style={styles.middle}>
-              <Text style={styles.header_text}>第一階段 - 墨綠色</Text>
+              <Text style={styles.header_text}>第一階段 墨綠色</Text>
               <Image style={styles.bananaImage} source={require('../assets/images/banana_1.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43, marginBottom: 30 }}>
                 <Text style={styles.text}>未熟，不宜食用</Text>
               </Unorderedlist>
 
-              <Text style={styles.header_text}>第二階段 - 淡青色至半青半黃</Text>
+              <Text style={styles.header_text}>第二階段 淡青色至半青半黃</Text>
               <Image style={styles.bananaImage} source={require('../assets/images/banana_2.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
                 <Text style={styles.text}>口感苦澀、皮厚肉硬</Text>
@@ -113,7 +113,7 @@ function EatScreen({navigation, route}: any) {
                 <Text style={styles.text}>具有抗性澱粉、提供高飽足感，但不易消化，吃多容易引起腹脹、消化不良等反應</Text>
               </Unorderedlist>
               
-              <Text style={styles.header_text}>第三階段 - 四分之三至全黃香蕉</Text>
+              <Text style={styles.header_text}>第三階段 四分之三至全黃香蕉</Text>
               <Image style={styles.bananaImage} source={require('../assets/images/banana_3.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
                 <Text style={styles.text}>味道香濃、口感軟滑</Text>
@@ -125,7 +125,7 @@ function EatScreen({navigation, route}: any) {
                 <Text style={styles.text}>豐富的鉀和鎂能消除疲勞，減少運動抽筋的機會。助消化、安眠、抗憂鬱</Text>
               </Unorderedlist>
             
-              <Text style={styles.header_text}>第四階段 - 帶有啡點之全熟香蕉</Text>
+              <Text style={styles.header_text}>第四階段 帶有啡點之全熟香蕉</Text>
               <Image style={styles.bananaImage} source={require('../assets/images/banana_4.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
                 <Text style={styles.text}>口感軟爛，適合牙口不好者食用</Text>
@@ -176,10 +176,10 @@ function RecipeScreen({navigation, route}: any) {
       <View style={styles.container}>
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
-            <Text style={styles.text_back}> ᐸ  返回 </Text>
+            <Text style={styles.text_back}>ᐸ  返回</Text>
           </TouchableOpacity>
           <View style={styles.first}>
-            <Text style={styles.title}> 香蕉食譜 </Text>
+            <Text style={styles.title}>香蕉食譜</Text>
             <TouchableOpacity>
               <Ionicons name="notifications-outline" size={25} style={styles.notification_R} onPress={openNotification}/>
             </TouchableOpacity>
