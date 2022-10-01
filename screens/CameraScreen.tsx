@@ -4,29 +4,30 @@ import { ScrollView, ActivityIndicator, StyleSheet, TextInput, Text, View, Color
 import { Camera, CameraType } from 'expo-camera'
 import { Ionicons } from '@expo/vector-icons';
 import { api } from '../api'
-import { useNavigation, NavigationContainer } from '@react-navigation/native';
+import { useNavigation, NavigationContainer, CommonActions } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Canvas, { Image as CanvasImage } from 'react-native-canvas'
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import Unorderedlist from 'react-native-unordered-list';
+
 import Agenda from '../screens/AgendaScreen';
+import { render } from 'react-dom';
 
 
 let camera: Camera
 function CameraScreen() {
-  const [startCamera, setStartCamera] = React.useState(false)
-  const [previewVisible, setPreviewVisible] = React.useState(false)
-  const [capturedImage, setCapturedImage] = React.useState<any>(null)
+  const [startCamera, setStartCamera] = useState(false)
+  const [previewVisible, setPreviewVisible] = useState(false)
+  const [capturedImage, setCapturedImage] = useState<any>(null)
   const [type, setType] = useState(CameraType.back)
 
   const navigation = useNavigation();
 
   const __startCamera = async () => {
     const { status } = await Camera.requestCameraPermissionsAsync()
-    console.log(status)
+    // console.log(status)
     if (status === 'granted') {
       setStartCamera(true)
     } else {
-      Alert.alert('Access denied')
+      Alert.alert('權限遭拒')
     }
   }
   const __takePicture = async () => {
@@ -52,80 +53,80 @@ function CameraScreen() {
 
   return (
     <View style={styles.container}>
-        <View
-          style={{
-            flex: 1,
-            width: '100%'
-          }}
-        >
-          {previewVisible && capturedImage ? (
-            <CameraPreview photo={capturedImage} savePhoto={__savePhoto} retakePicture={__retakePicture} />
-          ) : (
-            <Camera
-              type={type}
-              style={{ flex: 1 }}
-              ref={(r) => {
-                camera = r!
+      <View
+        style={{
+          flex: 1,
+          width: '100%'
+        }}
+      >
+        {previewVisible && capturedImage ? (
+          <CameraPreview photo={capturedImage} savePhoto={__savePhoto} retakePicture={__retakePicture} />
+        ) : (
+          <Camera
+            type={type}
+            style={{ flex: 1 }}
+            ref={(r) => {
+              camera = r!
+            }}
+          >
+            <View
+              style={{
+                flex: 1,
+                width: '100%',
+                backgroundColor: 'transparent',
+                flexDirection: 'row'
               }}
             >
               <View
                 style={{
+                  position: 'absolute',
+                  left: '5%',
+                  top: '5%',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between'
+                }}
+              >
+                <TouchableOpacity
+                  onPress={() => {
+                    setType(type === CameraType.back ? CameraType.front : CameraType.back);
+                  }}>
+                  <Text style={styles.text}>切換鏡頭</Text>
+                </TouchableOpacity>
+              </View>
+              <View
+                style={{
+                  position: 'absolute',
+                  bottom: 0,
+                  flexDirection: 'row',
                   flex: 1,
                   width: '100%',
-                  backgroundColor: 'transparent',
-                  flexDirection: 'row'
+                  padding: 20,
+                  justifyContent: 'space-between'
                 }}
               >
                 <View
                   style={{
-                    position: 'absolute',
-                    left: '5%',
-                    top: '5%',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
+                    alignSelf: 'center',
+                    flex: 1,
+                    alignItems: 'center'
                   }}
                 >
                   <TouchableOpacity
-                    onPress={() => {
-                      setType(type === CameraType.back ? CameraType.front : CameraType.back);
-                    }}>
-                    <Text style={styles.text}> 切換鏡頭 </Text>
-                  </TouchableOpacity>
-                </View>
-                <View
-                  style={{
-                    position: 'absolute',
-                    bottom: 0,
-                    flexDirection: 'row',
-                    flex: 1,
-                    width: '100%',
-                    padding: 20,
-                    justifyContent: 'space-between'
-                  }}
-                >
-                  <View
+                    onPress={__takePicture}
                     style={{
-                      alignSelf: 'center',
-                      flex: 1,
-                      alignItems: 'center'
+                      width: 70,
+                      height: 70,
+                      bottom: 0,
+                      borderRadius: 50,
+                      backgroundColor: '#fff'
                     }}
-                  >
-                    <TouchableOpacity
-                      onPress={__takePicture}
-                      style={{
-                        width: 70,
-                        height: 70,
-                        bottom: 0,
-                        borderRadius: 50,
-                        backgroundColor: '#fff'
-                      }}
-                    />
-                  </View>
+                  />
                 </View>
               </View>
-            </Camera>
-          )}
-        </View>
+            </View>
+          </Camera>
+        )}
+      </View>
       <StatusBar style="auto" />
     </View>
   )
@@ -196,13 +197,10 @@ const CameraPreview = ({ photo, retakePicture, savePhoto }: any) => {
 }
 
 function SelectScreen({navigation, route}: any) {
-  // const [encodedImg, setEncodedImg] = React.useState<any>(null)
-  const [croppedImg, setCroppedImg] = React.useState<any>([])
-  const [output, setOutput] = React.useState<any>(null)
-  const [loading, setLoading] = React.useState<any>(true)
-  const ref = useRef<any>(null)
+  const [croppedImg, setCroppedImg] = useState<any>([])
+  const [loading, setLoading] = useState<any>(true)
   const { capturedImage } = route.params
-  console.log(capturedImage)
+  // console.log(capturedImage)
   const encodedImg: Object = {'uri': 'data:image/png;base64,' + capturedImage.base64}
 
   useEffect(() => getBoundingBox(), [])
@@ -221,49 +219,44 @@ function SelectScreen({navigation, route}: any) {
   }
 
   return (
-    <>
-      <StatusBar />
-        {/* <SafeAreaView style={styles.container}> */}
-        {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
-        <View style={styles.container}>
-          <View style={styles.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
-              <View>
-                <Text style={styles.text_back}> ᐸ  返回 </Text>
-              </View>
-            </TouchableOpacity>
-            <View style={styles.first}>
-              <Text style={styles.title}> 選擇香蕉 </Text>
-                <TouchableOpacity>
-                   <Ionicons name="notifications-outline" size={25} style={styles.notification} />
-                </TouchableOpacity>
-            </View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
+          <View>
+            <Text style={styles.text_back}>ᐸ  返回</Text>
           </View>
-          <View style={styles.main_s}>
-            {loading ? 
-            <ActivityIndicator size="large" color="#7E6107" /> : 
+        </TouchableOpacity>
+        <View style={styles.first}>
+          <Text style={styles.title}>選擇香蕉</Text>
+            <TouchableOpacity>
+                <Ionicons name="notifications-outline" size={25} style={styles.notification} />
+            </TouchableOpacity>
+        </View>
+      </View>
+      <View style={styles.main}>
+        {loading ? 
+        <ActivityIndicator size="large" color="#7E6107" /> : 
+        <>
+          <Text style={styles.description}>
+            點擊下方任一照片即可查看香蕉目前的成熟階段{"\n"}
+            並選擇是否要加入您的日曆頁面中
+          </Text>
+          <View style={styles.main}>
             <ScrollView>
-              <View style={styles.main}>
-                <Text style={styles.description}>
-                  點擊下方任一照片即可查看香蕉目前的成熟階段
-                </Text>
-                <Text style={styles.description}>
-                  並選擇是否要加入您的日曆頁面中
-                </Text>
                 {croppedImg.map((img: any, index: any) => {
                   const src: any = 'data:image/png;base64,' + img.img
                   return (
-                    <TouchableOpacity key={index} style={styles.Button_E} onPress={() => navigation.navigate('Result', {img: croppedImg[index].img})}>
-                      <ImageBackground source={{ uri: src }} style={styles.banana_K} />
+                    <TouchableOpacity key={index} style={styles.bananaButton} onPress={() => navigation.navigate('Result', {img: croppedImg[index].img})}>
+                      <ImageBackground source={{ uri: src }} style={styles.bananaImage} />
                     </TouchableOpacity>
                   )
                 })}
-              </View>
-            </ScrollView>}
+            </ScrollView>
           </View>
-        </View>
-      {/* </SafeAreaView> */}
-    </>
+        </>
+        }
+      </View>
+    </View>
   );
 }
 
@@ -271,9 +264,8 @@ function ResultScreen({ navigation, route }: any) {
   const { img } = route.params
   const [result, setResult] = useState({ knowledge: { condition: '', info: '', kid: -1}, imageURL: ''});
   const [loading, setLoading] = useState(true)
-  // window.alert(JSON.stringify(res))
 
-  useEffect(() => classify(), [])
+  useEffect(() => {if (result.knowledge.kid === -1) classify()}, [])
 
   function classify(){
     const data: Object = {'uri': 'data:image/png;base64,' + img}
@@ -282,54 +274,93 @@ function ResultScreen({ navigation, route }: any) {
       setResult(res);
       setLoading(false);
     })
-    .catch(err => window.alert(err))
+    .catch(err => Alert.alert(err))
+  }
+
+  function renderInfo(kid: Number) {
+    if (kid === 1) return (
+      <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+        <Text style={styles.infoText}>未熟，不宜食用</Text>
+      </Unorderedlist>
+    )
+    else if (kid === 2) return (
+      <>
+        <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+          <Text style={styles.infoText}>口感苦澀、皮厚肉硬</Text>
+        </Unorderedlist>
+        <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+          <Text style={styles.infoText}>含有「難消化性麥芽糊精」，不易被小腸吸收，升糖指數較低，可穩定血糖，有助於改善腸道健康</Text>
+        </Unorderedlist>
+        <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+          <Text style={styles.infoText}>具有抗性澱粉、提供高飽足感，但不易消化，吃多容易引起腹脹、消化不良等反應</Text>
+        </Unorderedlist>
+      </>
+    )
+    else if (kid === 3) return (
+      <>
+        <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+          <Text style={styles.infoText}>味道香濃、口感軟滑</Text>
+        </Unorderedlist>
+        <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+          <Text style={styles.infoText}>含有維他命B2、B6及C，促進新陳代謝，養顏美白效果</Text>
+        </Unorderedlist>
+        <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+          <Text style={styles.infoText}>豐富的鉀和鎂能消除疲勞，減少運動抽筋的機會。助消化、安眠、抗憂鬱</Text>
+        </Unorderedlist>
+      </>
+    )
+    else if (kid === 4) return (
+      <>
+        <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+          <Text style={styles.infoText}>口感軟爛，適合牙口不好者食用</Text>
+        </Unorderedlist>
+        <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+          <Text style={styles.infoText}>含有大量多酚，能夠延緩衰老</Text>
+        </Unorderedlist>
+        <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
+          <Text style={styles.infoText}>啡點越多，免疫活性越高，當中的磷脂質有助抑制胃潰瘍，幫助消化</Text>
+        </Unorderedlist>
+      </>
+    )
+    else return null
   }
 
   return (
-    <>
-      <StatusBar />
-      {/* <SafeAreaView style={styles.container}> */}
-      {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
-            <View>
-              <Text style={styles.text_back}> ᐸ  返回 </Text>
-            </View>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
+            <Text style={styles.text_back}>ᐸ  返回</Text>
+        </TouchableOpacity>
+        <View style={styles.first}>
+          <Text style={styles.title}>分類結果</Text>
+          <TouchableOpacity>
+            <Ionicons name="notifications-outline" size={25} style={styles.notification} />
           </TouchableOpacity>
-          <View style={styles.first}>
-            <Text style={styles.title}> 分類結果 </Text>
-            <TouchableOpacity>
-              <Ionicons name="notifications-outline" size={25} style={styles.notification} />
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.main_r}>
-        {loading ? 
-          <ActivityIndicator size="large" color="#7E6107" /> : 
-          <View style={styles.main}>
-              <Text style={styles.header_text}>{result.knowledge.condition}</Text>
-              <Image style={styles.banana} source={{ uri: result.imageURL }} />
-              <Text style={styles.text2}>
-                {result.knowledge.info + "\n"}
-              </Text>
-            <Text style={styles.text_calender}>
-              是否加入日曆頁面
-            </Text>
-            <View style={styles.button_calender}>
-              <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons name="close-circle" size={50} style={styles.button} />
-              </TouchableOpacity>
-              <Text>           </Text>
-              <TouchableOpacity onPress={() => navigation.navigate('EditInfo', {imageURL: result.imageURL, kid: result.knowledge.kid})}>
-                <Ionicons name="checkmark-circle" size={50} style={styles.button} />
-              </TouchableOpacity>
-            </View>
-          </View>}
         </View>
       </View>
-      {/* </SafeAreaView> */}
-    </>
+      <View style={styles.main}>
+      {loading ? 
+        <ActivityIndicator size="large" color="#7E6107" /> : 
+        <View style={styles.main}>
+            <Text style={styles.header_text}>{result.knowledge.condition}</Text>
+            <Image style={styles.banana} source={{ uri: result.imageURL }} />
+            <View style={styles.info}>
+              {renderInfo(result.knowledge.kid)}
+            </View>
+          <Text style={styles.text_calender}>
+            是否加入日曆頁面
+          </Text>
+          <View style={styles.button_calender}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Ionicons name="close-circle" size={50} style={styles.button} />
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('EditInfo', {imageURL: result.imageURL, kid: result.knowledge.kid})}>
+              <Ionicons name="checkmark-circle" size={50} style={styles.button} />
+            </TouchableOpacity>
+          </View>
+        </View>}
+      </View>
+    </View>
   );
 }
 
@@ -340,6 +371,7 @@ function EditInfoScreen({ navigation, route }: any) {
 
   const [name, setName] = useState('Banana 01');
   const [source, setSource] = useState('全聯');
+  const navigation_toCalendar = useNavigation();
 
   const nameInputChange = (val: any) => {
     setName(val);
@@ -350,16 +382,23 @@ function EditInfoScreen({ navigation, route }: any) {
   }
 
   function postCalendar(){
-    // window.alert(String(imageURL + name + source + kid))
     api.postCalendar(imageURL, name, source, kid) 
     .then(res => {
       if(res.success){
-        window.alert('成功加入日曆！')
-        // navigation.navigate('Agenda')
+        Alert.alert('成功加入日曆！')
+        // navigation_toCalendar.dispatch(
+        //   CommonActions.reset({
+        //     index: 1,
+        //     routes: [
+        //       { name: 'Root' },
+        //       { name: 'Calendar' },
+        //     ],
+        //   })
+        // );
       }
-      else window.alert('有地方出錯了⋯⋯')
+      else Alert.alert('有地方出錯了⋯⋯')
     })
-    .catch(err => window.alert(err))
+    .catch(err => Alert.alert(err))
   }
 
   return (
@@ -369,29 +408,25 @@ function EditInfoScreen({ navigation, route }: any) {
       keyboardShouldPersistTaps="never"
       scrollEnabled={false}
     >
-      <StatusBar />
-      {/* <SafeAreaView style={styles.container}> */}
-      {/* <View style={[styles.container, { paddingTop: Math.max(insets.top, 16) }]}> */}
       <View style={styles.container}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.myButton}>
+          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
             <View>
-              <Text style={styles.text_back}> ᐸ  返回 </Text>
+              <Text style={styles.text_back}>ᐸ  返回</Text>
             </View>
           </TouchableOpacity>
           <View style={styles.first}>
-            <Text style={styles.title}> 儲存資訊 </Text>
+            <Text style={styles.title}>儲存資訊</Text>
             <TouchableOpacity>
               <Ionicons name="notifications-outline" size={25} style={styles.notification} />
             </TouchableOpacity>
           </View>
         </View>
-        
-        <View style={styles.main_e}>
+        <View style={styles.main}>
           <Image style={{ width: '70%', height: '35%', borderRadius: 20 }} source={{ uri: imageURL }} />
           <View style={{ width: '70%', marginTop: 30 }}>
           <View style={styles.Edit_name}>
-            <Text style={styles.Edit_name}> 名稱：</Text>
+            <Text style={styles.Edit_name}>名稱：</Text>
             <TextInput
               style={styles.TextInput}
               placeholder="Banana 01"
@@ -399,13 +434,11 @@ function EditInfoScreen({ navigation, route }: any) {
               onChangeText={(val) => nameInputChange(val)}
             />
           </View>
-
           <View style={styles.Edit_name}>
-            <Text style={styles.Edit_name}> 日期：{formatDate}</Text>
+            <Text style={styles.Edit_name}>日期：{formatDate}</Text>
           </View>
-          
           <View style={styles.Edit_name}>
-            <Text style={styles.Edit_name}> 購買地：</Text>
+            <Text style={styles.Edit_name}>購買地：</Text>
             <TextInput
               style={styles.TextInput}
               placeholder="全聯"
@@ -419,7 +452,6 @@ function EditInfoScreen({ navigation, route }: any) {
           </TouchableOpacity>
         </View>
       </View>
-      {/* </SafeAreaView> */}
     </ScrollView>
   );
 }
@@ -445,29 +477,28 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
   },
   header: {
-    height: 210,
-    width: 420,
-    backgroundColor: '#FAE5A4',
-    borderBottomLeftRadius: 60,
-    borderBottomRightRadius: 60,
-    marginLeft: -4,
-  },
-  myButton: {
-    height: 50,
-    width: 200,
-    marginTop: 30,
+    flexDirection: 'row',
+    backgroundColor: '#fff',
     justifyContent: 'center',
-    marginLeft: -30,
+  },
+  button_back: {
+    position: 'absolute',
+    top: 60,
+    left: 60,
+    zIndex: 1,
   },
   text_back: {
     fontSize: 18,
     color: "#7E6107",
-    marginLeft: 70,
-    marginTop: 25,
   },
   first: {
+    height: 210,
+    width: '100%',
+    backgroundColor: '#FAE5A4',
+    borderBottomLeftRadius: 60,
+    borderBottomRightRadius: 60,
+    paddingTop: 160,
     flexDirection: 'row',
-    paddingTop: 80,
   },
   title: {
     fontSize: 25,
@@ -487,104 +518,75 @@ const styles = StyleSheet.create({
     height: 538,
     backgroundColor: '#fff',
   },
-  main_s: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  main_r: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  main_e: {
-    flex: 1,
-    width: '100%',
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-  },
   main: {
     flex: 1,
-    width: 420,
-    backgroundColor: '#fff',
+    width: '100%',
+    height: '100%',
     display: 'flex',
-    flexDirection: 'column',
     alignItems: 'center',
-    marginBottom: 50,
+    justifyContent: 'center',
+    backgroundColor: '#fff',
   },
   text: {
     fontSize: 18,
     color: 'white',
+    marginTop: 20
+  },
+  infoText: {
+    fontSize: 18,
+    color: "#7E6107",
+    marginVertical: 10,
   },
   description: {
-    fontSize: 19,
-    color: '#7E6107',
-    fontWeight: 'bold',
-    alignItems: 'center',
-    marginTop: 10,
+    fontSize: 15,
+    color: '#000',
+    marginVertical: 20,
   },
-  Button_E: {
-    marginTop: 60,
+  bananaButton: {
+    marginBottom: 20,
     height: 220,
-    width: '60%',
+    width: '100%',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'transparent',
+    backgroundColor: '#000',
   },
-  banana_K: {
+  bananaImage: {
     width: 280,
     height: 220,
+    borderRadius: 80,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
-    resizeMode: 'contain',
   },
   header_text: {
-    width: '100%',
+    marginBottom: 10,
     fontSize: 20,
     fontWeight: 'bold',
     color: "#4D3604",
-    textAlign: 'center',
-    margin: 10
-  },
-  text2: {
-    fontSize: 18,
-    color: "#7E6107",
-    marginLeft: 50,
-    marginRight: 50,
   },
   banana: {
-    flex: 1,
     margin: 10,
     borderRadius: 20,
-    width: "75%",
-    height: 180,
+    width: "65%",
+    height: 200,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  button_calender:{
-    flexDirection: 'row',
-    // marginHorizontal: 30,
-    alignItems: 'center'
+  info: {
+    width: '80%'
   },
-  text_calender:{
+  button_calender: {
+    width: '50%',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly',
+  },
+  text_calender: {
     fontSize: 20,
     fontWeight: 'bold',
     color: "#4D3604",
   },
-  button:{
+  button: {
     color: "#7E6107",
     paddingTop: 10,
     fontWeight: 'bold',
