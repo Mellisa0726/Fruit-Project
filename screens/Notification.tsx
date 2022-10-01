@@ -11,22 +11,22 @@ interface NotificationProps {
 export default function Notification(props: NotificationProps) {
   const [data, setData] = React.useState<object>({});
 
-  useEffect(() => {
-    api.getNotification()
-    .then(res => {
-        setData(res)
-        //window.alert(res.rotten[0].pid)
-        //console.warn(res)
-    })
-    /* .then(() =>
-      //console.warn('data', data?.rotten)
+  // useEffect(() => {
+  //   api.getNotification()
+  //   .then(res => {
+  //       setData(res)
+  //       //window.alert(res.rotten[0].pid)
+  //       //console.warn(res)
+  //   })
+  //   /* .then(() =>
+  //     //console.warn('data', data?.rotten)
 
-    ) */
-    .catch(err => console.log(err))
-  }, []);
+  //   ) */
+  //   .catch(err => console.log(err))
+  // }, []);
 
   const closeNotification = () => {
-      props.changeModalState(false);
+      props.changeModalState();
   };
 
   return (
