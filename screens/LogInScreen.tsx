@@ -17,36 +17,39 @@ import { RootTabParamList } from '../types';
 import KnowledgeScreen from '../screens/KnowledgeScreen';
 import AgendaScreen from '../screens/AgendaScreen';
 
-function GoToLogIn({ data }: any) {
+const Logo = require('../assets/images/logo.jpg');
+
+function LogIn({ email, password }: any) {
   const navigation = useNavigation();
 
   function logIn() {
-  api.logIn(data.email, data.password)
+  api.logIn(email, password)
     .then(() => navigation.navigate('Root'))
     .catch(err => {
       // console.log(err);
-      window.alert('Log in failed');
+      Alert.alert('登入失敗\n請確認電子郵件及密碼');
     });
   }
   
   return (
     <TouchableOpacity onPress={logIn} style={styles.link}>
-       <Text style={styles.text}> 登入 </Text>
+       <Text style={styles.text}>登入</Text>
     </TouchableOpacity> 
   );
 };
 
-function GoToSignUp({ screenName }: any) {
+function GoToSignUp() {
   const navigation = useNavigation();
+  const screenName: any = 'SignUp';
   return (
     <TouchableOpacity onPress={() => navigation.navigate(screenName)}>
-      <Text style={styles.signup_button}>註冊</Text>
+      <Text style={styles.underlineButton}>註冊</Text>
     </TouchableOpacity>
   );
 };
 
 function LogInScreen() {
-  const [data, setData] = React.useState({
+  const [data, setData] = useState({
     email: '',
     password: '',
     check_textInputChange: false,
@@ -119,13 +122,13 @@ function LogInScreen() {
     >
       <View style={styles.container}>
         <View style={styles.first}>
-          <Image source={require('../assets/images/logo_new.jpg')} style={styles.logo} />
+          <Image source={Logo} style={styles.logo} />
           <StatusBar />
 
           <View style={styles.inputView}>
             <TextInput
-              style={styles.TextInput}
-              placeholder="Email"
+              style={styles.textInput}
+              placeholder="電子郵件"
               placeholderTextColor="#9B9B9B"
               onChangeText={(val) => textInputChange(val)}
               onEndEditing={(e) => handleValidUser(e.nativeEvent.text)}
@@ -134,8 +137,8 @@ function LogInScreen() {
           
           <View style={styles.inputView}>
             <TextInput
-              style={styles.TextInput}
-              placeholder="Password"
+              style={styles.textInput}
+              placeholder="密碼"
               placeholderTextColor="#9B9B9B"
               secureTextEntry={data.secureTextEntry ? true : false}
               onChangeText={(val) => handlePasswordChange(val)}
@@ -157,10 +160,9 @@ function LogInScreen() {
                 />
               }
             </TouchableOpacity>
-            <Text>   </Text>
           </View>
-          <GoToLogIn screenName="LogIn" data={data} />
-          <GoToSignUp screenName="SignUp" />
+          <LogIn email={data.email} password={data.password} />
+          <GoToSignUp />
         </View>
       </View>
     </ScrollView>
@@ -168,7 +170,7 @@ function LogInScreen() {
 }
 
 
-function GoSignUp({data}: any) {
+function SignUp({data}: any) {
     const navigation = useNavigation();
     
     function signUp() {
@@ -181,14 +183,14 @@ function GoSignUp({data}: any) {
     }
 
     return (
-        <TouchableOpacity onPress={signUp} style={styles.link}>
-            <Text style={styles.text}> 送出 </Text>
-          </TouchableOpacity>
+      <TouchableOpacity onPress={signUp} style={styles.link}>
+        <Text style={styles.text}>送出</Text>
+      </TouchableOpacity>
     )
 }
 
 function SignUpScreen({ navigation }: any) {
-  const [data, setData] = React.useState({
+  const [data, setData] = useState({
     email: '',
     password: '',
     check_textInputChange: false,
@@ -214,6 +216,7 @@ function SignUpScreen({ navigation }: any) {
       });
     }
   }
+
   const handlePasswordChange = (val:any) => {
     if (val.trim().length >= 4) {
       setData({
@@ -229,18 +232,21 @@ function SignUpScreen({ navigation }: any) {
       });
     }
   }
+
   const updateSecureTextEntry = () => {
     setData({
       ...data,
       secureTextEntry: !data.secureTextEntry
     });
   }
+
   const updateSecureTextEntry_repeat = () => {
     setData({
       ...data,
       secureTextEntry: !data.secureTextEntry
     });
   }
+
   return (
     <ScrollView
       contentContainerStyle={{ flex: 1 }}
@@ -250,22 +256,22 @@ function SignUpScreen({ navigation }: any) {
     >
       <View style={styles.container}>
         <View style={styles.first}>
-          <Image source={require('../assets/images/logo.jpg')} style={styles.logo} />
+          <Image source={Logo} style={styles.logo} />
           <Text style={styles.slogan}>
             為你的香蕉註冊帳號吧 ！
           </Text>
           <View style={styles.inputView}>
             <TextInput
-              style={styles.TextInput}
-              placeholder="Email"
+              style={styles.textInput}
+              placeholder="電子郵件"
               placeholderTextColor="#9B9B9B"
               onChangeText={(val) => textInputChange(val)}
             />
           </View>
           <View style={styles.inputView}>
             <TextInput
-              style={styles.TextInput}
-              placeholder="Password"
+              style={styles.textInput}
+              placeholder="密碼"
               placeholderTextColor="#9B9B9B"
               secureTextEntry={data.secureTextEntry ? true : false}
               onChangeText={(val) => handlePasswordChange(val)}
@@ -287,14 +293,10 @@ function SignUpScreen({ navigation }: any) {
                 />
               }
             </TouchableOpacity>
-            <Text>   </Text>
           </View>
-
-          <GoSignUp screenName="SignUp" data={data}/>
-          <TouchableOpacity onPress={() => navigation.goBack()} style={styles.link}>
-            <View>
-              <Text style={styles.text}> 返回登入 </Text>
-            </View>
+          <SignUp data={data}/>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+              <Text style={styles.underlineButton}>返回登入</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -380,12 +382,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   first: {
-    height: 600,
-    width: 420,
+    height: '75%',
+    width: '100%',
     backgroundColor: '#FAE5A4',
     borderBottomLeftRadius: 130,
     borderBottomRightRadius: 130,
-    paddingTop: 90,
+    display: 'flex',
+    justifyContent: 'center',
     alignItems: 'center',
   },
   link: {
@@ -406,9 +409,9 @@ const styles = StyleSheet.create({
   logo: {
     height: 170,
     width: 170,
-    borderRadius: 90,
-    backgroundColor: '#000',
-    marginBottom: 60,
+    borderRadius: 100,
+    backgroundColor: '#fff',
+    marginBottom: 90,
   },
   inputView: {
     backgroundColor: "#fff",
@@ -418,12 +421,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingLeft : 15,
+    paddingHorizontal: 15,
   },
-  TextInput: {
+  textInput: {
     flex: 1,
   },
-  signup_button:{
+  underlineButton:{
     fontSize: 13,
     height: 30,
     paddingTop: 8,
@@ -444,13 +447,6 @@ const styles = StyleSheet.create({
   },
 
   //SignUpScreen
-  header: {
-    height: 600,
-    width: 420,
-    backgroundColor: '#FAE5A4',
-    borderBottomLeftRadius: 130,
-    borderBottomRightRadius: 130,
-  },
   slogan: {
     fontSize: 20,
     color: "#000",
