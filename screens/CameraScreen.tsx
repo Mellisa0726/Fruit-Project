@@ -213,7 +213,10 @@ function SelectScreen({navigation, route}: any) {
         setCroppedImg(res['object'])
         setLoading(false)
       }
-      else window.alert('No banana.')
+      else {
+        window.alert('沒有偵測到香蕉')
+        navigation.navigate('CameraScreen')
+      }
     })
     .catch(err => window.alert(err))
   }
