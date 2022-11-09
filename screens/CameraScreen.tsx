@@ -214,7 +214,7 @@ function SelectScreen({navigation, route}: any) {
         setLoading(false)
       }
       else {
-        window.alert('沒有偵測到香蕉')
+        window.alert('沒有偵測到香蕉或橘子')
         navigation.navigate('CameraScreen')
       }
     })
@@ -230,7 +230,7 @@ function SelectScreen({navigation, route}: any) {
           </View>
         </TouchableOpacity>
         <View style={styles.first}>
-          <Text style={styles.title}>選擇香蕉</Text>
+          <Text style={styles.title}>選擇水果</Text>
             <TouchableOpacity>
                 <Ionicons name="notifications-outline" size={25} style={styles.notification} />
             </TouchableOpacity>
@@ -241,15 +241,15 @@ function SelectScreen({navigation, route}: any) {
         <ActivityIndicator size="large" color="#7E6107" /> : 
         <>
           <Text style={styles.description}>
-            點擊下方任一照片即可查看香蕉目前的成熟階段{"\n"}
+            點擊下方任一照片即可查看水果目前的成熟階段{"\n"}
             並選擇是否要加入您的日曆頁面中
           </Text>
           <View style={styles.main}>
             <ScrollView>
                 {croppedImg.map((img: any, index: any) => {
-                  const src: any = 'data:image/png;base64,' + img.img
+                  const src: any = 'data:image/png;base64,' + img.img;
                   return (
-                    <TouchableOpacity key={index} style={styles.bananaButton} onPress={() => navigation.navigate('Result', {img: croppedImg[index].img})}>
+                    <TouchableOpacity key={index} style={styles.bananaButton} onPress={() => navigation.navigate('Result', {img: croppedImg[index].img, label: croppedImg[index].label})}>
                       <ImageBackground source={{ uri: src }} style={styles.bananaImage} />
                     </TouchableOpacity>
                   )
@@ -264,13 +264,14 @@ function SelectScreen({navigation, route}: any) {
 }
 
 function ResultScreen({ navigation, route }: any) {
-  const { img } = route.params
+  const { img, label } = route.params
   const [result, setResult] = useState({ knowledge: { condition: '', info: '', kid: -1}, imageURL: ''});
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {if (result.knowledge.kid === -1) classify()}, [])
 
   function classify(){
+    alert(label);
     const data: Object = {'uri': 'data:image/png;base64,' + img}
     api.classify(data)
     .then(res => {

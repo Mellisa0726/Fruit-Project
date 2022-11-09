@@ -334,7 +334,7 @@ function BottomTabNavigator() {
         name="Knowledge"
         component={KnowledgeScreen}
         options={{
-          title: '關於香蕉',
+          title: '水果小知識',
           tabBarIcon: ({ color }) => <TabBarIcon name="bulb-outline" color={color} />,
         }}
       />

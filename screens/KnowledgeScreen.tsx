@@ -14,24 +14,25 @@ import { Context } from '../contexts/Context';
 
 const { width } = Dimensions.get('window');
 
-function GoToEat({ screenName, isModalVisible, changeModalState }: any) {
+function GoToBanana({ screenName, isModalVisible, changeModalState }: any) {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, changeModalState: changeModalState})} style={styles.knowledgeButton}>
-      <ImageBackground style={styles.knowledgeButtonImage} source={require('../assets/images/香蕉熟成階段.png')}>
-        <Text style={styles.knowledgeButtonText}>香蕉熟成階段</Text>
+      <ImageBackground style={styles.knowledgeButtonImage} source={require('../assets/images/banana_a.png')}>
+        <Text style={styles.knowledgeButtonText}>關於香蕉</Text>
       </ImageBackground>
     </TouchableOpacity>
   );
-} 
-function GoToRecipe({ screenName, isModalVisible, changeModalState }: any) {
+}
+
+function GoToOrange({ screenName, isModalVisible, changeModalState }: any) {
   const navigation = useNavigation();
 
   return (
     <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, changeModalState: changeModalState})} style={styles.knowledgeButton}>
-      <ImageBackground style={styles.knowledgeButtonImage} source={require('../assets/images/廚房用具.png')}>
-        <Text style={styles.knowledgeButtonText}>香蕉食譜</Text>
+      <ImageBackground style={styles.knowledgeButtonImage} source={require('../assets/images/orange_4.png')}>
+        <Text style={styles.knowledgeButtonText}>關於橘子</Text>
       </ImageBackground>
     </TouchableOpacity>
   );
@@ -51,6 +52,64 @@ function KnowledgeScreen() {
         <View style={styles.container}>
           <View style={styles.header}>
             <View style={styles.first}>
+              <Text style={styles.title}> 水果小知識 </Text>
+              <TouchableOpacity>
+                <Ionicons name="notifications-outline" size={25} style={styles.notification_K} onPress={openNotification}/>
+              </TouchableOpacity>
+              <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/>
+            </View>
+          </View>
+          <View style={styles.main}>
+            <GoToBanana screenName="關於香蕉" isModalVisible={isModalVisible} changeModalState={changeModalState} />
+            <GoToOrange screenName="關於橘子" isModalVisible={isModalVisible} changeModalState={changeModalState} />
+          </View>
+        </View>
+        {/* </SafeAreaView> */}
+    </>
+  );
+}
+
+function GoToEat({ screenName, isModalVisible, changeModalState }: any) {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, changeModalState: changeModalState})} style={styles.knowledgeButton}>
+      <ImageBackground style={styles.knowledgeButtonImage} source={require('../assets/images/香蕉熟成階段.png')}>
+        <Text style={styles.knowledgeButtonText}>香蕉熟成階段</Text>
+      </ImageBackground>
+    </TouchableOpacity>
+  );
+}
+
+function GoToRecipe({ screenName, isModalVisible, changeModalState }: any) {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, changeModalState: changeModalState})} style={styles.knowledgeButton}>
+      <ImageBackground style={styles.knowledgeButtonImage} source={require('../assets/images/banana_b.png')}>
+        <Text style={styles.knowledgeButtonText}>香蕉食譜</Text>
+      </ImageBackground>
+    </TouchableOpacity>
+  );
+}
+
+function BananaScreen({navigation, route}: any) {
+  const { isModalVisible, changeModalState } = useContext(Context);
+  const openNotification = () => {
+    changeModalState();
+  };
+
+  return (
+    <>
+      <StatusBar />
+        {/* <SafeAreaView style={styles.container_K}> */}
+        {/* <View style={[styles.container_K, { paddingTop: Math.max(insets.top, 16) }]}> */}
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <View style={styles.first}>
+              <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
+                  <Text style={styles.text_back}>ᐸ  返回</Text>
+              </TouchableOpacity>
               <Text style={styles.title}> 關於香蕉 </Text>
               <TouchableOpacity>
                 <Ionicons name="notifications-outline" size={25} style={styles.notification_K} onPress={openNotification}/>
@@ -98,43 +157,43 @@ function EatScreen({navigation, route}: any) {
               <Text style={styles.header_text}>第一階段 墨綠色</Text>
               <Image style={styles.bananaImage} source={require('../assets/images/banana_1.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43, marginBottom: 30 }}>
-                <Text style={styles.text}>未熟，不宜食用</Text>
+                <Text style={styles.text}>未熟，不宜食用。</Text>
               </Unorderedlist>
 
               <Text style={styles.header_text}>第二階段 淡青色至半青半黃</Text>
               <Image style={styles.bananaImage} source={require('../assets/images/banana_2.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
-                <Text style={styles.text}>口感苦澀、皮厚肉硬</Text>
+                <Text style={styles.text}>口感苦澀、皮厚肉硬。</Text>
               </Unorderedlist>
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
-                <Text style={styles.text}>含有「難消化性麥芽糊精」，不易被小腸吸收，升糖指數較低，可穩定血糖，有助於改善腸道健康</Text>
+                <Text style={styles.text}>含有「難消化性麥芽糊精」，不易被小腸吸收，升糖指數較低，可穩定血糖，有助於改善腸道健康。</Text>
               </Unorderedlist>
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43, marginBottom: 80 }}>
-                <Text style={styles.text}>具有抗性澱粉、提供高飽足感，但不易消化，吃多容易引起腹脹、消化不良等反應</Text>
+                <Text style={styles.text}>具有抗性澱粉、提供高飽足感，但不易消化，吃多容易引起腹脹、消化不良等反應。</Text>
               </Unorderedlist>
               
               <Text style={styles.header_text}>第三階段 四分之三至全黃香蕉</Text>
               <Image style={styles.bananaImage} source={require('../assets/images/banana_3.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
-                <Text style={styles.text}>味道香濃、口感軟滑</Text>
+                <Text style={styles.text}>味道香濃、口感軟滑。</Text>
               </Unorderedlist>
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
-                <Text style={styles.text}>含有維他命B2、B6及C，促進新陳代謝，養顏美白效果</Text>
+                <Text style={styles.text}>含有維他命B2、B6及C，促進新陳代謝，有養顏美白效果。</Text>
               </Unorderedlist>
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43, marginBottom: 80 }}>
-                <Text style={styles.text}>豐富的鉀和鎂能消除疲勞，減少運動抽筋的機會。助消化、安眠、抗憂鬱</Text>
+                <Text style={styles.text}>豐富的鉀和鎂能消除疲勞，減少運動抽筋的機會，助消化、安眠、抗憂鬱。</Text>
               </Unorderedlist>
             
               <Text style={styles.header_text}>第四階段 帶有啡點之全熟香蕉</Text>
               <Image style={styles.bananaImage} source={require('../assets/images/banana_4.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
-                <Text style={styles.text}>口感軟爛，適合牙口不好者食用</Text>
+                <Text style={styles.text}>口感軟爛，適合牙口不好者食用。</Text>
               </Unorderedlist>
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
-                <Text style={styles.text}>含有大量多酚，能夠延緩衰老</Text>
+                <Text style={styles.text}>含有大量多酚，能夠延緩衰老。</Text>
               </Unorderedlist>
               <Unorderedlist bulletUnicode={0x2726} color='#7E6107' style={{ fontSize: 18, lineHeight: 43 }}>
-                <Text style={styles.text}>啡點越多，免疫活性越高，當中的磷脂質有助抑制胃潰瘍，幫助消化</Text>
+                <Text style={styles.text}>啡點越多，免疫活性越高，當中的磷脂質有助抑制胃潰瘍，幫助消化。</Text>
               </Unorderedlist>
               
             </View>
@@ -245,6 +304,64 @@ function RecipeScreen({navigation, route}: any) {
   );
 }
 
+function OrangeScreen({navigation, route}: any) {
+  const { isModalVisible, changeModalState } = useContext(Context);
+  const openNotification = () => {
+    changeModalState();
+  };
+
+  return (
+    <>
+      <StatusBar />
+        {/* <SafeAreaView style={styles.container_K}> */}
+        {/* <View style={[styles.container_K, { paddingTop: Math.max(insets.top, 16) }]}> */}
+        <View style={styles.container}>
+          <View style={styles.header}>
+            <View style={styles.first}>
+              <TouchableOpacity onPress={() => navigation.goBack()} style={styles.button_back}>
+                  <Text style={styles.text_back}>ᐸ  返回</Text>
+              </TouchableOpacity>
+              <Text style={styles.title}> 關於橘子 </Text>
+              <TouchableOpacity>
+                <Ionicons name="notifications-outline" size={25} style={styles.notification_K} onPress={openNotification}/>
+              </TouchableOpacity>
+              <Notification isModalVisible={isModalVisible} changeModalState={changeModalState}/>
+            </View>
+          </View>
+          <View style={styles.main}>
+            <GoToOrangeEat screenName="橘子熟成階段" isModalVisible={isModalVisible} changeModalState={changeModalState} />
+            <GoToOrangeRecipe screenName="橘子食譜" isModalVisible={isModalVisible} changeModalState={changeModalState} />
+          </View>
+        </View>
+        {/* </SafeAreaView> */}
+    </>
+  );
+}
+
+function GoToOrangeEat({ screenName, isModalVisible, changeModalState }: any) {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, changeModalState: changeModalState})} style={styles.knowledgeButton}>
+      <ImageBackground style={styles.knowledgeButtonImage} source={require('../assets/images/orange_3.png')}>
+        <Text style={styles.knowledgeButtonText}>橘子熟成階段</Text>
+      </ImageBackground>
+    </TouchableOpacity>
+  );
+}
+
+function GoToOrangeRecipe({ screenName, isModalVisible, changeModalState }: any) {
+  const navigation = useNavigation();
+
+  return (
+    <TouchableOpacity onPress={() => navigation.navigate(screenName, {isModalVisible: isModalVisible, changeModalState: changeModalState})} style={styles.knowledgeButton}>
+      <ImageBackground style={styles.knowledgeButtonImage} source={require('../assets/images/orange_2.png')}>
+        <Text style={styles.knowledgeButtonText}>橘子食譜</Text>
+      </ImageBackground>
+    </TouchableOpacity>
+  );
+}
+
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -252,8 +369,10 @@ export default function App() {
     <NavigationContainer independent={true}>
       <Stack.Navigator initialRouteName="Knowledge">
         <Stack.Screen name="Knowledge" component={KnowledgeScreen}options={{ headerShown: false }} />
+        <Stack.Screen name="關於香蕉" component={BananaScreen}options={{ headerShown: false }} />
         <Stack.Screen name="香蕉熟成階段" component={EatScreen} options={{  headerShown: false }} />
         <Stack.Screen name="香蕉食譜" component={RecipeScreen} options={{ headerShown: false }} />
+        <Stack.Screen name="關於橘子" component={OrangeScreen}options={{ headerShown: false }} />
       </Stack.Navigator>
     </NavigationContainer>
   );
