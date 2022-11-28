@@ -389,40 +389,40 @@ function OrangeEatScreen({navigation, route}: any) {
           </View>
           <ScrollView>
             <View style={styles.middle}>
-              <Image style={styles.bananaImage} source={require('../assets/images/果肉.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#4D3604' style={{ fontSize: 20, lineHeight: 54 }}>
                 <Text style={styles.header_text_o}>果肉：潤肺、抗癌</Text>
               </Unorderedlist>
+              <Image style={styles.bananaImage} source={require('../assets/images/果肉.png')} />
               <Text style={styles.text}>橘子果肉性味甘酸、入肺、胃經；具有健脾開胃、理氣通絡、止渴潤肺的功效，含豐富維生素C。在鮮橘肉中含有抗癌物質「諾米靈」，能分解癌化學物質，抑制並阻斷癌細胞的生長，同時使人體內除毒酶的活性成倍提高。</Text>
 
-              <Image style={styles.bananaImage} source={require('../assets/images/橘皮.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#4D3604' style={{ fontSize: 20, lineHeight: 54 }}>
                 <Text style={styles.header_text_o}>晒乾橘皮：化痰</Text>
               </Unorderedlist>
+              <Image style={styles.bananaImage} source={require('../assets/images/橘皮.png')} />
               <Text style={styles.text}>橘皮晒乾後在中醫又叫「陳皮」（因入藥年分越久藥效越好，因此叫陳皮）。陳皮常用於治療胃痛、久咳、疝氣、食積、嘔吐等症。陳皮除了具有理氣健脾、燥濕化痰、治風邪等藥用，還可以拿來泡熱水澡，溫身美肌。</Text>
               
-              <Image style={styles.bananaImage} source={require('../assets/images/橘子橘絡.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#4D3604' style={{ fontSize: 20, lineHeight: 54 }}>
                 <Text style={styles.header_text_o}>橘絡：治痰滯、降膽固醇</Text>
               </Unorderedlist>
+              <Image style={styles.bananaImage} source={require('../assets/images/橘子橘絡.png')} />
               <Text style={styles.text}>橘絡即橘瓤上面的白色網狀絲絡又名橘絲，性味甘、平、苦，有通絡化痰、順氣活血之功效，常用於治療痰滯的胸痛和咳嗽等症。含有豐富維生素P，能防治高血壓，內側薄皮含有膳食纖維及果膠，老人多食用可促進通便，並降低膽固醇。</Text>
               
-              <Image style={styles.bananaImage} source={require('../assets/images/橘子橘葉.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#4D3604' style={{ fontSize: 20, lineHeight: 54 }}>
                 <Text style={styles.header_text_o}>橘葉精油：治神經官能症</Text>
               </Unorderedlist>
+              <Image style={styles.bananaImage} source={require('../assets/images/橘子橘葉.png')} />
               <Text style={styles.text}>橘葉，性味辛、苦、平，歸肝經，具有疏肝理氣、散結消腫、去毒之功效，為治肝膽脅痛、乳房結塊的要藥。</Text>
               
-              <Image style={styles.bananaImage} source={require('../assets/images/橘紅.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#4D3604' style={{ fontSize: 20, lineHeight: 54 }}>
                 <Text style={styles.header_text_o}>橘紅：祛痰治咳</Text>
               </Unorderedlist>
+              <Image style={styles.bananaImage} source={require('../assets/images/橘紅.png')} />
               <Text style={styles.text}>橘紅又名「壇紅」，採集時取鮮果皮刮掉白色的內層，晾乾、晒乾單留表皮稱為「橘紅」，性味辛、苦、溫，歸肺、脾、胃經。具有理氣寬胸、祛寒痰、濕痰、食積嘔惡等功效，但橘紅不適用於陰虛燥咳和氣虛咳嗽之人。</Text>
               
-              <Image style={styles.bananaImage} source={require('../assets/images/橘子果核.png')} />
               <Unorderedlist bulletUnicode={0x2726} color='#4D3604' style={{ fontSize: 20, lineHeight: 54 }}>
                 <Text style={styles.header_text_o}>橘核：治療睾丸腫痛</Text>
               </Unorderedlist>
+              <Image style={styles.bananaImage} source={require('../assets/images/橘子果核.png')} />
               <Text style={styles.text}>橘核，性味苦、平，無毒，歸肝經。有理氣散結止痛的作用，臨床常用來治療睾丸腫痛、乳腺炎性腫痛、疝氣痛等症。</Text>
             </View>
           </ScrollView>
