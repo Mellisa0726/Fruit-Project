@@ -271,9 +271,12 @@ function ResultScreen({ navigation, route }: any) {
   useEffect(() => {if (result.knowledge.kid === -1) classify()}, [])
 
   function classify(){
-    alert(label);
+    // alert(label);
     const data: Object = {'uri': 'data:image/png;base64,' + img}
-    api.classify(data)
+    api.classify({
+      'fruit': label,
+      'imageCode': data
+    })
     .then(res => {
       setResult(res);
       setLoading(false);
