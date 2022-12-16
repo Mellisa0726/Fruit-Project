@@ -17,7 +17,7 @@ import { RootTabParamList } from '../types';
 import KnowledgeScreen from '../screens/KnowledgeScreen';
 import AgendaScreen from '../screens/AgendaScreen';
 
-const Logo = require('../assets/images/logo.jpg');
+const Logo = require('../assets/images/logo.png');
 
 function LogIn({ email, password }: any) {
   const navigation = useNavigation();
@@ -258,7 +258,7 @@ function SignUpScreen({ navigation }: any) {
         <View style={styles.first}>
           <Image source={Logo} style={styles.logo} />
           <Text style={styles.slogan}>
-            為你的香蕉註冊帳號吧 ！
+            為你的水果註冊帳號吧 ！
           </Text>
           <View style={styles.inputView}>
             <TextInput
